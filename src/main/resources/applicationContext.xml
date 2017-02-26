@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        ">
+
+    <!-- Hibernate4 -->
+    <!-- 加载资源文件  其中包含变量信息，必须在Spring配置文件的最前面加载，即第一个加载-->
+    <!--<context:property-placeholder location="classpath:mysql.properties" />-->
+
+
+    <!-- 配置SessionFactory -->
+    <!--Hibernate的配置也可以单独放在hibernate.cfg.xml文件中,然后通过如下的配置指向config文件,这样在spring配置中就不要配置dataSource和其他Hibernate相关的信息了。-->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:hibernate.cfg.xml" />
+    </bean>
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <context:component-scan base-package="personal.darxan.hostel.controller"></context:component-scan>
+    <context:component-scan base-package="personal.darxan.hostel.service"></context:component-scan>
+    <context:component-scan base-package="personal.darxan.hostel.logic"></context:component-scan>
+    <context:component-scan base-package="personal.darxan.hostel.dao"></context:component-scan>
+    <!--Spring 容器初始化的时候，会扫描 personal.darxan.hostel.dao下 标有
+    (@Component,@Service,@Controller,@Repository) 注解的 类 纳入spring容器管理-->
+
+
+</beans>

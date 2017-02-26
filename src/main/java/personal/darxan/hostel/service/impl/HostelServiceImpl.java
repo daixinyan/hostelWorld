@@ -1,0 +1,186 @@
+package personal.darxan.hostel.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import personal.darxan.hostel.dao.HostelDao;
+import personal.darxan.hostel.dao.HostelRoomDao;
+import personal.darxan.hostel.model.Hostel;
+import personal.darxan.hostel.model.HostelRoom;
+import personal.darxan.hostel.service.interf.HostelService;
+import personal.darxan.hostel.tool.AttributeUpdate;
+import personal.darxan.hostel.tool.Convert;
+import personal.darxan.hostel.tool.MyLogger;
+import personal.darxan.hostel.tool.StringConstant;
+import personal.darxan.hostel.vo.AdministerVO;
+import personal.darxan.hostel.vo.HostelRoomVO;
+import personal.darxan.hostel.vo.HostelVO;
+import personal.darxan.hostel.vo.ServiceResult;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by darxan on 2017/2/17.
+ */
+@Service
+public class HostelServiceImpl implements HostelService {
+
+    @Autowired
+    private HostelRoomDao hostelRoomDao;
+
+    @Autowired
+    private HostelDao hostelDao;
+
+    public ServiceResult scheduleIncrement(HttpServletRequest httpServletRequest,
+                                           Long id, int count){
+
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            HostelVO hostelVO = (HostelVO) httpServletRequest
+                    .getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
+            HostelRoom hostelRoom = hostelRoomDao.load(id);
+            if (!hostelRoom.getHostel().getHostelId().equals(hostelVO.getHostelId())) {
+                throw new Exception(StringConstant.AUTH_WRONG);
+            }
+            hostelRoom.setCount((short)(hostelRoom.getCount()+count));
+            hostelRoomDao.update(hostelRoom);
+        }catch (Exception e) {
+            e.printStackTrace();
+            serviceResult.setMessage(e.getMessage());
+            serviceResult.setSuccess(false);
+        }
+        return serviceResult;
+    }
+
+    public ServiceResult schedule(HttpServletRequest httpServletRequest){
+
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            HostelVO hostelVO = (HostelVO) httpServletRequest
+                    .getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
+            Hostel hostel = hostelDao.load(hostelVO.getHostelId());
+
+            MyLogger.log(hostel);
+
+            Set<HostelRoom> hostelEntities = hostel.getHostelRoomSet();
+
+            MyLogger.log(hostelEntities.size());
+            MyLogger.log(hostelEntities);
+
+            List<HostelRoomVO> roomVOList = new ArrayList<HostelRoomVO>(hostelEntities.size());
+            for (HostelRoom room:hostelEntities) {
+                roomVOList.add(Convert.convert(room));
+            }
+            serviceResult.setValue(roomVOList);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            serviceResult.setMessage(e.getMessage());
+            serviceResult.setSuccess(false);
+        }
+        return serviceResult;
+    }
+
+    public ServiceResult updateSchedule(HttpServletRequest httpServletRequest,
+                                        HostelRoomVO hostelRoom) {
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            HostelVO hostelVO = (HostelVO) httpServletRequest
+                    .getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
+            HostelRoom hostelRoomEntity = Convert.convert(hostelRoom);
+            HostelRoom hostelRoomPersistent = hostelRoomDao.load(hostelRoom.getRoomId());
+            if (!hostelRoomPersistent.getHostel().getHostelId().equals(hostelVO.getHostelId())) {
+                throw new Exception(StringConstant.AUTH_WRONG);
+            }
+            AttributeUpdate.udpate(hostelRoomPersistent, hostelRoomEntity, HostelRoom.class);
+            hostelRoomDao.update(hostelRoomPersistent);
+        }catch (Exception e) {
+            e.printStackTrace();
+            serviceResult.setMessage(e.getMessage());
+            serviceResult.setSuccess(false);
+        }
+        return serviceResult;
+    }
+
+    public ServiceResult addSchedule(HttpServletRequest httpServletRequest,
+                                     HostelRoomVO hostelRoom) {
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            HostelVO hostelVO = (HostelVO) httpServletRequest
+                    .getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
+            HostelRoom hostelRoomEntity = Convert.convert(hostelRoom);
+            hostelRoomEntity.setHostel(Convert.convert(hostelVO));
+            hostelRoomDao.save(hostelRoomEntity);
+        }catch (Exception e) {
+            e.printStackTrace();
+            serviceResult.setMessage(e.getMessage());
+            serviceResult.setSuccess(false);
+        }
+        return serviceResult;
+    }
+
+
+    public ServiceResult updateHostel(HttpServletRequest httpServletRequest,
+                                      HostelVO hostel){
+
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            HostelVO hostelVO = (HostelVO) httpServletRequest.
+                    getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
+
+            Hostel hostelEntity = Convert.convert(hostel);
+            MyLogger.log(hostelEntity);
+
+            Hostel hostelPersistent = hostelDao.load(hostelVO.getHostelId());
+            AttributeUpdate.udpate(hostelPersistent, hostelEntity, Hostel.class);
+
+            hostelDao.update(hostelPersistent);
+            serviceResult.setValue(hostelVO);
+        }catch (Exception e) {
+            e.printStackTrace();
+            serviceResult.setMessage(e.getMessage());
+            serviceResult.setSuccess(false);
+        }
+        return serviceResult;
+    }
+
+
+    public ServiceResult verifyHostel(HttpServletRequest httpServletRequest,
+                                      Long id, boolean pass){
+
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            AdministerVO administerVO =
+                    (AdministerVO) httpServletRequest
+                            .getSession(false)
+                            .getAttribute(StringConstant.SESSION_LOGIN);
+            Hostel hostel = hostelDao.load(id);
+            hostel.setState((short)1);
+            hostelDao.update(hostel);
+        }catch (Exception e) {
+            e.printStackTrace();
+            serviceResult.setMessage(e.getMessage());
+            serviceResult.setSuccess(false);
+        }
+        return serviceResult;
+    }
+
+
+    public ServiceResult getHostelRoomById(
+            HttpServletRequest httpServletRequest, Long id) {
+
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            HostelRoom hostelRoom = hostelRoomDao.load(id);
+            serviceResult.setValue(Convert.convert(hostelRoom));
+        }catch (Exception e) {
+            e.printStackTrace();
+            serviceResult.setMessage(e.getMessage());
+            serviceResult.setSuccess(false);
+        }
+        return serviceResult;
+    }
+
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link type="text/css" rel="stylesheet" href="../../plugin/menu/demo/css/demo.css" />
+    <link type="text/css" rel="stylesheet" href="../../plugin/menu/dist/css/jquery.mmenu.all.css" />
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../plugin/menu/dist/js/jquery.mmenu.all.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('nav#menu').mmenu();
+        });
+    </script>
+</head>
+
+<body>
+
+<div class="header">
+    <a href="#menu"><span></span></a>
+    hostelWorld
+</div>
+
+<nav id="menu">
+    <ul>
+        <li><a href="/public/hostel">hostels Search</a></li>
+        <li><a href="/user/user">用户信息</a> </li>
+        <li><a href="/user/list/checkIn">入住信息</a> </li>
+        <li><a href="/user/list/reservation">预定信息</a> </li>
+        <li><a href="/user/list/userPay">用户付款</a> </li>
+    </ul>
+</nav>
+
+<div class="content">
+
+    <div class="myPayment">
+        <div class="scheduleItem">
+            <div class="computer">${scheduleItem.computer}</div>
+            <div class="airCondition">${scheduleItem.airCondition}</div>
+            <div class="numOfBed">${scheduleItem.numOfBed}</div>
+            <div class="capacity">${scheduleItem.capacity}</div>
+            <div class="count">${scheduleItem.count}</div>
+            <div class="price">${scheduleItem.price}</div>
+            <div class="startDate">${scheduleItem.startDate}</div>
+            <div class="endDate">${scheduleItem.endDate}</div>
+            <div class="description">${scheduleItem.description}</div>
+            <div class="image">${scheduleItem.image}</div>
+            <div class="price">${scheduleItem.price}</div>
+        </div>
+    </div>
+
+</div>
+<div class="myFooter"></div>
+
+</body>
+
+</html>

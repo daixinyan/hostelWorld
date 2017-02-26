@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link type="text/css" rel="stylesheet" href="../../plugin/menu/demo/css/demo.css" />
+    <link type="text/css" rel="stylesheet" href="../../plugin/menu/dist/css/jquery.mmenu.all.css" />
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../plugin/menu/dist/js/jquery.mmenu.all.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('nav#menu').mmenu();
+        });
+    </script>
+</head>
+
+<body>
+
+<div class="header">
+    <a href="#menu"><span></span></a>
+    hostelWorld
+</div>
+
+<nav id="menu">
+    <ul>
+        <li><a href="/public/list/hostel">hostels Search</a></li>
+        <li><a href="/user/user/infor">用户信息</a> </li>
+        <li><a href="/user/list/checkIn">入住信息</a> </li>
+        <li><a href="/user/list/reservation">预定信息</a> </li>
+        <li><a href="/user/list/userPay">用户付款</a> </li>
+    </ul>
+</nav>
+
+<div class="myContent">
+
+    <div class="personalInfo">
+        <form action="/user/update" method="post">
+         
+            <input type="text" class="name" name="name" value="${user.name}">
+            
+            <input type="password" class="password" name="password" value="${user.password}">
+            <input type="password" class="re_password" name="re_password" value="${user.password}">
+            
+            <input type="text" class="contact" name="contact" value="${user.contact}">
+            <input type="number" class="phone" name="phone" value="${user.phone}">
+            <input type="number" class="bankcard" name="bankcard" value="${user.bankcard}">
+            
+            <img src="${user.avatar}">
+            <input type="file" class="avatar" name="avatar" value="${user.avatar}">
+
+            <input type="submit">
+        </form>
+    </div>
+
+</div>
+<div class="myFooter"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+footer {
+    TEXT-ALIGN: center;
+    LINE-HEIGHT: 2;
+    /*BACKGROUND-COLOR: #000; */
+    FONT-FAMILY: SimSun;
+    HEIGHT: 83px;
+    COLOR: #000;
+    FONT-SIZE: 15px;
+    PADDING-TOP: 20px;
+}

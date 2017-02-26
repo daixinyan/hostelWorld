@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<div class="myHeader">
+    <a class="myLog" href="/">hostel world</a>
+    <div class="isLogin">
+        <img src="/image/login.png" href="/public/login"/>
+    </div>
+</div>
+
+<div class="myNav">
+</div>
+
+<div class="myContent">
+    <div class="listItem">
+
+        <div class="price">${room.price}</div>
+        <div class="name">${room.name}</div>
+        <div class="contact">${room.contact}</div>
+
+        <div class="capacity">${room.capacity}</div>
+        <div class="numOfBed">${room.numOfBed}</div>
+        <div class="airCondition">${room.airCondition}</div>
+        <div class="computer">${room.computer}</div>
+
+        <div class="description">${room.description}</div>
+
+        <form action="/user/reserve">
+            <input type="number" value="${room.roomId}" name="roomId">
+            <input type="number" value="${room.amount}" name="amount">
+            <input type="submit">
+        </form>
+
+    </div>
+</div>
+<div class="myFooter"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link type="text/css" rel="stylesheet" href="../../css/nav.css" />
+    <link type="text/css" rel="stylesheet" href="../../plugin/menu/dist/css/jquery.mmenu.all.css" />
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../plugin/menu/dist/js/jquery.mmenu.all.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('nav#menu').mmenu();
+        });
+    </script>
+</head>
+
+<body>
+
+<div class="header">
+    <a href="#menu"><span></span></a>
+    hostelWorld
+</div>
+
+<nav id="menu">
+    <ul>
+        <li><a href="/public/list/hostel">hostels Search</a></li>
+        <li><a href="/hostel/hostel/info">客栈信息</a> </li>
+        <li><a href="/hostel/list/schedule">客栈计划</a> </li>
+        <li><a href="/hostel/list/checkIn">入住信息</a> </li>
+        <li><a href="/hostel/list/reservation">预定信息</a> </li>
+        <li><a href="/hostel/list/userPay">用户付款</a> </li>
+        <li><a href="/hostel/list/payment">平台结账</a> </li>
+    </ul>
+</nav>
+
+<div class="content">
+
+    <div class="hostelInfo">
+        <form action="/hostel/update">
+            <input type="email" class="name" name="name"/>
+            <input type="password" class="password" name="password"/>
+            <input type="password" class="re_password" name="re_password"/>
+            <input type="text" class="contact" name="contact"/>
+            <input type="number" class="phone" name="phone"/>
+            <input type="number" class="bankcard" name="bankcard"/>
+            <input type="text" class="hostel" name="hostel"/>
+
+            <input type="submit">
+        </form>
+    </div>
+
+
+
+    <div class="scheduleSubmit">
+        <form action="/hostel/schedule" method="post" >
+            <input type="radio" class="computer" name="computer"/>
+            <input type="radio" class="airCondition" name="airCondition"/>
+            <input type="number" class="numOfBed" name="numOfBed"/>
+            <input type="number" class="count" name="count"/>
+            <input type="number" class="capacity" name="capacity"/>
+            <input type="number" class="price" name="price"/>
+            <input type="date" class="startDate" name="dateLower">
+            <input type="date" class="endDate" name="dateUpper">
+            <input type="text" class="description" name="description">
+            <input type="image" class="image" name="image">
+            <input type="submit">
+        </form>
+    </div>
+
+    <div class="mySchedule">
+        <div class="scheduleItem">
+            <div class="computer">${scheduleItem.computer}</div>
+            <div class="airCondition">${scheduleItem.airCondition}</div>
+            <div class="numOfBed">${scheduleItem.numOfBed}</div>
+            <div class="capacity">${scheduleItem.capacity}</div>
+            <div class="count">${scheduleItem.count}</div>
+            <div class="price">${scheduleItem.price}</div>
+            <div class="startDate">${scheduleItem.startDate}</div>
+            <div class="endDate">${scheduleItem.endDate}</div>
+            <div class="description">${scheduleItem.description}</div>
+            <div class="image">${scheduleItem.image}</div>
+        </div>
+    </div>
+
+    <div class="myReservation">
+        <div class="scheduleItem">
+            <div class="computer">${scheduleItem.computer}</div>
+            <div class="airCondition">${scheduleItem.airCondition}</div>
+            <div class="numOfBed">${scheduleItem.numOfBed}</div>
+            <div class="capacity">${scheduleItem.capacity}</div>
+            <div class="count">${scheduleItem.count}</div>
+            <div class="price">${scheduleItem.price}</div>
+            <div class="startDate">${scheduleItem.startDate}</div>
+            <div class="endDate">${scheduleItem.endDate}</div>
+            <div class="description">${scheduleItem.description}</div>
+            <div class="image">${scheduleItem.image}</div>
+
+            <div class="checkOut">
+                <form action="/hostel/checkIn">
+                    <input type="text" name="people" class="people">
+                    <input type="text" name="reservationId" class="reservationId" value="${scheduleItem.reservationId}">
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="myCheckIn">
+        <div class="scheduleItem">
+            <div class="computer">${scheduleItem.computer}</div>
+            <div class="airCondition">${scheduleItem.airCondition}</div>
+            <div class="numOfBed">${scheduleItem.numOfBed}</div>
+            <div class="capacity">${scheduleItem.capacity}</div>
+            <div class="count">${scheduleItem.count}</div>
+            <div class="price">${scheduleItem.price}</div>
+            <div class="startDate">${scheduleItem.startDate}</div>
+            <div class="endDate">${scheduleItem.endDate}</div>
+            <div class="description">${scheduleItem.description}</div>
+            <div class="image">${scheduleItem.image}</div>
+            <div class="people">${scheduleItem.people}</div>
+
+            <div class="checkOut">
+                <form action="/hostel/checkOut">
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="myPayment">
+        <div class="scheduleItem">
+            <div class="computer">${scheduleItem.computer}</div>
+            <div class="airCondition">${scheduleItem.airCondition}</div>
+            <div class="numOfBed">${scheduleItem.numOfBed}</div>
+            <div class="capacity">${scheduleItem.capacity}</div>
+            <div class="count">${scheduleItem.count}</div>
+            <div class="price">${scheduleItem.price}</div>
+            <div class="startDate">${scheduleItem.startDate}</div>
+            <div class="endDate">${scheduleItem.endDate}</div>
+            <div class="description">${scheduleItem.description}</div>
+            <div class="image">${scheduleItem.image}</div>
+            <div class="price">${scheduleItem.price}</div>
+        </div>
+    </div>
+
+    <div class="myFooter">
+    </div>
+</div>
+
+
+
+</body>
+
+</html>
