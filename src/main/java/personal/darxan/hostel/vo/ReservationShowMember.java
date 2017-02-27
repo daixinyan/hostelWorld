@@ -44,6 +44,8 @@ public class ReservationShowMember {
 
     private Long hostelId;
 
+    private String hostel;
+
     private Date startDate;
 
     private Date endDate;
@@ -71,6 +73,14 @@ public class ReservationShowMember {
     private String image;
 
 
+    public String getHostel() {
+        return hostel;
+    }
+
+    public void setHostel(String hostel) {
+        this.hostel = hostel;
+    }
+
     @Override
     public String toString() {
         return "ReservationShowMember{" +
@@ -86,9 +96,11 @@ public class ReservationShowMember {
                 ", updateTime=" + updateTime +
                 ", checkInTime=" + checkInTime +
                 ", checkOutTime=" + checkOutTime +
+                ", paymentTime=" + paymentTime +
                 ", people='" + people + '\'' +
                 ", roomId=" + roomId +
                 ", hostelId=" + hostelId +
+                ", hostel='" + hostel + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", price=" + price +

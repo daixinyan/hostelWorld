@@ -152,6 +152,7 @@ public class OrderServiceImpl implements OrderService {
             serviceResult.setValue(paginationResult);
 
         }catch (Exception e) {
+            e.printStackTrace();
             serviceResult.setSuccess(false);
             serviceResult.setMessage(e.getMessage());
         }
@@ -161,7 +162,7 @@ public class OrderServiceImpl implements OrderService {
     public ServiceResult getReservationByUser(HttpServletRequest httpServletRequest,
                                               final ReservationRestrict reservationRestrict) {
 
-        return getByHostel(httpServletRequest,
+        return getByUser(httpServletRequest,
                 new MyFunction<PaginationResult, Object>() {
                     public PaginationResult execute(Object id) {
                         return reservationDao.getReservationByUser(id, reservationRestrict);
@@ -173,7 +174,7 @@ public class OrderServiceImpl implements OrderService {
     public ServiceResult getCheckInByUser(HttpServletRequest httpServletRequest,
                                           final ReservationRestrict reservationRestrict) {
 
-        return getByHostel(httpServletRequest,
+        return getByUser(httpServletRequest,
                 new MyFunction<PaginationResult, Object>() {
                     public PaginationResult execute(Object id) {
                         return reservationDao.getCheckInByUser(id, reservationRestrict);
@@ -185,7 +186,7 @@ public class OrderServiceImpl implements OrderService {
     public ServiceResult getPaymentByUser(HttpServletRequest httpServletRequest,
                                           final ReservationRestrict reservationRestrict) {
 
-        return getByHostel(httpServletRequest,
+        return getByUser(httpServletRequest,
                 new MyFunction<PaginationResult, Object>() {
                     public PaginationResult execute(Object id) {
                         return reservationDao.getPaymentByUser(id, reservationRestrict);
@@ -213,6 +214,7 @@ public class OrderServiceImpl implements OrderService {
             serviceResult.setValue(paginationResult);
 
         }catch (Exception e) {
+            e.printStackTrace();
             serviceResult.setSuccess(false);
             serviceResult.setMessage(e.getMessage());
         }

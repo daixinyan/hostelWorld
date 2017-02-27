@@ -45,23 +45,6 @@ public class PublicController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
 
-    @RequestMapping(value = "test")
-    public ModelAndView test() {
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("public/test");
-
-        ArrayList<String> users = new ArrayList<String>();
-
-        users.add("1fd");
-        users.add("2fd");
-        users.add("3fd");
-
-        modelAndView.addObject("users",users);
-        modelAndView.addObject("message", "hello");
-
-        return modelAndView;
-    }
 
     @RequestMapping(value = "/list/hostel")
     public ModelAndView hostels(HttpServletRequest httpServletRequest,
@@ -85,15 +68,12 @@ public class PublicController {
     @RequestMapping(value = "/hostel/{roomId}")
     public ModelAndView hostels(HttpServletRequest httpServletRequest, @PathVariable("roomId") Long roomId) {
 
-
         ModelAndView modelAndView = new ModelAndView();
         ServiceResult serviceResult = hostelService.getHostelRoomById(httpServletRequest, roomId);
         MyLogger.log(serviceResult);
 
-        modelAndView.setViewName("public/hostel");
-        if (serviceResult.isSuccess()) {
-            modelAndView.addObject("room", (HostelRoomVO)serviceResult.getValue());
-        }
+        modelAndView.setViewName("public/room");
+        modelAndView.addObject("room", (HostelRoomVO)serviceResult.getValue());
         return modelAndView;
     }
 

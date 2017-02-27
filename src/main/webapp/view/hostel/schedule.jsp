@@ -41,19 +41,35 @@
 
 
     <div class="mySchedule">
-        <c:forEach items="${schedules}" var="scheduleItem">
-            <div class="scheduleItem">
-                <span class="computer">${scheduleItem.computer}</span>
-                <span class="airCondition">${scheduleItem.airCondition}</span>
-                <span class="numOfBed">${scheduleItem.numOfBed}</span>
-                <span class="capacity">${scheduleItem.capacity}</span>
-                <span class="count">${scheduleItem.count}</span>
-                <span class="price">${scheduleItem.price}</span>
-                <span class="startDate">${scheduleItem.startDate}</span>
-                <span class="endDate">${scheduleItem.endDate}</span>
-                <span class="description">${scheduleItem.description}</span>
-                <span class="image">${scheduleItem.image}</span>
+        <c:forEach items="${schedules}" var="room">
+            <div class="room">
+                <span class="computer">${room.computer}</span>
+                <span class="airCondition">${room.airCondition}</span>
+                <span class="numOfBed">${room.numOfBed}</span>
+                <span class="capacity">${room.capacity}</span>
+                <span class="count">${room.count}</span>
+                <span class="price">${room.price}</span>
+                <span class="startDate">${room.startDate}</span>
+                <span class="endDate">${room.endDate}</span>
+                <span class="description">${room.description}</span>
+                <span class="image">${room.image}</span>
             </div>
+
+            <form action="/hostel/action/schedule">
+                <input type="radio" value="${room.airCondition}" class="airCondition">
+                <input type="number" value="${room.capacity}" class="capacity">
+                <input type="number" value="${room.computer}" class="computer">
+                <input type="number" value="${room.count}" class="count">
+                <input type="number" value="${room.numOfBed}" class="numOfBed">
+
+                <input type="text" value="${room.description}" class="description">
+
+                <input type="date" value="${room.startDate}" class="startDate">
+                <input type="date" value="${room.endDate}" class="endDate">
+
+                <img src="${room.image}"/>
+                <input type="image" value="" class="image">
+            </form>
         </c:forEach>
 
     </div>

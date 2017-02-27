@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+
+    <link type="text/css" rel="stylesheet" href="../../plugin/bootstrap/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="../../css/nav.css" />
     <link type="text/css" rel="stylesheet" href="../../plugin/menu/dist/css/jquery.mmenu.all.css" />
     <script type="text/javascript" src="../../js/jquery.min.js"></script>
@@ -36,22 +38,55 @@
 
 <div class="content">
 
-    <div class="myCheckIn">
-        <div class="scheduleItem">
-            <div class="computer">${scheduleItem.computer}</div>
-            <div class="airCondition">${scheduleItem.airCondition}</div>
-            <div class="numOfBed">${scheduleItem.numOfBed}</div>
-            <div class="capacity">${scheduleItem.capacity}</div>
-            <div class="count">${scheduleItem.count}</div>
-            <div class="price">${scheduleItem.price}</div>
-            <div class="startDate">${scheduleItem.startDate}</div>
-            <div class="endDate">${scheduleItem.endDate}</div>
-            <div class="description">${scheduleItem.description}</div>
-            <div class="image">${scheduleItem.image}</div>
-            <div class="people">${scheduleItem.people}</div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <div class="col-md-1"></div>
+            <div class="col-md-8">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Rolex
+                    </dt>
+                    <dd>
+                        劳力士创始人为汉斯.威尔斯多夫，1908年他在瑞士将劳力士注册为商标。
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="col-md-3">
+                <form>
+                    <fieldset>
+                        <legend>表单项</legend>
+
+                        <label>表签名</label>
+                        <input type="text" />
+                        <span class="help-block">这里填写帮助信息.</span>
+
+                        <label>表签名</label>
+                        <input type="text" />
+                        <span class="help-block">这里填写帮助信息.</span>
+
+                        <label>表签名</label>
+                        <input type="text" />
+                        <span class="help-block">这里填写帮助信息.</span>
+
+                        <label class="checkbox">
+                            <input type="checkbox" /> 勾选同意</label>
+                        <button type="submit" class="btn">提交</button>
+
+                        <label class="checkbox">
+                            <input type="checkbox" /> 勾选同意</label>
+                        <button type="submit" class="btn">提交</button>
+
+                        <label class="checkbox">
+                            <input type="checkbox" /> 勾选同意</label>
+                        <button type="submit" class="btn">提交</button>
+                    </fieldset>
+
+                </form>
+
+            </div>
         </div>
-    </div>
-    <div class="myFooter">
     </div>
 </div>
 

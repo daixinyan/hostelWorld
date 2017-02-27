@@ -58,6 +58,17 @@ public class HostelController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/update/schedule")
+    public ModelAndView updateSchedule(HttpServletRequest httpServletRequest,
+                                       @ModelAttribute HostelRoomVO hostelRoomVO) {
+        ModelAndView modelAndView = new ModelAndView();
+        ServiceResult serviceResult =
+                hostelService.updateSchedule(httpServletRequest, hostelRoomVO);
+        modelAndView.setViewName("redirect: /list/schedule");
+        modelAndView.addObject("result",serviceResult.isSuccess());
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/action/schedule")
     @ResponseBody
     public ServiceResult addSchedule(HttpServletRequest httpServletRequest,

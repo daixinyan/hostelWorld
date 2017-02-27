@@ -97,7 +97,7 @@ public class UserController {
         modelAndView.setViewName("user/payment");
         modelAndView.addObject("paginationResult", (PaginationResult)serviceResult.getValue());
         modelAndView.addObject("reservationRestrict", reservationRestrict);
-        modelAndView.addObject("reservation", (ReservationShowHostel)null);
+        modelAndView.addObject("reservation", (ReservationShowMember)null);
         return modelAndView;
     }
 
@@ -115,7 +115,7 @@ public class UserController {
         modelAndView.setViewName("user/checkIn");
         modelAndView.addObject("paginationResult", (PaginationResult)serviceResult.getValue());
         modelAndView.addObject("reservationRestrict", reservationRestrict);
-        modelAndView.addObject("reservation", (ReservationShowHostel)null);
+        modelAndView.addObject("reservation", (ReservationShowMember)null);
         return modelAndView;
     }
 
@@ -134,7 +134,7 @@ public class UserController {
         modelAndView.setViewName("user/payment");
         modelAndView.addObject("paginationResult", (PaginationResult)serviceResult.getValue());
         modelAndView.addObject("reservationRestrict", reservationRestrict);
-        modelAndView.addObject("reservation", (ReservationShowHostel)null);
+        modelAndView.addObject("reservation", (ReservationShowMember)null);
         return modelAndView;
     }
 

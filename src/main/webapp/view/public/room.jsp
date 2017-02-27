@@ -48,8 +48,22 @@
 
         <a href="/public/hostel/${room.roomId}">${room.roomId}</a>
         <form action="../../user/reserve">
-            <input type="number" value="${room.roomId}" name="roomId">
-            <input type="number" value="1" name="amount">
+
+
+            <input type="radio" value="${room.airCondition}" class="airCondition">
+            <input type="number" value="${room.capacity}" class="capacity">
+            <input type="number" value="${room.computer}" class="computer">
+            <input type="number" value="${room.count}" class="count">
+            <input type="number" value="${room.numOfBed}" class="numOfBed">
+
+            <input type="text" value="${room.description}" class="description">
+
+            <input type="date" value="${room.startDate}" class="startDate">
+            <input type="date" value="${room.endDate}" class="endDate">
+
+            <img src="${room.image}"/>
+            <input type="image" value="" class="image">
+
             <input type="submit">
         </form>
 

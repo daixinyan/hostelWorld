@@ -18,13 +18,13 @@
 
         <nav id="menu">
             <ul>
-                <li><a href="../../public/list/hostel">hostels Search</a></li>
-                <li><a href="../../public/register/hostel">注册</a> </li>
-                <li><a href="../../public/register/user">注册</a> </li>
-                <li><a href="../../public/login/default">登陆</a> </li>
-                <li><a href="../../public/login/hostel">hostel登陆</a> </li>
-                <li><a href="../../public/login/user">会员登陆</a> </li>
-                <li><a href="../../public/login/admin">管理员登陆</a> </li>
+                <li><a href="/public/list/hostel">hostels Search</a></li>
+                <li><a href="/public/register/hostel">注册</a> </li>
+                <li><a href="/public/register/user">注册</a> </li>
+                <li><a href="/public/login/default">登陆</a> </li>
+                <li><a href="/public/login/hostel">hostel登陆</a> </li>
+                <li><a href="/public/login/user">会员登陆</a> </li>
+                <li><a href="/public/login/admin">管理员登陆</a> </li>
 
             </ul>
         </nav>
@@ -33,20 +33,27 @@
     <c:otherwise>
         <c:if test="${sessionScope.LOGIN_TYPE=='personal.darxan.hostel.vo.MemberVO'}">
             <nav id="menu">
+                <ul>
+                    <li><a href="/public/list/hostel">hostels Search</a></li>
 
+                    <li><a href="/user/user/info">用户信息</a> </li>
+                    <li><a href="/user/list/checkIn">入住信息</a> </li>
+                    <li><a href="/user/list/reservation">预定信息</a> </li>
+                    <li><a href="/user/list/payment">用户付款</a> </li>
+                </ul>
             </nav>
         </c:if>
 
         <c:if test="${ sessionScope.LOGIN_TYPE=='personal.darxan.hostel.vo.HostelVO'}">
             <nav id="menu">
                 <ul>
-                    <li><a href="../../public/list/hostel">hostels Search</a></li>
-                    <li><a href="../../hostel/hostel/info">客栈信息</a> </li>
-                    <li><a href="../../hostel/list/schedule">客栈计划</a> </li>
-                    <li><a href="../../hostel/list/checkIn">入住信息</a> </li>
-                    <li><a href="../../hostel/list/reservation">预定信息</a> </li>
-                    <li><a href="../../hostel/list/payment">用户付款</a> </li>
-                    <li><a href="../../hostel/list/payment">平台结账</a> </li>
+                    <li><a href="/public/list/hostel">hostels Search</a></li>
+                    <li><a href="/hostel/hostel/info">客栈信息</a> </li>
+                    <li><a href="/hostel/list/schedule">客栈计划</a> </li>
+                    <li><a href="/hostel/list/checkIn">入住信息</a> </li>
+                    <li><a href="/hostel/list/reservation">预定信息</a> </li>
+                    <li><a href="/hostel/list/payment">用户付款</a> </li>
+                    <li><a href="/hostel/list/payment">平台结账</a> </li>
                 </ul>
             </nav>
         </c:if>
