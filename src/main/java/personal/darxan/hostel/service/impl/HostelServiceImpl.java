@@ -7,10 +7,7 @@ import personal.darxan.hostel.dao.HostelRoomDao;
 import personal.darxan.hostel.model.Hostel;
 import personal.darxan.hostel.model.HostelRoom;
 import personal.darxan.hostel.service.interf.HostelService;
-import personal.darxan.hostel.tool.AttributeUpdate;
-import personal.darxan.hostel.tool.Convert;
-import personal.darxan.hostel.tool.MyLogger;
-import personal.darxan.hostel.tool.StringConstant;
+import personal.darxan.hostel.tool.*;
 import personal.darxan.hostel.vo.AdministerVO;
 import personal.darxan.hostel.vo.HostelRoomVO;
 import personal.darxan.hostel.vo.HostelVO;
@@ -18,6 +15,7 @@ import personal.darxan.hostel.vo.ServiceResult;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -168,7 +166,7 @@ public class HostelServiceImpl implements HostelService {
     }
 
 
-    public ServiceResult getHostelRoomById(
+    public ServiceResult getRoomById(
             HttpServletRequest httpServletRequest, Long id) {
 
         ServiceResult serviceResult = new ServiceResult(true);
@@ -183,4 +181,27 @@ public class HostelServiceImpl implements HostelService {
         return serviceResult;
     }
 
+    public ServiceResult getHostels(
+            HttpServletRequest httpServletRequest, Long id) {
+
+        ServiceResult serviceResult = new ServiceResult();
+        try {
+            Hostel hostel = hostelDao.load(id);
+            Collection<HostelRoom> hostelRoomCollection = hostel.getHostelRoomSet();
+
+            HostelVO hostelVO = Convert.convert(hostel);
+            List<HostelRoomVO> hostelRoomVOList =
+                    new ArrayList<HostelRoomVO>(hostelRoomCollection.size());
+            for (HostelRoom hostelRoom:hostelRoomCollection) {
+                hostelRoomVOList.add(Convert.convert(hostelRoom, false));
+            }
+            serviceResult.setValue(new MyPair(hostelVO, hostelRoomVOList));
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            serviceResult.setMessage(e.getMessage());
+            serviceResult.setSuccess(false);
+        }
+        return serviceResult;
+    }
 }

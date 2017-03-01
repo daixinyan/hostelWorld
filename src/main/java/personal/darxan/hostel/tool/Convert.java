@@ -135,6 +135,10 @@ public final class Convert {
     }
 
     public static final HostelRoomVO convert(HostelRoom entity) {
+        return convert(entity, true);
+    }
+
+    public static final HostelRoomVO convert(HostelRoom entity, boolean fetchJoined) {
         HostelRoomVO hostelRoom = new HostelRoomVO();
         hostelRoom.setCount(entity.getCount());
         hostelRoom.setImage(entity.getImage());
@@ -148,7 +152,7 @@ public final class Convert {
         hostelRoom.setStartDate(entity.getStartDate());
         hostelRoom.setEndDate(entity.getEndDate());
 
-        if (entity.getHostel()!=null) {
+        if (fetchJoined && entity.getHostel()!=null) {
             hostelRoom.setHostelId(entity.getHostel().getHostelId());
             hostelRoom.setState(entity.getHostel().getState());
             hostelRoom.setPhone(entity.getHostel().getPhone());

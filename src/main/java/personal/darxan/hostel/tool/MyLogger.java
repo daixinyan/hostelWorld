@@ -12,10 +12,10 @@ public final class MyLogger {
     }
 
     public static final void print(Object object) {
-        System.out.print(object.toString());
+        System.out.print(object);
     }
 
     public static final void println(Object object) {
-        System.out.println(object.toString());
+        System.out.println(object);
     }
 }

@@ -7,6 +7,7 @@
 
     <link type="text/css" rel="stylesheet" href="../../css/nav.css" />
     <link type="text/css" rel="stylesheet" href="../../plugin/menu/dist/css/jquery.mmenu.all.css" />
+    <link type="text/css" rel="stylesheet" href="../../plugin/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../plugin/menu/dist/js/jquery.mmenu.all.min.js"></script>
 
@@ -39,59 +40,49 @@
 
 <div class="content">
 
-    <div class="reservationRestrict">
-            <form action="/hostel/list/checkIn">
-                <input type="search" class="keyInput" name="key"/>
-                <input type="submit"/>
-                <input type="text" class="order" name="order"/>
-                <input type="text" class="add1" name="add1"/>
-                <input type="text" class="add2" name="add2"/>
-                <input type="text" class="add3" name="add3"/>
-                <input type="text" class="add4" name="add4"/>
-                <input type="text" class="address" name="address"/>
-                <input type="radio" class="computer" name="computer"/>
-                <input type="radio" class="airCondition" name="airCondition"/>
-                <input type="number" class="numOfBed" name="numOfBed"/>
-                <input type="number" class="capacity" name="capacity"/>
-                <input type="number" class="page" name="page"/>
-                <input type="radio" class="asc" name="asc"/>
-                <input type="number" class="pageSize" name="pageSize" value="10"/>
-                <div class="priceLimit">
-                    <input type="number" class="priceLower" name="priceLower"/>
-                    <input type="number" class="priceUpper" name="priceUpper"/>
-                </div>
+    <div class="myCheckIn col-md-8">
 
-                <div class="date">
-                    <input type="date" class="dateLower" name="dateLower">
-                    <input type="date" class="dateUpper" name="dateUpper">
-                </div>
-            </form>
-    </div>
 
-    <div class="myCheckIn">
-        <div class="scheduleItem">
-            <div class="computer">${scheduleItem.computer}</div>
-            <div class="airCondition">${scheduleItem.airCondition}</div>
-            <div class="numOfBed">${scheduleItem.numOfBed}</div>
-            <div class="capacity">${scheduleItem.capacity}</div>
-            <div class="count">${scheduleItem.count}</div>
-            <div class="price">${scheduleItem.price}</div>
-            <div class="startDate">${scheduleItem.startDate}</div>
-            <div class="endDate">${scheduleItem.endDate}</div>
-            <div class="description">${scheduleItem.description}</div>
-            <div class="image">${scheduleItem.image}</div>
-            <div class="people">${scheduleItem.people}</div>
-
-            <div class="checkOut">
-                <form action="/hostel/checkOut">
-                    <input type="submit">
-                </form>
+        <div class="" style="display:block;">
+            <div class="col-xs-12 col-sm-12 col-md-3 ">
+                <a  class=" "  href="" title="" >
+                    <img alt="" src="../../image/common.jpg" style="height:180px;width:190px;border-width:0px;">
+                </a>
             </div>
+            <diV class="col-xs-12 col-sm-12 col-md-4">
+                <h3 class="">
+                    <a class="" title="" href="">DARXAN</a>
+                </h3>
+                <a class="" title="" href="">
+                    <div class="">
+                        <span class="phone">18795855867</span>
+                    </div>
+                </a>
+
+
+                <a class="">
+                    <div class="">
+                        <span onclick="alert('f')" class="checkout">点击checkout</span>
+                    </div>
+                </a>
+                <a class="">
+                    <div class="">
+                        <span class="price"><dfn>¥</dfn><b>80.0*2</b>起</span>
+                    </div>
+                </a>
+                <a class="">
+                    <div class="">
+                        <span class="price">2017-02-26 16:30:21.0</span>
+                    </div>
+                </a>
+            </diV>
+
         </div>
+        <div class="clearfix"></div>
+
     </div>
 
-    <div class="myFooter">
-    </div>
+
 </div>
 
 

@@ -48,8 +48,8 @@ public class Reservation extends BaseTable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date reserveTime;
 
-    @Column(columnDefinition="decimal(10,2) default 0")
-    private double amount;
+    @Column
+    private int amount;
 
     private double price;
 
@@ -163,11 +163,11 @@ public class Reservation extends BaseTable {
         this.paymentTime = paymentTime;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

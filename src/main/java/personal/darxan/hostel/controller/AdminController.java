@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import personal.darxan.hostel.service.interf.AdminService;
 import personal.darxan.hostel.service.interf.HostelService;
 import personal.darxan.hostel.service.interf.OrderService;
+import personal.darxan.hostel.tool.DateFormatter;
 import personal.darxan.hostel.vo.ReservationRestrict;
 import personal.darxan.hostel.vo.ServiceResult;
 
@@ -30,9 +31,8 @@ public class AdminController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(DateFormatter.dateFormat, false));
     }
 
     @RequestMapping(value = "/admin")

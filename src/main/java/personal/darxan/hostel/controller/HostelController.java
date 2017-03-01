@@ -10,6 +10,8 @@ import personal.darxan.hostel.service.impl.HostelServiceImpl;
 import personal.darxan.hostel.service.interf.AuthService;
 import personal.darxan.hostel.service.interf.HostelService;
 import personal.darxan.hostel.service.interf.OrderService;
+import personal.darxan.hostel.tool.AttributeUpdate;
+import personal.darxan.hostel.tool.DateFormatter;
 import personal.darxan.hostel.tool.MyLogger;
 import personal.darxan.hostel.vo.*;
 
@@ -35,10 +37,10 @@ public class HostelController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(DateFormatter.dateFormat, false));
     }
+
 
     @ResponseBody
     @RequestMapping(value = "/increment/{roomId}/{count}")
@@ -132,6 +134,7 @@ public class HostelController {
     public ModelAndView getReservation(HttpServletRequest httpServletRequest,
                                         @ModelAttribute ReservationRestrict reservationRestrict) {
         MyLogger.log(reservationRestrict);
+        AttributeUpdate.clearObject(reservationRestrict, ReservationRestrict.class);
         ModelAndView modelAndView = new ModelAndView();
         ServiceResult serviceResult = orderService.getReservationByHostel(
                 httpServletRequest, reservationRestrict);
@@ -148,6 +151,7 @@ public class HostelController {
                                     @ModelAttribute ReservationRestrict reservationRestrict) {
         MyLogger.log(reservationRestrict);
         ModelAndView modelAndView = new ModelAndView();
+        AttributeUpdate.clearObject(reservationRestrict, ReservationRestrict.class);
         ServiceResult serviceResult = orderService.getCheckInByHostel(
                 httpServletRequest, reservationRestrict);
         modelAndView.setViewName("hostel/checkIn");

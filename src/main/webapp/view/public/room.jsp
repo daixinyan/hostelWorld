@@ -47,8 +47,8 @@
         <div class="state">${room.state}</div>
 
         <a href="/public/hostel/${room.roomId}">${room.roomId}</a>
-        <form action="../../user/reserve">
 
+        <form action="../../user/reserve">
 
             <input type="radio" value="${room.airCondition}" class="airCondition">
             <input type="number" value="${room.capacity}" class="capacity">
@@ -65,6 +65,7 @@
             <input type="image" value="" class="image">
 
             <input type="submit">
+
         </form>
 
     </div>

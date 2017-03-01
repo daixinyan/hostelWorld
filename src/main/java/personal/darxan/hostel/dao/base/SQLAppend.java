@@ -34,6 +34,9 @@ public class SQLAppend {
 
     }
 
+    private static final String joinedTablePrefix = " _joinedTable_";
+    private static final String mainTablePrefix = " _mainTable";
+
     private void addJoined(StringBuilder headerSQL) {
         for (Object joinedTable: joinedTables) {
             headerSQL.append(" join _mainTable."+joinedTable+" _joinedTable_"+joinedTable);
@@ -67,6 +70,11 @@ public class SQLAppend {
     private void addSQLCondition(Object column, Object value, String condition) {
         if (column==null||value==null) {
             return;
+        }
+        if (!column.toString().contains(".")) {
+            column = mainTablePrefix+"."+column;
+        }else {
+            column = joinedTablePrefix+column;
         }
         addConnector();
         sql.append(column);
@@ -117,7 +125,12 @@ public class SQLAppend {
         if (column==null||asc==null) {
             return this;
         }
-        order = "ORDER by "+column+(asc?"asc":"desc");
+        if (!column.toString().contains(".")) {
+            column = mainTablePrefix+"."+column;
+        }else {
+            column = joinedTablePrefix+column;
+        }
+        order = "ORDER by "+column+(asc?" asc ":" desc ");
         return this;
     }
 
@@ -126,6 +139,11 @@ public class SQLAppend {
             return this;
         }
         addConnector();
+        if (!appendString.contains(".")) {
+            appendString = mainTablePrefix+table+"."+appendString;
+        }else {
+            appendString = joinedTablePrefix+appendString;
+        }
         sql.append(" ");
         sql.append(appendString);
         sql.append(" ");

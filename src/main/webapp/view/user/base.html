@@ -15,6 +15,17 @@
         $(function() {
             $('nav#menu').mmenu();
         });
+        Date.prototype.toDateInputValue = (function() {
+            var local = new Date(this);
+            local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+            return local.toJSON().slice(0,10);
+        });
+        $(document).ready(
+            function() {
+                var datePickers = $('#datePicker');
+                datePickers.val(new Date().toDateInputValue());
+            }
+        );
     </script>
 </head>
 
@@ -38,6 +49,9 @@
 
 <div class="content">
 
+    <form>
+        <input id="datePicker" type="date" value="2014-11-02">
+    </form>
     <div class="myFooter">
     </div>
 </div>

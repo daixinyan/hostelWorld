@@ -34,8 +34,8 @@ public class HostelRoomDao extends BaseDao<HostelRoom, Long> {
         sqlAppend.addOrder(searchRestrict.getOrder(), searchRestrict.isAsc());
 
         if (searchRestrict.getDateLower()!=null&&searchRestrict.getDateUpper()!=null) {
-            sqlAppend.addGE("endDate", "?");
-            sqlAppend.addLE("startDate", "?");
+            sqlAppend.addGE("endDate", " ? ");
+            sqlAppend.addLE("startDate", " ? ");
         }
         Query query = sqlAppend.fetchCount();
         if (searchRestrict.getDateLower()!=null&&searchRestrict.getDateUpper()!=null) {

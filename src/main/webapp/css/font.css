@@ -1,0 +1,16 @@
+.tab-h2 {
+    color:#0059b2;
+    font-size:20px;
+    letter-spacing: 1px;
+    text-align:center;
+    margin:45px 0 10px;
+}
+
+
+.tab-p {
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-align:center;
+    color: #999;
+    margin:15px 0 45px;
+}

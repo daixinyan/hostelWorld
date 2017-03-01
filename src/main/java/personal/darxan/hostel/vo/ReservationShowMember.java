@@ -26,7 +26,7 @@ public class ReservationShowMember {
      */
     private Date reserveTime;
 
-    private double amount;
+    private int amount;
 
 
     private Date updateTime;
@@ -178,11 +178,11 @@ public class ReservationShowMember {
         this.reserveTime = reserveTime;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

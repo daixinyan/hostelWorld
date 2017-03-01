@@ -39,62 +39,105 @@
 
 <div class="myContent">
 
-    <div class="hostelsList">
 
-        <div class="listHeader">
-            <form action="../../hostel/list/checkIn" method="post">
-                <input type="text" class="keyword" name="keyword" value="${reservationRestrict.keyword}"/>
-                <input type="text" class="order" name="order"  value="${reservationRestrict.order}"/>
+    <div class="container-fluid">
+        <div class="row-fluid">
 
+            <div class="col-md-2"></div>
+            <div class="col-md-7">
+                <div class="listItems">
+                    <c:forEach items="${paginationResult.items}" var="reservation">
 
-                <input type="number" class="page" id="pageNum" name="page"  value="${reservationRestrict.page}"/>
-                <input id="searchButton" type="submit"/>
+                        <div class="" style="display:block;">
+                            <div class="col-xs-12 col-sm-12 col-md-4 ">
+                                <a  class=" "  href="../../public/user/${reservation.memberId}" title="${reservation.name}" >
+                                    <img class="img-responsive" alt="${reservation.contact}" src="${reservation.avatar}" style="height:160px;width:150px;border-width:0px;">
+                                </a>
+                            </div>
+                            <diV class="col-xs-12 col-sm-12 col-md-8">
+                                <h3 class="">
+                                    <a class="" title="" href="../../public/user/${reservation.memberId}">${reservation.contact}</a>
+                                </h3>
+                                <a class="" title="" href="../../public/user/${reservation.memberId}">
+                                    <div class="">
+                                        <span class="phone">${reservation.phone}</span>
+                                    </div>
+                                </a>
 
-                <div class="date">
-                    <input type="date" class="dateLower" name="dateLower" value="${reservationRestrict.dateLower}">
-                    <input type="date" class="dateUpper" name="dateUpper" value="${reservationRestrict.dateUpper}">
+                                <c:if test="${reservation.checkOut!=true}">
+                                    <a class="">
+                                        <div class="">
+                                            <span onclick="alert('${reservation.memberId}')" class="checkout">点击checkout</span>
+                                        </div>
+                                    </a>
+                                </c:if>
+                                <c:if test="${reservation.checkOut==true}">
+                                    <br/>
+                                </c:if>
+                                <br/>
+                                <a class="">
+                                    <div class="">
+                                        <span class="price">
+                                            <dfn>¥</dfn>
+                                            <b>${reservation.price}*${reservation.amount}</b>
+                                        </span>
+                                    </div>
+                                </a>
+                                <a class="">
+                                    <div class="">
+                                        <span class="time">${reservation.reserveTime}</span>
+                                    </div>
+                                </a>
+                            </diV>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </c:forEach>
                 </div>
-            </form>
-        </div>
 
-
-
-        <div class="listItems">
-            <c:forEach items="${paginationResult.items}" var="reservation">
-                <div class="listItem">
-
-                    <div class="memberId">${reservation.memberId}</div>
-                    <div class="name">${reservation.name}</div>
-                    <div class="contact">${reservation.contact}</div>
-                    <div class="phone">${reservation.phone}</div>
-                    <div class="avatar">${reservation.avatar}</div>
-
-                    <div class="price">${reservation.price}</div>
-                    <div class="amount">${reservation.amount}</div>
-
-                    <div class="checkIn">${reservation.checkIn}</div>
-                    <div class="checkInTime">${reservation.checkInTime}</div>
-                    <div class="people">${reservation.people}</div>
-
-                    <div class="payment">${reservation.payment}</div>
-                    <div class="paymentTime">${reservation.paymentTime}</div>
-                    <div class="checkOut">${reservation.checkOut}</div>
-                    <div class="checkOutTime">${reservation.checkOutTime}</div>
-
-
-                    <div class="reserveTime">${reservation.reserveTime}</div>
-                    <div class="reservationId">${reservation.reservationId}</div>
-
-
+                <div class="myPager">
+                    <ul id="myPagination" class="pagination" ></ul >
                 </div>
-            </c:forEach>
-        </div>
+            </div>
 
-        <div class="myPager">
-            <ul id="myPagination" class="pagination" ></ul >
-        </div>
+            <div class="col-md-3">
+                <form action="../../hostel/list/checkIn" method="post">
+                    <fieldset>
+                        <legend>入住单搜索</legend>
 
+
+                        <input type="hidden" class="page" id="pageNum" name="page"  value="${reservationRestrict.page}"/>
+
+                        <label>搜索关键字</label>
+                        <input type="text" class="keyword" name="keyword" value="${reservationRestrict.keyword}"/>
+                        <span class="help-block"></span>
+
+                        <%--<label>排序方式</label>--%>
+                        <input type="hidden" class="order" name="order"  value="${reservationRestrict.order}"/>
+
+                        <label>从旧到新</label>
+                        <input type="radio" class="order" name="asc"  value="${reservationRestrict.asc}"/>
+                        <span class="help-block"></span>
+
+                        <label>开始日期</label>
+                        <input type="date" class="dateLower" name="dateLower" value="${reservationRestrict.dateLowerString}">
+                        <span class="help-block"></span>
+
+                        <label>截至日期</label>
+                        <input type="date" class="dateUpper" name="dateUpper" value="${reservationRestrict.dateUpperString}">
+                        <span class="help-block"></span>
+
+                        <button id="searchButton" type="submit" class="btn">提交</button>
+
+                    </fieldset>
+
+                </form>
+
+            </div>
+        </div>
     </div>
+
+
 </div>
 
 </body>

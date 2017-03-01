@@ -32,7 +32,7 @@ public class ReservationShower {
      */
     private Date createTime;
 
-    private double amount;
+    private int amount;
 
     private String add_1;
 

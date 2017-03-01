@@ -41,69 +41,80 @@
 
 
 <jsp:include page="../common/nav.jsp"/>
+<div class="container-fluid">
+<div class="row-fluid">
 
-<div class="myContent">
-
-    <div class="hostelsList">
-
-        <div class="listHeader">
-            <form action="/public/list/hostel" method="post">
-                <input type="text" class="keyInput" name="keyword" value="${searchRestrict.keyword}"/>
-                <input type="text" class="order" name="order"  value="${searchRestrict.order}"/>
-                <input type="text" class="add1" name="add1" value="${searchRestrict.add1}"/>
-                <input type="text" class="add2" name="add2" value="${searchRestrict.add2}"/>
-                <input type="text" class="add3" name="add3" value="${searchRestrict.add3}"/>
-                <input type="text" class="add4" name="add4" value="${searchRestrict.add4}"/>
-                <input type="text" class="address" name="address" value="${searchRestrict.address}"/>
-                <input type="radio" class="computer" name="computer" value="${searchRestrict.computer}"/>
-                <input type="radio" class="airCondition" name="airCondition" value="${searchRestrict.airCondition}"/>
-                <input type="number" class="numOfBed" name="numOfBed" value="${searchRestrict.numOfBed}"/>
-                <input type="number" class="capacity" name="capacity" value="${searchRestrict.capacity}"/>
-                <input type="number" class="page" id="pageNum" name="page"  value="${searchRestrict.page}"/>
-                <input id="searchButton" type="submit"/>
-                <div class="priceLimit">
-                    <input type="number" class="priceLower" name="priceLower" value="${searchRestrict.priceLower}"/>
-                    <input type="number" class="priceUpper" name="priceUpper" value="${searchRestrict.priceUpper}"/>
-                </div>
-
-                <div class="date">
-                    <input type="date" class="dateLower" name="dateLower" value="${searchRestrict.dateLower}">
-                    <input type="date" class="dateUpper" name="dateUpper" value="${searchRestrict.dateUpper}">
-                </div>
-            </form>
-        </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
 
 
         <div class="listItems">
             <c:forEach items="${hostels.items}" var="room">
-                <div class="listItem">
+                <br/>
+                <div class="" style="display:block;">
 
-                    <div class="roomId">${room.roomId}</div>
-                    <div class="add_1">${room.add_1}</div>
-                    <div class="add_2">${room.add_2}</div>
-                    <div class="add_3">${room.add_3}</div>
-                    <div class="add_4">${room.add_4}</div>
-                    <div class="address">${room.address}</div>
-                    <div class="airCondition">${room.airCondition}</div>
-                    <div class="bankcard">${room.bankcard}</div>
-                    <div class="capacity">${room.capacity}</div>
-                    <div class="computer">${room.computer}</div>
-                    <div class="contact">${room.contact}</div>
-                    <div class="count">${room.count}</div>
-                    <div class="createTime">${room.createTime}</div>
-                    <div class="description">${room.description}</div>
-                    <div class="endDate">${room.endDate}</div>
-                    <div class="hostel">${room.hostel}</div>
-                    <div class="hostelId">${room.hostelId}</div>
-                    <div class="image">${room.image}</div>
-                    <div class="numOfBed">${room.numOfBed}</div>
-                    <div class="phone">${room.phone}</div>
-                    <div class="price">${room.price}</div>
-                    <div class="startDate">${room.startDate}</div>
-                    <div class="state">${room.state}</div>
+                    <div class="col-md-4">
+                        <a  class=" "  href="../../public/room/${room.roomId}" title="${room.hostel}" >
+                            <img  class="img-responsive" alt="${room.hostel}" src="${room.image}">
+                        </a>
+                    </div>
 
-                    <a href="/public/hostel/${room.roomId}">${room.roomId}</a>
+                    <div class="col-md-5">
+                        <h2 class="">
+                            <a class="" title="" href="../../public/hostel/${room.roomId}">${room.contact}</a>
+                        </h2>
+                        <a class="" title="" href="../../public/hostel/${room.roomId}">
+                            <div class="">
+                                <span class="phone">${room.phone}</span>
+                            </div>
+                        </a>
+                        <a class="">
+                            <div class="">
+                                <span class="">${room.address}</span>
+                            </div>
+                        </a>
+                        <a class="">
+                            <div class="">
+                                <span class="">
+                                    <c:choose>
+                                        <c:when test="${room.airCondition==true}">
+                                            有空调
+                                        </c:when>
+                                        <c:otherwise>
+                                            无空调
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:choose>
+                                        <c:when test="${room.computer==true}">
+                                            有电脑
+                                        </c:when>
+                                        <c:otherwise>
+                                            无电脑
+                                        </c:otherwise>
+                                    </c:choose>
+                                    ${room.numOfBed}人床
+                                </span>
+                            </div>
+                        </a>
+                        <a class="">
+                            <div class="">
+                                <span class="">${room.description}</span>
+                            </div>
+                        </a>
+                    </div>
+                    <diV class="col-md-2">
+                        <a class="">
+                            <div class="">
+                                        <span class="price tab-h2">
+                                            <dfn>¥</dfn>
+                                            <b>${room.price}</b>
+                                        </span>
+                            </div>
+                        </a>
+                    </diV>
+
                 </div>
+                <div class="clearfix"></div>
             </c:forEach>
         </div>
 
@@ -114,7 +125,65 @@
     </div>
 </div>
 
+    <div class="col-md-3">
+        <br/>
+        <form action="../../public/list/hostel" method="post">
+            <fieldset>
+                <legend>房间搜索</legend>
 
+
+                <input type="hidden" class="page" id="pageNum" name="page"  value="${searchRestrict.page}"/>
+
+                <label>搜索关键字</label>
+                <input type="text" class="keyword" name="keyword" value="${searchRestrict.keyword}"/>
+                <span class="help-block"></span>
+
+                <label>排序方式</label>
+                <input type="radio" class="order" name="order"  value="${searchRestrict.order}"/>
+
+                <label>从旧到新</label>
+                <input type="radio" class="order" name="asc"  value="${searchRestrict.asc}"/>
+                <span class="help-block"></span>
+
+                <label>开始日期</label>
+                <input type="date" class="dateLower" name="dateLower" value="${searchRestrict.dateLowerString}">
+                <span class="help-block"></span>
+
+                <label>截至日期</label>
+                <input type="date" class="dateUpper" name="dateUpper" value="${searchRestrict.dateUpperString}">
+                <span class="help-block"></span>
+
+                <label>最低价格</label>
+                <input type="text" class="priceLower" name="priceLower" value="${searchRestrict.priceLower}">
+                <span class="help-block"></span>
+
+                <label>最高价格</label>
+                <input type="text" class="priceUpper" name="priceUpper" value="${searchRestrict.priceUpper}">
+                <span class="help-block"></span>
+
+                <label>床数</label>
+                <input type="number" class="numOfBed" name="numOfBed" value="${searchRestrict.numOfBed}">
+                <span class="help-block"></span>
+
+                <label>地址</label>
+                <input type="text" class="address" name="address" value="${searchRestrict.address}"/>
+                <span class="help-block"></span>
+
+                <label>空调</label>
+                <input type="radio" class="airCondition" name="airCondition"  value="${searchRestrict.airCondition}"/>
+
+                <label>电脑</label>
+                <input type="radio" class="computer" name="computer"  value="${searchRestrict.computer}"/>
+
+                <button id="searchButton" type="submit" class="btn">提交</button>
+
+            </fieldset>
+
+        </form>
+
+</div>
+
+</div>
 </body>
 
 </html>

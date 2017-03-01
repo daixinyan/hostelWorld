@@ -12,15 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 import personal.darxan.hostel.service.interf.AuthService;
 import personal.darxan.hostel.service.interf.HostelService;
 import personal.darxan.hostel.service.interf.SearchService;
-import personal.darxan.hostel.tool.AttributeUpdate;
-import personal.darxan.hostel.tool.MyLogger;
-import personal.darxan.hostel.tool.StringConstant;
+import personal.darxan.hostel.tool.*;
 import personal.darxan.hostel.vo.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by darxan on 2017/2/14.
@@ -40,10 +37,10 @@ public class PublicController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(DateFormatter.dateFormat, false));
     }
+
 
 
     @RequestMapping(value = "/list/hostel")
@@ -62,18 +59,43 @@ public class PublicController {
             modelAndView.addObject("hostels", (PaginationResult)serviceResult.getValue());
         }
         modelAndView.addObject("searchRestrict", searchRestrict);
+        modelAndView.addObject("room", (HostelRoomVO)null);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/hostel/{roomId}")
+    @RequestMapping("/hostel/{hostelId}")
+    public ModelAndView roomsByHostel(HttpServletRequest httpServletRequest,
+                                      @PathVariable("hostelId") Long hostelId) {
+        ModelAndView modelAndView = new ModelAndView("public/hostel");
+        ServiceResult serviceResult = hostelService.getHostels(httpServletRequest, hostelId);
+        MyPair<HostelVO, List<HostelRoomVO>> pair =
+                (MyPair<HostelVO, List<HostelRoomVO>>) serviceResult.getValue();
+        modelAndView.addObject("hostel", pair.getFirst());
+        modelAndView.addObject("rooms",  pair.getSecond());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/room/{roomId}")
     public ModelAndView hostels(HttpServletRequest httpServletRequest, @PathVariable("roomId") Long roomId) {
 
         ModelAndView modelAndView = new ModelAndView();
-        ServiceResult serviceResult = hostelService.getHostelRoomById(httpServletRequest, roomId);
+        ServiceResult serviceResult = hostelService.getRoomById(httpServletRequest, roomId);
         MyLogger.log(serviceResult);
 
         modelAndView.setViewName("public/room");
         modelAndView.addObject("room", (HostelRoomVO)serviceResult.getValue());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/{userId}")
+    public ModelAndView user(HttpServletRequest httpServletRequest, @PathVariable("userId") Long userId) {
+
+        ModelAndView modelAndView = new ModelAndView();
+        ServiceResult serviceResult = null;
+        MyLogger.log(serviceResult);
+
+        modelAndView.setViewName("public/user");
+        modelAndView.addObject("user", (HostelRoomVO)serviceResult.getValue());
         return modelAndView;
     }
 

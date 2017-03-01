@@ -51,8 +51,8 @@
                 <input id="searchButton" type="submit"/>
 
                 <div class="date">
-                    <input type="date" class="dateLower" name="dateLower" value="${reservationRestrict.dateLower}">
-                    <input type="date" class="dateUpper" name="dateUpper" value="${reservationRestrict.dateUpper}">
+                    <input type="date" class="dateLower" name="dateLower" value="${reservationRestrict.dateLowerString}">
+                    <input type="date" class="dateUpper" name="dateUpper" value="${reservationRestrict.dateUpperString}">
                 </div>
             </form>
         </div>
@@ -83,6 +83,48 @@
                     <div class="reservationId">${reservation.reservationId}</div>
 
                 </div>
+
+                <div class="" style="display:block;">
+                    <div class="col-xs-12 col-sm-12 col-md-4 ">
+                        <a  class=" "  href="../../public/user/${reservation.memberId}" title="${reservation.name}" >
+                            <img alt="${reservation.contact}" src="${reservation.avatar}" style="height:170px;width:150px;border-width:0px;">
+                        </a>
+                    </div>
+                    <diV class="col-xs-12 col-sm-12 col-md-8">
+                        <h3 class="">
+                            <a class="" title="" href="../../public/user/${reservation.memberId}">${reservation.contact}</a>
+                        </h3>
+                        <a class="" title="" href="../../public/user/${reservation.memberId}">
+                            <div class="">
+                                <span class="phone">${reservation.phone}</span>
+                            </div>
+                        </a>
+
+                        <c:if test="${reservation.checkOut!=true}">
+                            <a class="">
+                                <div class="">
+                                    <span onclick="alert('${reservation.memberId}')" class="checkout">点击checkout</span>
+                                </div>
+                            </a>
+                        </c:if>
+
+                        <a class="">
+                            <div class="">
+                                        <span class="price">
+                                            <dfn>¥</dfn>
+                                            <b>${reservation.price}*${reservation.amount}</b>
+                                        </span>
+                            </div>
+                        </a>
+                        <a class="">
+                            <div class="">
+                                <span class="time">${reservation.reserveTime}</span>
+                            </div>
+                        </a>
+                    </diV>
+
+                </div>
+                <div class="clearfix"></div>
             </c:forEach>
         </div>
 

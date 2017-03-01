@@ -1,6 +1,9 @@
 package personal.darxan.hostel.vo;
 
+import personal.darxan.hostel.model.HostelRoom;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by darxan on 2017/2/15.

@@ -32,7 +32,7 @@ public class ReservationVO {
      */
     private Date createTime;
 
-    private double amount;
+    private int amount;
 
     public Long getReservationId() {
         return reservationId;
@@ -122,11 +122,11 @@ public class ReservationVO {
         this.createTime = createTime;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 }

@@ -27,8 +27,8 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
             sqlAppend.addEq(pair.getFirst(), pair.getSecond());
         }
         if (reservationRestrict.getDateLower()!=null&&reservationRestrict.getDateUpper()!=null) {
-            sqlAppend.addGE("endDate", "?");
-            sqlAppend.addLE("startDate", "?");
+            sqlAppend.addGE("reserveTime", "?");
+            sqlAppend.addLE("reserveTime", "?");
         }
         Query query = sqlAppend.fetchCount();
         if (reservationRestrict.getDateLower()!=null&&reservationRestrict.getDateUpper()!=null) {
@@ -56,26 +56,26 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
     public PaginationResult getReservationByUser(Object userId, ReservationRestrict reservationRestrict) {
 
         return getReservation(reservationRestrict,
-                new MyPair<String,Object>("_joinedTable_member.memberId", userId));
+                new MyPair<String,Object>("member.memberId", userId));
     }
 
     public PaginationResult getReservationByHostel(Object hostelId,ReservationRestrict reservationRestrict) {
 
         return getReservation(reservationRestrict,
-                new MyPair<String,Object>("_joinedTable_hostel.hostelId", hostelId));
+                new MyPair<String,Object>("hostel.hostelId", hostelId));
     }
 
     public PaginationResult getCheckInByUser(Object userId, ReservationRestrict reservationRestrict) {
         return getReservation(
                 reservationRestrict,
-                new MyPair<String,Object>("_joinedTable_member.memberId", userId),
+                new MyPair<String,Object>("member.memberId", userId),
                 new MyPair<String,Object>("checkIn", 1)
         );
     }
 
     public PaginationResult getCheckInByHostel(Object hostelId, ReservationRestrict reservationRestrict) {
         return getReservation(reservationRestrict,
-                new MyPair<String,Object>("_joinedTable_hostel.hostelId", hostelId),
+                new MyPair<String,Object>("hostel.hostelId", hostelId),
                 new MyPair<String,Object>("checkIn", 1)
         );
     }
@@ -83,14 +83,14 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
     public PaginationResult getCheckOutByUser(Object userId, ReservationRestrict reservationRestrict) {
         return getReservation(
                 reservationRestrict,
-                new MyPair<String,Object>("_joinedTable_member.memberId", userId),
+                new MyPair<String,Object>("member.memberId", userId),
                 new MyPair<String,Object>("checkOut", 1)
         );
     }
 
     public PaginationResult getCheckOutByHostel(Object hostelId, ReservationRestrict reservationRestrict) {
         return getReservation(reservationRestrict,
-                new MyPair<String,Object>("_joinedTable_hostel.hostelId", hostelId),
+                new MyPair<String,Object>("hostel.hostelId", hostelId),
                 new MyPair<String,Object>("checkOut", 1)
         );
 //        getSession().createQuery("from Reservation r join r.member member join r.hostel hostel where r.checkOut")
@@ -100,14 +100,14 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
     public PaginationResult getPaymentByUser(Object userId, ReservationRestrict reservationRestrict) {
         return getReservation(
                 reservationRestrict,
-                new MyPair<String,Object>("_joinedTable_member.memberId", userId),
+                new MyPair<String,Object>("member.memberId", userId),
                 new MyPair<String,Object>("payment", 1)
         );
     }
 
     public PaginationResult getPaymentByHostel(Object hostelId, ReservationRestrict reservationRestrict) {
         return getReservation(reservationRestrict,
-                new MyPair<String,Object>("_joinedTable_hostel.hostelId", hostelId),
+                new MyPair<String,Object>("hostel.hostelId", hostelId),
                 new MyPair<String,Object>("payment", 1)
         );
 //        getSession().createQuery("from Reservation r join r.member member join r.hostel hostel where r.checkOut")

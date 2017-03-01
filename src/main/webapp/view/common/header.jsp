@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <link type="text/css" rel="stylesheet" href="../../plugin/bootstrap/css/bootstrap.min.css"/>
 <link type="text/css" rel="stylesheet" href="../../css/nav.css" />
+<link type="text/css" rel="stylesheet" href="../../css/font.css" />
 <link type="text/css" rel="stylesheet" href="../../plugin/menu/dist/css/jquery.mmenu.all.css" />
 <script type="text/javascript" src="../../js/jquery.min.js"></script>
 <script type="text/javascript" src="../../js/jquery.form.js"></script>

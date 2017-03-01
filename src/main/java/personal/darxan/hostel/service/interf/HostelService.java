@@ -18,6 +18,8 @@ public interface HostelService {
     public ServiceResult updateHostel(HttpServletRequest httpServletRequest, HostelVO hostel);
 
     public ServiceResult verifyHostel(HttpServletRequest httpServletRequest, Long id, boolean pass);
-    public ServiceResult getHostelRoomById(HttpServletRequest httpServletRequest, Long id);
+    public ServiceResult getRoomById(HttpServletRequest httpServletRequest, Long id);
+
+    public ServiceResult getHostels(HttpServletRequest httpServletRequest, Long id);
 
 }

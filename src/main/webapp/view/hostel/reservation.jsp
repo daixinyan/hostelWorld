@@ -51,8 +51,8 @@
                 <input id="searchButton" type="submit"/>
 
                 <div class="date">
-                    <input type="date" class="dateLower" name="dateLower" value="${reservationRestrict.dateLower}">
-                    <input type="date" class="dateUpper" name="dateUpper" value="${reservationRestrict.dateUpper}">
+                    <input type="date" class="dateLower" name="dateLower" value="${reservationRestrict.dateLowerString}">
+                    <input type="date" class="dateUpper" name="dateUpper" value="${reservationRestrict.dateUpperString}">
                 </div>
             </form>
         </div>

@@ -1,5 +1,7 @@
 package personal.darxan.hostel.vo;
 
+import personal.darxan.hostel.tool.DateFormatter;
+
 import java.util.Date;
 
 /**
@@ -15,11 +17,11 @@ public class ReservationRestrict {
 
     private Integer pageSize = 10;
 
-    private String order;
+    private String order = "reserveTime";
 
-    private Date dateLower;
+    private Date dateLower = new Date(System.currentTimeMillis()-15*24*60*60*1000);
 
-    private Date dateUpper;
+    private Date dateUpper = new Date();
 
 
     @Override
@@ -89,5 +91,13 @@ public class ReservationRestrict {
 
     public void setAsc(boolean asc) {
         this.asc = asc;
+    }
+
+    public String getDateLowerString() {
+        return DateFormatter.dateFormat.format(dateLower);
+    }
+
+    public String getDateUpperString() {
+        return DateFormatter.dateFormat.format(dateUpper);
     }
 }

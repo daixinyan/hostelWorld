@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import personal.darxan.hostel.service.interf.AuthService;
 import personal.darxan.hostel.service.interf.OrderService;
 import personal.darxan.hostel.service.interf.UserService;
+import personal.darxan.hostel.tool.DateFormatter;
 import personal.darxan.hostel.tool.MyLogger;
 import personal.darxan.hostel.vo.*;
 
@@ -35,10 +36,10 @@ public class UserController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(DateFormatter.dateFormat, false));
     }
+
 
     public ServiceResult deposit() {
         ServiceResult modelAndView = new ServiceResult();

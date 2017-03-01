@@ -1,5 +1,7 @@
 package personal.darxan.hostel.vo;
 
+import personal.darxan.hostel.tool.DateFormatter;
+
 import java.util.Date;
 
 /**
@@ -7,9 +9,9 @@ import java.util.Date;
  */
 public class SearchRestrict {
 
-    private double priceUpper;
+    private double priceUpper = 1000000;
 
-    private double priceLower;
+    private double priceLower = 0;
 
     private String address;
 
@@ -35,15 +37,24 @@ public class SearchRestrict {
 
     private Short pageSize = 20;
 
-    private String order ;
+    private String order = "roomId";
 
-    private boolean asc;
+    private boolean asc = true;
 
 
-    private Date dateLower;
+    private Date dateLower = new Date(System.currentTimeMillis()-15*24*60*60*1000);
 
-    private Date dateUpper;
+    private Date dateUpper = new Date();
 
+
+    public String getDateLowerString() {
+        return DateFormatter.dateFormat.format(dateLower);
+    }
+
+
+    public String getDateUpperString() {
+        return DateFormatter.dateFormat.format(dateUpper);
+    }
 
     public Date getDateLower() {
         return dateLower;
