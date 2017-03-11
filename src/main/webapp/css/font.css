@@ -6,11 +6,26 @@
     margin:45px 0 10px;
 }
 
+.tab-larger {
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-align:center;
+    color: #999;
+    margin:15px 0 15px;
+}
 
 .tab-p {
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-align:center;
+    color: #999;
+    margin:15px 0 45px;
+}
+
+.tab-close {
     font-size: 15px;
     letter-spacing: 2px;
     text-align:center;
     color: #999;
-    margin:15px 0 45px;
+    margin:10px 0 15px;
 }

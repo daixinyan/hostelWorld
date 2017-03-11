@@ -1,5 +1,6 @@
 package personal.darxan.hostel.service.interf;
 
+import org.springframework.transaction.annotation.Transactional;
 import personal.darxan.hostel.vo.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by darxan on 2017/2/15.
  */
+@Transactional
 public interface AuthService {
 
     /**

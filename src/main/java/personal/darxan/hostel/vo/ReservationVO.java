@@ -7,6 +7,10 @@ import java.util.Date;
  */
 public class ReservationVO {
 
+    private Date checkInDate;
+
+
+
     private Long reservationId;
 
     private boolean reserved;
@@ -33,6 +37,15 @@ public class ReservationVO {
     private Date createTime;
 
     private int amount;
+
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
 
     public Long getReservationId() {
         return reservationId;

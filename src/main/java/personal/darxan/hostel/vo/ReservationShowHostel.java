@@ -9,6 +9,8 @@ public class ReservationShowHostel {
 
     private Long reservationId;
 
+    private Date checkInDate;
+
     private boolean reserved;
 
     private boolean canceled;
@@ -104,6 +106,14 @@ public class ReservationShowHostel {
                 ", contact='" + contact + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
     }
 
     public Long getReservationId() {

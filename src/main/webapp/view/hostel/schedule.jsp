@@ -1,4 +1,5 @@
-<%--
+<%@ page import="personal.darxan.hostel.tool.DateFormatter" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: darxan
   Date: 2017/2/21
@@ -16,20 +17,30 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <jsp:include page="../common/header.jsp"/>
-    <script type="text/javascript">
-        function submitSchedule() {
-            var options = {
-                success: function (data) {
-                    alert(data);
-                    console.log(data);
+    <link type="text/css" rel="stylesheet" href="../../css/table.css">
+
+    <script>
+        $(document).ready(function () {
+            var currentPage = 1;
+            var visiblePages = 10;
+            var totalPage = 1;
+            totalPage = ${paginationResult.totalPages};
+            currentPage = ${reservationRestrict.page};
+
+            $('#myPagination').jqPaginator({
+                totalPages: totalPage,
+                visiblePages: visiblePages,
+                currentPage: currentPage,
+                onPageChange: function (num, type) {
+                    if (num!=currentPage) {
+                        $("#pageNum").attr("value", num);
+                        $("#searchButton").click();
+                    }
                 }
-            };
-            // ajaxForm
-            console.log("start submit");
-            $("#scheduleSubmitForm").ajaxForm(options);
-        }
+            });
+        });
     </script>
+    <jsp:include page="../common/header.jsp"/>
 </head>
 
 <body>
@@ -37,70 +48,128 @@
 <jsp:include page="../common/nav.jsp"/>
 
 
-<div class="content">
+<div class="myContent">
+    <br/>
+    <br/>
+    <div class="col-md-1"></div>
+    <table class="bordered col-md-8">
+        <thead>
+        <tr>
+            <th>描述</th>
+            <th>床数</th>
+            <th>容量</th>
+            <th>空调</th>
+            <th>PC</th>
+            <th>房价</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="list">
+        <c:forEach items="${rooms}" var="room">
+            <form action="/hostel/update/schedule">
+                <tr class="table-input">
+
+                    <input type="hidden" name="roomId" value="${room.roomId}"></span>
+                    <td title="${hostel.name}">
+                        <span><img src="${room.image}" style="width: 3em;height: 3em"></span>
+                        <span>${room.description}</span>
+                    </td>
+                    <td><span><input name="numOfBed" value="${room.numOfBed}"></span></td>
+                    <td><span><input name="capacity" value="${room.capacity}"></span></td>
+
+                    <td>
+                        <span><input type="checkbox" name="airCondition"
+                                     <c:if test="${room.airCondition}"> checked</c:if>
+                              ></span>
+                    </td>
+
+                    <td><span><input type="checkbox" name="computer"
+                                    <c:if test="${room.computer}"> checked</c:if>
+                        ></span>
+                    </td>
 
 
-    <div class="mySchedule">
-        <c:forEach items="${schedules}" var="room">
-            <div class="room">
-                <span class="computer">${room.computer}</span>
-                <span class="airCondition">${room.airCondition}</span>
-                <span class="numOfBed">${room.numOfBed}</span>
-                <span class="capacity">${room.capacity}</span>
-                <span class="count">${room.count}</span>
-                <span class="price">${room.price}</span>
-                <span class="startDate">${room.startDate}</span>
-                <span class="endDate">${room.endDate}</span>
-                <span class="description">${room.description}</span>
-                <span class="image">${room.image}</span>
-            </div>
-
-            <form action="/hostel/action/schedule">
-                <input type="radio" value="${room.airCondition}" class="airCondition">
-                <input type="number" value="${room.capacity}" class="capacity">
-                <input type="number" value="${room.computer}" class="computer">
-                <input type="number" value="${room.count}" class="count">
-                <input type="number" value="${room.numOfBed}" class="numOfBed">
-
-                <input type="text" value="${room.description}" class="description">
-
-                <input type="date" value="${room.startDate}" class="startDate">
-                <input type="date" value="${room.endDate}" class="endDate">
-
-                <img src="${room.image}"/>
-                <input type="image" value="" class="image">
+                    <td>
+                        <span class="base_price"><dfn>¥</dfn>
+                            <input name="price" value="${room.price}"></span>
+                    </td>
+                    <td>
+                        <a href=""><input type="submit"></a>
+                    </td>
+                </tr>
             </form>
         </c:forEach>
 
-    </div>
+        </tbody>
 
+        <div class="myPager">
+            <ul id="myPagination" class="pagination" ></ul >
+        </div>
 
-    <div class="scheduleSubmit">
-        <form id="scheduleSubmitForm" action="/hostel/action/schedule" method="post" >
-            <input type="radio" class="computer" name="computer"/>
-            <input type="radio" class="airCondition" name="airCondition"/>
+    </table>
+    
+    <div class="col-md-3">
+        <form id="scheduleSubmitForm" action="../../hostel/action/schedule" method="post" >
+            <legend>房间类型增加</legend>
+
+            <img class="img-responsive" src="${hostel.image}">
+            <input type="file" class="image" name="image"/>
+            <span class="help-block"></span>
+
+            <label>电脑</label>
+            <input type="checkbox" class="computer" name="computer"/>
+            <span class="help-block"></span>
+
+            <label>空调</label>
+            <input type="checkbox" class="airCondition" name="airCondition"/>
+            <span class="help-block"></span>
+
+            <label>床数</label>
             <input type="number" class="numOfBed" name="numOfBed"/>
+            <span class="help-block"></span>
+
+            <label>总数</label>
             <input type="number" class="count" name="count"/>
+            <span class="help-block"></span>
+
+            <label>容量</label>
             <input type="number" class="capacity" name="capacity"/>
+            <span class="help-block"></span>
+
+
+            <label>单价</label>
             <input type="number" class="price" name="price"/>
-            <input type="date" class="startDate" name="dateLower"/>
-            <input type="date" class="endDate" name="dateUpper"/>
+            <span class="help-block"></span>
+
+
+            <c:set var="currentTime" value="<%=DateFormatter.dateFormat.format(new Date()) %>" />
+            <label>计划开始日期</label>
+            <input type="date" class="startDate" name="dateLower" value="${currentTime}"/>
+            <span class="help-block"></span>
+
+            <label>计划截至日期</label>
+            <input type="date" class="endDate" name="dateUpper" value="${currentTime}"/>
+            <span class="help-block"></span>
+
+
+            <label>简单描述</label>
             <input type="text" class="description" name="description"/>
-            <%--<input type="image" class="image" name="image"/>--%>
-            <input type="submit"/>
+            <span class="help-block"></span>
+
+            <input type="submit">
         </form>
-        <button onclick="submitSchedule()">
-            submit
-        </button>
-    </div>
-
-
-
-    <div class="myFooter">
     </div>
 </div>
 
 
+
+<script>
+    $(function(){
+        $("table").resizableColumns({
+            store: window.store
+        });
+    });
+</script>
 
 </body>
 

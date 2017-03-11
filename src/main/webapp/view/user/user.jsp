@@ -25,21 +25,142 @@
 <div class="myContent">
 
     <div class="personalInfo">
-        <form action="/user/update" method="post">
+        <form action="/user/update/info" method="post">
 
-            <input type="text" class="name" name="name" value="${user.name}">
+            <input type="hidden" name="memberId" value="${user.memberId}">
 
-            <input type="password" class="password" name="password" value="${user.password}">
-            <input type="password" class="re_password" name="re_password" value="${user.password}">
+            <div>
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <h2 class="tab-h2">avatar</h2>
+                    <p class="tab-p">You can change your avatar here or remove the current avatar to revert to gravatar.com
+                    </p>
+                </div>
+                <fieldset class="col-md-5">
+                    <br/>
+                    <br/>
+                    <img src="${user.avatar}">
+                    <input type="file" class="avatar" name="avatar" value="${user.avatar}">
+                    <span class="help-block"></span>
+                </fieldset>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="clearfix"></div>
 
-            <input type="text" class="contact" name="contact" value="${user.contact}">
-            <input type="number" class="phone" name="phone" value="${user.phone}">
-            <input type="number" class="bankcard" name="bankcard" value="${user.bankCard}">
+            <div>
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <h2 class="tab-h2">Main settings</h2>
+                    <p class="tab-p">This information will appear on your profile.
+                    </p>
+                </div>
+                <fieldset class="col-md-5">
 
-            <img src="${user.avatar}">
-            <input type="file" class="avatar" name="avatar" value="${user.avatar}">
 
-            <input type="submit">
+                    <div>
+
+                        <br/>
+                        <br/>
+                        <span class="tab-larger">当前状态</span>
+                        <c:choose>
+                            <c:when test="${user.state==1}">
+                                <span class="tab-larger">已激活</span>
+                                <a href="/user/level/${user.level+1}" target="_blank">
+                                    <span class="underline_link tab-h2">升级享优惠</span>
+                                </a>
+                                <a href="/user/state/destroy" target="_blank">
+                                    <span class="underline_link">注销资格</span>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="tab-larger">未激活</span>
+                                <a href="/user/state/active" target="_blank">
+                                    <span class="underline_link tab-h2">激活</span>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                        <br/>
+                        <br/>
+                    </div>
+
+                    <div>
+
+
+                        <span class="tab-larger">当前级别</span>
+                            <span class="tab-larger">
+                                <c:choose>
+                                    <c:when test="${user.level==0}">
+                                        未激活
+                                    </c:when>
+                                    <c:when test="${user.level==1}">
+                                        一般会员
+                                    </c:when>
+                                    <c:when test="${user.level==2}">
+                                        高级会员
+                                    </c:when>
+                                    <c:when test="${user.level==3}">
+                                        冲击会员
+                                    </c:when>
+                                </c:choose>
+                            </span>
+                            <a href="http://www.baidu.com" target="_blank">
+                                <span class="underline_link tab-h2">升级享受优惠</span>
+                            </a>
+                        <br/>
+                        <br/>
+                    </div>
+
+
+                    <div>
+
+
+                        <span class="tab-larger">当前积分</span>
+                        <span class="tab-larger">
+                                ${user.bonusPoint}
+                            </span>
+                        <a href="/user/exchange/1000" target="_blank">
+                            <span class="underline_link tab-larger">兑换积分</span>
+                        </a>
+                        <br/>
+                        <br/>
+                    </div>
+
+                    <input type="text" class="col-md-12 col-sm-12" name="name" value="${user.name}">
+                    <label class="tab-close">name</label>
+                    <span class="help-block"></span>
+
+
+                    <input type="password" class="col-md-12 col-sm-12" name="password" value="${user.password}">
+                    <label class="tab-close">password</label>
+                    <span class="help-block"></span>
+
+
+                    <input type="password" class="col-md-12 col-sm-12" name="re_password" value="${user.password}">
+                    <label class="tab-close">re_password</label>
+                    <span class="help-block"></span>
+
+
+                    <input type="text" class="col-md-12 col-sm-12" name="contact" value="${user.contact}">
+                    <label class="tab-close">contact</label>
+                    <span class="help-block"></span>
+
+
+                    <input type="number" class="col-md-12 col-sm-12" name="phone" value="${user.phone}">
+                    <label class="tab-close">phone</label>
+                    <span class="help-block"></span>
+
+
+                    <input type="number" class="col-md-12 col-sm-12" name="bankCard" value="${user.bankCard}">
+                    <label class="tab-close">bankcard</label>
+                    <span class="help-block"></span>
+
+                    <div class="clearfix"></div>
+                    <input type="submit">
+                </fieldset>
+                <div class="col-md-2"></div>
+
+            </div>
+
         </form>
     </div>
 

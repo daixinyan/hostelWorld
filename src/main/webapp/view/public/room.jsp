@@ -1,4 +1,5 @@
-<%--
+<%@ page import="personal.darxan.hostel.tool.DateFormatter" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: darxan
   Date: 2017/2/19
@@ -12,65 +13,150 @@
 
 <head>
     <title>Title</title>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="../common/header.jsp"/>
+    <script type="text/javascript" src="../../js/numberchooser.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/numberchooser.css">
 </head>
 
 <body>
 
-<jsp:include page="nav.jsp"/>
+<jsp:include page="../common/nav.jsp"/>
 
 <div class="myContent">
-    <div class="listItem">
+    <br/>
+    <br/>
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+        <img src="../../image/default.jpg" class="img-responsive">
+    </div>
+    <div class="col-md-4">
+        <a href=""><div><strong>${room.description}</strong></div> </a>
+        <a href=""><div>${room.hostel}</div> </a>
+        <div class="">
+            <span>价&nbsp;&nbsp;&nbsp;&nbsp;格&nbsp;&nbsp;</span>
+            <span class="price tab-h2">
+                    <dfn>¥</dfn>
+                    <b>6.5</b>
+            </span>
+        </div>
 
-        <div class="roomId">${room.roomId}</div>
-        <div class="add_1">${room.add_1}</div>
-        <div class="add_2">${room.add_2}</div>
-        <div class="add_3">${room.add_3}</div>
-        <div class="add_4">${room.add_4}</div>
-        <div class="address">${room.address}</div>
-        <div class="airCondition">${room.airCondition}</div>
-        <div class="bankcard">${room.bankcard}</div>
-        <div class="capacity">${room.capacity}</div>
-        <div class="computer">${room.computer}</div>
-        <div class="contact">${room.contact}</div>
-        <div class="count">${room.count}</div>
-        <div class="createTime">${room.createTime}</div>
-        <div class="description">${room.description}</div>
-        <div class="endDate">${room.endDate}</div>
-        <div class="hostel">${room.hostel}</div>
-        <div class="hostelId">${room.hostelId}</div>
-        <div class="image">${room.image}</div>
-        <div class="numOfBed">${room.numOfBed}</div>
-        <div class="phone">${room.phone}</div>
-        <div class="price">${room.price}</div>
-        <div class="startDate">${room.startDate}</div>
-        <div class="state">${room.state}</div>
+        <div class="">
+            <span>床&nbsp;&nbsp;&nbsp;&nbsp;数&nbsp;&nbsp;</span>
+            <span class="price tab-h2">
+                    <dfn>¥</dfn>
+                    <b>${room.price}</b>
+            </span>
+        </div>
 
-        <a href="/public/hostel/${room.roomId}">${room.roomId}</a>
+        <div class="">
+            <span>最大容量</span>
+            <span class="price tab-h2">
+                    <dfn>成人</dfn>
+                    <b>${room.capacity}</b>
+            </span>
+        </div>
 
-        <form action="../../user/reserve">
+        <div class="">
+            <span>地&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;&nbsp;</span>
+            <span class="price tab-h2">
+                    <dfn></dfn>
+                    <b>
+                    ${room.add_1}
+                    ${room.add_2}
+                    ${room.add_3}
+                    ${room.add_4}
+                    </b>
+            </span>
+        </div>
 
-            <input type="radio" value="${room.airCondition}" class="airCondition">
-            <input type="number" value="${room.capacity}" class="capacity">
-            <input type="number" value="${room.computer}" class="computer">
-            <input type="number" value="${room.count}" class="count">
-            <input type="number" value="${room.numOfBed}" class="numOfBed">
+        <div class="">
+            <span>空&nbsp;&nbsp;&nbsp;&nbsp;调&nbsp;&nbsp;</span>
+            <span class="price tab-h2">
+                    <dfn></dfn>
+                    <b>
+                        <c:choose>
+                            <c:when test="${room.airCondition}">
+                                有
+                            </c:when>
+                            <c:otherwise>
+                                无
+                            </c:otherwise>
+                        </c:choose>
+                    </b>
+            </span>
+        </div>
 
-            <input type="text" value="${room.description}" class="description">
+        <div class="">
+            <span>电&nbsp;&nbsp;&nbsp;&nbsp;脑&nbsp;&nbsp;</span>
+            <span class="price tab-h2">
+                    <dfn></dfn>
+                    <b>
+                        <c:choose>
+                            <c:when test="${room.computer}">
+                                有
+                            </c:when>
+                            <c:otherwise>
+                                无
+                            </c:otherwise>
+                        </c:choose>
+                    </b>
+            </span>
+        </div>
 
-            <input type="date" value="${room.startDate}" class="startDate">
-            <input type="date" value="${room.endDate}" class="endDate">
+        <div class="">
+            <span>详细地址</span>
+            <span class="price tab-h2">
+                    <dfn></dfn>
+                    <b>${room.address}</b>
+            </span>
+        </div>
 
-            <img src="${room.image}"/>
-            <input type="image" value="" class="image">
+        <br/>
 
-            <input type="submit">
+        <div class="">
+            <span>数&nbsp;&nbsp;&nbsp;&nbsp;量&nbsp;&nbsp;</span>
+            <span>
+                <form action="../../user/reserve/default" method="get">
+                    <input class="sdddq bgColor" id="numberChooser" name="amount" value="1"> </input>
+                    <label>在线付款&nbsp;</label>
+                    <input type="checkbox">
+                    <span class="help-block"></span>
 
-        </form>
+                    <input type="hidden" name="roomId" value="1"> </input>
+                    <span class="help-block"></span>
+
+
+                    <c:set var="currentTime" value="<%=DateFormatter.dateFormat.format(new Date()) %>" />
+                    <label>入住日期</label>
+                    <input type="date" name="checkInDate" value="${currentTime}">
+                    <span class="help-block"></span>
+
+                    <br/>
+                    <c:choose>
+                        <c:when test="${ sessionScope.LOGIN_TYPE=='personal.darxan.hostel.vo.MemberVO'}">
+                            <input type="submit">
+                        </c:when>
+                        <c:otherwise>
+                            请先
+                            <a target="_blank" href="/public/login/default">
+                                <span class="underline_link">登录</span>
+                            </a>
+                            或者
+                            <a href="">
+                                <span class="underline_link">刷新</span>
+                            </a>
+                            当前页面
+                        </c:otherwise>
+                    </c:choose>
+                </form>
+            </span>
+        </div>
 
     </div>
+
+    <div class="col-md-2"></div>
+
 </div>
-<div class="myFooter"></div>
 
 </body>
 

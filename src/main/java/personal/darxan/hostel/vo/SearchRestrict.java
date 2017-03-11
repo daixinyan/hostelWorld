@@ -39,7 +39,7 @@ public class SearchRestrict {
 
     private String order = "roomId";
 
-    private boolean asc = true;
+    private boolean asc;
 
 
     private Date dateLower = new Date(System.currentTimeMillis()-15*24*60*60*1000);

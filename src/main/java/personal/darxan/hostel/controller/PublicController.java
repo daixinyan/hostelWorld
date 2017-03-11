@@ -15,6 +15,7 @@ import personal.darxan.hostel.service.interf.SearchService;
 import personal.darxan.hostel.tool.*;
 import personal.darxan.hostel.vo.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
 @RequestMapping(value = "/public")
 public class PublicController {
 
-    @Autowired
+    @Resource
     private AuthService authService;
 
     @Autowired
@@ -130,7 +131,7 @@ public class PublicController {
 
         if (serviceResult.isSuccess()) {
             if (loginVO.getLoginType().equals(StringConstant.ADMIN)) {
-                modelAndView.setViewName("redirect: /admin/admin");
+                modelAndView.setViewName("redirect: /admin/admin/info");
             }else if (loginVO.getLoginType().equals(StringConstant.HOSTEL)){
                 modelAndView.setViewName("redirect: /hostel/hostel/info");
             }else {

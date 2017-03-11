@@ -71,7 +71,7 @@ public class HostelServiceImpl implements HostelService {
             for (HostelRoom room:hostelEntities) {
                 roomVOList.add(Convert.convert(room));
             }
-            serviceResult.setValue(roomVOList);
+            serviceResult.setValue(new MyPair<HostelVO,List>(hostelVO,roomVOList));
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -92,7 +92,7 @@ public class HostelServiceImpl implements HostelService {
             if (!hostelRoomPersistent.getHostel().getHostelId().equals(hostelVO.getHostelId())) {
                 throw new Exception(StringConstant.AUTH_WRONG);
             }
-            AttributeUpdate.udpate(hostelRoomPersistent, hostelRoomEntity, HostelRoom.class);
+            AttributeUpdate.update(hostelRoomPersistent, hostelRoomEntity, HostelRoom.class);
             hostelRoomDao.update(hostelRoomPersistent);
         }catch (Exception e) {
             e.printStackTrace();
@@ -101,6 +101,8 @@ public class HostelServiceImpl implements HostelService {
         }
         return serviceResult;
     }
+
+
 
     public ServiceResult addSchedule(HttpServletRequest httpServletRequest,
                                      HostelRoomVO hostelRoom) {
@@ -121,21 +123,30 @@ public class HostelServiceImpl implements HostelService {
 
 
     public ServiceResult updateHostel(HttpServletRequest httpServletRequest,
-                                      HostelVO hostel){
+                                      HostelVO updatedHostelVO){
 
         ServiceResult serviceResult = new ServiceResult(true);
         try {
-            HostelVO hostelVO = (HostelVO) httpServletRequest.
-                    getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
 
-            Hostel hostelEntity = Convert.convert(hostel);
+            Object login = httpServletRequest.
+                    getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
+            boolean hostelAuth = (login instanceof HostelVO) &&
+                    ((HostelVO) login).getHostelId().equals(updatedHostelVO.getHostelId());
+            boolean adminAuth = (login instanceof AdministerVO);
+            if ( !hostelAuth && !adminAuth) {
+                throw new Exception(StringConstant.AUTH_WRONG);
+            }
+
+            Hostel hostelEntity = Convert.convert(updatedHostelVO);
             MyLogger.log(hostelEntity);
 
-            Hostel hostelPersistent = hostelDao.load(hostelVO.getHostelId());
-            AttributeUpdate.udpate(hostelPersistent, hostelEntity, Hostel.class);
-
+            Hostel hostelPersistent = hostelDao.get(updatedHostelVO.getHostelId());
+            AttributeUpdate.update(hostelPersistent, hostelEntity, Hostel.class);
+            if (hostelAuth){
+                AttributeUpdate.update((HostelVO) login, updatedHostelVO, HostelVO.class);
+                serviceResult.setValue((HostelVO) login);
+            }
             hostelDao.update(hostelPersistent);
-            serviceResult.setValue(hostelVO);
         }catch (Exception e) {
             e.printStackTrace();
             serviceResult.setMessage(e.getMessage());
@@ -144,6 +155,22 @@ public class HostelServiceImpl implements HostelService {
         return serviceResult;
     }
 
+
+    public ServiceResult updateHostel(HostelVO updatedHostelVO){
+
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            Hostel hostelEntity = Convert.convert(updatedHostelVO);
+            Hostel hostelPersistent = hostelDao.get(updatedHostelVO.getHostelId());
+            AttributeUpdate.update(hostelPersistent, hostelEntity, Hostel.class);
+            hostelDao.update(hostelPersistent);
+        }catch (Exception e) {
+            e.printStackTrace();
+            serviceResult.setMessage(e.getMessage());
+            serviceResult.setSuccess(false);
+        }
+        return serviceResult;
+    }
 
     public ServiceResult verifyHostel(HttpServletRequest httpServletRequest,
                                       Long id, boolean pass){
@@ -186,7 +213,7 @@ public class HostelServiceImpl implements HostelService {
 
         ServiceResult serviceResult = new ServiceResult();
         try {
-            Hostel hostel = hostelDao.load(id);
+            Hostel hostel = hostelDao.get(id);
             Collection<HostelRoom> hostelRoomCollection = hostel.getHostelRoomSet();
 
             HostelVO hostelVO = Convert.convert(hostel);

@@ -9,6 +9,8 @@ public class ReservationShowMember {
 
     private Long reservationId;
 
+    private Date checkInDate;
+
     private boolean reserved;
 
     private boolean canceled;
@@ -46,6 +48,12 @@ public class ReservationShowMember {
 
     private String hostel;
 
+    private String contact;
+
+    private String phone;
+
+    private String address;
+
     private Date startDate;
 
     private Date endDate;
@@ -73,12 +81,44 @@ public class ReservationShowMember {
     private String image;
 
 
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
     public String getHostel() {
         return hostel;
     }
 
     public void setHostel(String hostel) {
         this.hostel = hostel;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

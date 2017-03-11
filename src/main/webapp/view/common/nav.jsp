@@ -54,6 +54,20 @@
                     <li><a href="/hostel/list/reservation">预定信息</a> </li>
                     <li><a href="/hostel/list/payment">用户付款</a> </li>
                     <li><a href="/hostel/list/payment">平台结账</a> </li>
+
+                </ul>
+            </nav>
+        </c:if>
+
+        <c:if test="${ sessionScope.LOGIN_TYPE=='personal.darxan.hostel.vo.AdministerVO'}">
+            <nav id="menu">
+                <ul>
+                    <li><a href="/public/list/hostel">hostels Search</a></li>
+                    <li><a href="/admin/list/reservation">订单信息</a> </li>
+                    <li><a href="/admin/list/hostels">客栈信息</a> </li>
+                    <li><a href="/admin/list/users">会员信息</a> </li>
+
+
                 </ul>
             </nav>
         </c:if>

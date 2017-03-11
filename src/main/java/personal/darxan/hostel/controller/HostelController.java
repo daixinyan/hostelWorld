@@ -13,11 +13,12 @@ import personal.darxan.hostel.service.interf.OrderService;
 import personal.darxan.hostel.tool.AttributeUpdate;
 import personal.darxan.hostel.tool.DateFormatter;
 import personal.darxan.hostel.tool.MyLogger;
+import personal.darxan.hostel.tool.MyPair;
 import personal.darxan.hostel.vo.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by darxan on 2017/2/14.
@@ -56,7 +57,10 @@ public class HostelController {
         ServiceResult serviceResult =
                 hostelService.schedule(httpServletRequest);
         modelAndView.setViewName("/hostel/schedule");
-        modelAndView.addObject("schedules",serviceResult.getValue());
+        MyPair<HostelVO, List<HostelRoomVO>> pair =
+                (MyPair<HostelVO, List<HostelRoomVO>>) serviceResult.getValue();
+        modelAndView.addObject("hostel", pair.getFirst());
+        modelAndView.addObject("rooms",  pair.getSecond());
         return modelAndView;
     }
 
@@ -72,12 +76,14 @@ public class HostelController {
     }
 
     @RequestMapping(value = "/action/schedule")
-    @ResponseBody
-    public ServiceResult addSchedule(HttpServletRequest httpServletRequest,
+    public ModelAndView addSchedule(HttpServletRequest httpServletRequest,
                                      @ModelAttribute HostelRoomVO hostelRoomVO) {
         MyLogger.log("hostelRoomVO");
         MyLogger.log(hostelRoomVO);
-        return hostelService.addSchedule(httpServletRequest, hostelRoomVO);
+        ModelAndView modelAndView = new ModelAndView("redirect: /hostel/list/schedule");
+        ServiceResult serviceResult = hostelService.addSchedule(httpServletRequest, hostelRoomVO);
+        modelAndView.addObject("message", serviceResult.getMessage());
+        return modelAndView;
     }
 
     @RequestMapping(value = "/hostel/info")
@@ -91,14 +97,14 @@ public class HostelController {
 
         if (serviceResult.isSuccess() && serviceResult.getValue() instanceof HostelVO) {
             modelAndView.setViewName("/hostel/hostel");
-            modelAndView.addObject("hostel", serviceResult.getValue());
+            modelAndView.addObject("hostel", (HostelVO)serviceResult.getValue());
         }else {
             modelAndView.setViewName("public/login");
         }
         return modelAndView;
     }
 
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update/info")
     public ModelAndView update(HttpServletRequest httpServletRequest,
                                       @ModelAttribute HostelVO hostel) {
 
@@ -114,14 +120,14 @@ public class HostelController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/checkIn")
+    @RequestMapping(value = "/action/checkIn")
     @ResponseBody
     public ServiceResult checkIn(HttpServletRequest httpServletRequest,
                                  @ModelAttribute CheckIn checkIn) {
         return orderService.checkIn(checkIn, httpServletRequest);
     }
 
-    @RequestMapping(value = "/checkOut")
+    @RequestMapping(value = "/action/checkOut")
     @ResponseBody
     public ServiceResult checkOut(HttpServletRequest httpServletRequest,
                                   @ModelAttribute CheckOut checkOut) {
@@ -135,13 +141,14 @@ public class HostelController {
                                         @ModelAttribute ReservationRestrict reservationRestrict) {
         MyLogger.log(reservationRestrict);
         AttributeUpdate.clearObject(reservationRestrict, ReservationRestrict.class);
+
         ModelAndView modelAndView = new ModelAndView();
         ServiceResult serviceResult = orderService.getReservationByHostel(
                 httpServletRequest, reservationRestrict);
-        modelAndView.setViewName("/hostel/reservation");
+        modelAndView.setViewName("hostel/reserved");
         modelAndView.addObject("paginationResult", (PaginationResult)serviceResult.getValue());
         modelAndView.addObject("reservationRestrict", reservationRestrict);
-        modelAndView.addObject("reservation", (ReservationShowHostel)null);
+        
         MyLogger.log(serviceResult);
         return modelAndView;
     }
@@ -150,8 +157,9 @@ public class HostelController {
     public ModelAndView getCheckIn(HttpServletRequest httpServletRequest,
                                     @ModelAttribute ReservationRestrict reservationRestrict) {
         MyLogger.log(reservationRestrict);
-        ModelAndView modelAndView = new ModelAndView();
         AttributeUpdate.clearObject(reservationRestrict, ReservationRestrict.class);
+
+        ModelAndView modelAndView = new ModelAndView();
         ServiceResult serviceResult = orderService.getCheckInByHostel(
                 httpServletRequest, reservationRestrict);
         modelAndView.setViewName("hostel/checkIn");
@@ -169,6 +177,8 @@ public class HostelController {
                                     @ModelAttribute ReservationRestrict reservationRestrict) {
 
         MyLogger.log(reservationRestrict);
+        AttributeUpdate.clearObject(reservationRestrict, ReservationRestrict.class);
+
         ModelAndView modelAndView = new ModelAndView();
         ServiceResult serviceResult = orderService.getPaymentByHostel(
                 httpServletRequest, reservationRestrict);

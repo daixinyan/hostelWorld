@@ -18,7 +18,7 @@ import java.util.List;
 public class ReservationDao extends BaseDao<Reservation, Long> {
 
 
-    private PaginationResult getReservation(
+    private PaginationResult __getReservation(
             ReservationRestrict reservationRestrict, MyPair ... myPairs) {
 
         SQLAppend sqlAppend = new SQLAppend(getSession(), "Reservation", "hostel", "member");
@@ -53,20 +53,25 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
         return paginationResult;
     }
 
+    public PaginationResult getReservation(ReservationRestrict reservationRestrict) {
+
+        return __getReservation(reservationRestrict);
+    }
+
     public PaginationResult getReservationByUser(Object userId, ReservationRestrict reservationRestrict) {
 
-        return getReservation(reservationRestrict,
+        return __getReservation(reservationRestrict,
                 new MyPair<String,Object>("member.memberId", userId));
     }
 
     public PaginationResult getReservationByHostel(Object hostelId,ReservationRestrict reservationRestrict) {
 
-        return getReservation(reservationRestrict,
+        return __getReservation(reservationRestrict,
                 new MyPair<String,Object>("hostel.hostelId", hostelId));
     }
 
     public PaginationResult getCheckInByUser(Object userId, ReservationRestrict reservationRestrict) {
-        return getReservation(
+        return __getReservation(
                 reservationRestrict,
                 new MyPair<String,Object>("member.memberId", userId),
                 new MyPair<String,Object>("checkIn", 1)
@@ -74,14 +79,14 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
     }
 
     public PaginationResult getCheckInByHostel(Object hostelId, ReservationRestrict reservationRestrict) {
-        return getReservation(reservationRestrict,
+        return __getReservation(reservationRestrict,
                 new MyPair<String,Object>("hostel.hostelId", hostelId),
                 new MyPair<String,Object>("checkIn", 1)
         );
     }
 
     public PaginationResult getCheckOutByUser(Object userId, ReservationRestrict reservationRestrict) {
-        return getReservation(
+        return __getReservation(
                 reservationRestrict,
                 new MyPair<String,Object>("member.memberId", userId),
                 new MyPair<String,Object>("checkOut", 1)
@@ -89,7 +94,7 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
     }
 
     public PaginationResult getCheckOutByHostel(Object hostelId, ReservationRestrict reservationRestrict) {
-        return getReservation(reservationRestrict,
+        return __getReservation(reservationRestrict,
                 new MyPair<String,Object>("hostel.hostelId", hostelId),
                 new MyPair<String,Object>("checkOut", 1)
         );
@@ -98,7 +103,7 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
     }
 
     public PaginationResult getPaymentByUser(Object userId, ReservationRestrict reservationRestrict) {
-        return getReservation(
+        return __getReservation(
                 reservationRestrict,
                 new MyPair<String,Object>("member.memberId", userId),
                 new MyPair<String,Object>("payment", 1)
@@ -106,7 +111,7 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
     }
 
     public PaginationResult getPaymentByHostel(Object hostelId, ReservationRestrict reservationRestrict) {
-        return getReservation(reservationRestrict,
+        return __getReservation(reservationRestrict,
                 new MyPair<String,Object>("hostel.hostelId", hostelId),
                 new MyPair<String,Object>("payment", 1)
         );

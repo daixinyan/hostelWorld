@@ -16,6 +16,9 @@ public interface OrderService {
     public ServiceResult cancel(Long reservationId, HttpServletRequest httpServletRequest);
     public ServiceResult reserve(ReservationVO reservationVO, HttpServletRequest httpServletRequest);
 
+    public ServiceResult getReservation(HttpServletRequest httpServletRequest,
+                                              ReservationRestrict reservationRestrict);
+
     public ServiceResult getReservationByUser(HttpServletRequest httpServletRequest,
                                               ReservationRestrict reservationRestrict);
     public ServiceResult getCheckInByUser(HttpServletRequest httpServletRequest,
@@ -30,6 +33,9 @@ public interface OrderService {
     public ServiceResult getPaymentByHostel(HttpServletRequest httpServletRequest,
                                             ReservationRestrict reservationRestrict);
 
+
+
+    public ServiceResult userPay(HttpServletRequest httpServletRequest, Long reservationId);
 
 
 }

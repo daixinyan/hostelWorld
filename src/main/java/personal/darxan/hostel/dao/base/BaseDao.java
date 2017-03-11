@@ -5,6 +5,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import personal.darxan.hostel.model.base.BaseTable;
+import personal.darxan.hostel.tool.MyLogger;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -71,6 +72,14 @@ public class BaseDao<T extends BaseTable, ID extends Serializable> {
     }
 
 
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public T getByName(String name) {
+        return getByPair("name", name);
+    }
     /**
      * <contains>
      *

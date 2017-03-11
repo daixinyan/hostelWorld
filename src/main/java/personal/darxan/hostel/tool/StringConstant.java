@@ -5,6 +5,8 @@ package personal.darxan.hostel.tool;
  */
 public final class StringConstant {
 
+    public static final String PARAMETER_WRONG = "参数错误";
+
     public static final String NAME_NOT_EXIST = "姓名不存在";
 
     public static final String WRONG_PASSWORD = "密码错误";

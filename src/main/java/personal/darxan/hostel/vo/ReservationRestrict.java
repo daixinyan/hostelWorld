@@ -9,6 +9,8 @@ import java.util.Date;
  */
 public class ReservationRestrict {
 
+    private Long reservationOwner;
+
     private String keyword;
 
     private Integer page = 1;
@@ -21,7 +23,7 @@ public class ReservationRestrict {
 
     private Date dateLower = new Date(System.currentTimeMillis()-15*24*60*60*1000);
 
-    private Date dateUpper = new Date();
+    private Date dateUpper = new Date(System.currentTimeMillis()+24*60*60*1000);
 
 
     @Override
@@ -35,6 +37,14 @@ public class ReservationRestrict {
                 ", dateLower=" + dateLower +
                 ", dateUpper=" + dateUpper +
                 '}';
+    }
+
+    public Long getReservationOwner() {
+        return reservationOwner;
+    }
+
+    public void setReservationOwner(Long reservationOwner) {
+        this.reservationOwner = reservationOwner;
     }
 
     public Date getDateLower() {

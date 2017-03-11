@@ -28,6 +28,11 @@ public class MemberVO extends BaseVO {
      * 会员最近一次状态更新时间
      */
     private Date updateTime;
+    /**
+     * 创建时间
+     *
+     */
+    private Date createTime;
 
     /**
      * 余额
@@ -58,6 +63,14 @@ public class MemberVO extends BaseVO {
     protected String password;
 
     private String avatar;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public String getAvatar() {
         return avatar;

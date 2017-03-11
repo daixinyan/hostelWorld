@@ -18,6 +18,10 @@ public class Reservation extends BaseTable {
     private Long reservationId;
 
 
+
+    @Temporal(TemporalType.DATE)
+    private Date checkInDate;
+
     private boolean reserved;
 
     private boolean canceled;
@@ -29,6 +33,8 @@ public class Reservation extends BaseTable {
     private boolean checkIn;
 
     private boolean checkOut;
+
+
 
 
     @ManyToOne(cascade={CascadeType.MERGE})
@@ -66,6 +72,14 @@ public class Reservation extends BaseTable {
     private Date paymentTime;
 
     private String people;
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
 
     public Long getReservationId() {
         return reservationId;

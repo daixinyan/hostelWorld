@@ -61,13 +61,13 @@
 
                     <div class="col-md-5">
                         <h2 class="">
-                            <a class="" title="" href="../../public/hostel/${room.roomId}">${room.contact}</a>
+                            <a class="" title="" href="../../public/hostel/${room.hostelId}">${room.contact}</a>
                         </h2>
-                        <a class="" title="" href="../../public/hostel/${room.roomId}">
-                            <div class="">
-                                <span class="phone">${room.phone}</span>
-                            </div>
-                        </a>
+                        <%--<a class="" title="" href="../../public/hostel/${room.hostelId}">--%>
+                            <%--<div class="">--%>
+                                <%--<span class="phone">${room.phone}</span>--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
                         <a class="">
                             <div class="">
                                 <span class="">${room.address}</span>
@@ -102,7 +102,7 @@
                             </div>
                         </a>
                     </div>
-                    <diV class="col-md-2">
+                    <diV class="col-md-3">
                         <a class="">
                             <div class="">
                                         <span class="price tab-h2">
@@ -127,7 +127,7 @@
 
     <div class="col-md-3">
         <br/>
-        <form action="../../public/list/hostel" method="post">
+        <form action="../../public/list/hostel" method="get">
             <fieldset>
                 <legend>房间搜索</legend>
 
@@ -139,10 +139,14 @@
                 <span class="help-block"></span>
 
                 <label>排序方式</label>
-                <input type="radio" class="order" name="order"  value="${searchRestrict.order}"/>
+                <input type="hidden" class="order" name="order"  value="roomId"/>
 
                 <label>从旧到新</label>
-                <input type="radio" class="order" name="asc"  value="${searchRestrict.asc}"/>
+                <input type="checkbox" class="order" name="asc"
+                       <c:if test="${searchRestrict.asc}">
+                           checked
+                       </c:if>
+                />
                 <span class="help-block"></span>
 
                 <label>开始日期</label>
@@ -170,10 +174,10 @@
                 <span class="help-block"></span>
 
                 <label>空调</label>
-                <input type="radio" class="airCondition" name="airCondition"  value="${searchRestrict.airCondition}"/>
+                <input type="checkbox" class="airCondition" name="airCondition"  value="${searchRestrict.airCondition}"/>
 
                 <label>电脑</label>
-                <input type="radio" class="computer" name="computer"  value="${searchRestrict.computer}"/>
+                <input type="checkbox" class="computer" name="computer"  value="${searchRestrict.computer}"/>
 
                 <button id="searchButton" type="submit" class="btn">提交</button>
 

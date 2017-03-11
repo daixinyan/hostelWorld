@@ -17,6 +17,7 @@ public interface HostelService {
     public ServiceResult schedule(HttpServletRequest httpServletRequest);
     public ServiceResult updateHostel(HttpServletRequest httpServletRequest, HostelVO hostel);
 
+
     public ServiceResult verifyHostel(HttpServletRequest httpServletRequest, Long id, boolean pass);
     public ServiceResult getRoomById(HttpServletRequest httpServletRequest, Long id);
 

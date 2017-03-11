@@ -36,66 +36,180 @@
 <body>
 
 <jsp:include page="../common/nav.jsp"/>
+<div class="container-fluid">
+    <div class="row-fluid">
 
-<div class="myContent">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
 
-    <div class="hostelsList">
 
-        <div class="listHeader">
-            <form action="../../hostel/list/checkIn" method="post">
+            <div class="listItems">
+                <c:forEach items="${paginationResult.items}" var="room">
+                    <br/>
+                    <div class="" style="display:block;">
+
+                        <div class="col-md-4">
+                            <a  class=" "  href="../../public/room/${room.roomId}" title="${room.hostel}" >
+                                <img  class="img-responsive" alt="${room.hostel}" src="${room.image}">
+                            </a>
+                        </div>
+
+                        <div class="col-md-5">
+                            <h2 class="">
+                                <a class="" title="" href="../../public/hostel/${room.hostelId}">${room.contact}</a>
+                            </h2>
+                            <a class="" title="" href="../../public/hostel/${room.hostelId}">
+                                <div class="">
+                                    <span class="phone">${room.phone}</span>
+                                </div>
+                            </a>
+                            <a class="">
+                                <div class="">
+                                    <span class="">${room.address}</span>
+                                </div>
+                            </a>
+                            <a class="">
+                                <div class="">
+                                <span class="">
+                                    <c:choose>
+                                        <c:when test="${room.airCondition==true}">
+                                            有空调
+                                        </c:when>
+                                        <c:otherwise>
+                                            无空调
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:choose>
+                                        <c:when test="${room.computer==true}">
+                                            有电脑
+                                        </c:when>
+                                        <c:otherwise>
+                                            无电脑
+                                        </c:otherwise>
+                                    </c:choose>
+                                    ${room.numOfBed}人床
+                                </span>
+                                </div>
+                            </a>
+                            <a class="">
+                                <div class="">
+                                    <span class="">${room.description}</span>
+                                </div>
+                            </a>
+                        </div>
+                        <diV class="col-md-3">
+                            <a class="">
+                                <div class="">
+                                        <span class="price tab-h2">
+                                            <dfn>¥</dfn>
+                                            <b>${room.price}</b>
+                                        </span>
+                                </div>
+                            </a>
+                        </diV>
+
+                        <br/>
+                        <br/>
+                        <a class="">
+                            <div class="">
+                                <span class="">
+                                    <c:choose>
+                                        <c:when test="${room.canceled}">
+                                            已退订
+                                        </c:when>
+                                        <c:when test="${room.checkIn && !room.canceled}">
+                                            已入住
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form action="../../user/cancel/${room.reservationId}">
+                                                <input class="borderless underline_link" type="submit" value="退订">
+                                            </form>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </span>
+                            </div>
+                        </a>
+
+                        <c:choose>
+                            <c:when test="${room.canceled}">
+                                <br/>
+                            </c:when>
+                            <c:when test="${room.payment}">
+                                <a class="">
+                                    <div class="">
+                                        <span class="">
+                                            已付款
+                                        </span>
+                                    </div>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="/user/pay/${room.reservationId}">
+                                    <div class="">
+                                        <span class="underline_link">
+                                            去付款
+                                        </span>
+                                    </div>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+
+                        <br/>
+
+                        <a class="">
+                            <div class="">
+                                <span class="">${room.reserveTime}</span>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </c:forEach>
+            </div>
+
+            <div class="myPager">
+                <ul id="myPagination" class="pagination" ></ul >
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <br/>
+        <form action="../../user/list/reservation" method="post">
+            <fieldset>
+                <legend>房间搜索</legend>
+
+
+                <input type="hidden" class="page" id="pageNum" name="page"  value="${reservationRestrict.page}"/>
+
+                <label>搜索关键字</label>
                 <input type="text" class="keyword" name="keyword" value="${reservationRestrict.keyword}"/>
-                <input type="text" class="order" name="order"  value="${reservationRestrict.order}"/>
+                <span class="help-block"></span>
 
+                <label>排序方式</label>
+                <input type="checkbox" class="order" name="order"  value="${reservationRestrict.order}"/>
 
-                <input type="number" class="page" id="pageNum" name="page"  value="${reservationRestrict.page}"/>
-                <input id="searchButton" type="submit"/>
+                <label>从旧到新</label>
+                <input type="checkbox" class="order" name="asc"  value="${reservationRestrict.asc}"/>
+                <span class="help-block"></span>
 
-                <div class="date">
-                    <input type="date" class="dateLower" name="dateLower" value="${reservationRestrict.dateLower}">
-                    <input type="date" class="dateUpper" name="dateUpper" value="${reservationRestrict.dateUpper}">
-                </div>
-            </form>
-        </div>
+                <label>开始日期</label>
+                <input type="date" class="dateLower" name="dateLower" value="${reservationRestrict.dateLowerString}">
+                <span class="help-block"></span>
 
+                <label>截至日期</label>
+                <input type="date" class="dateUpper" name="dateUpper" value="${reservationRestrict.dateUpperString}">
+                <span class="help-block"></span>
 
+                <button id="searchButton" type="submit" class="btn">提交</button>
 
-        <div class="listItems">
-            <c:forEach items="${paginationResult.items}" var="reservation">
-                <div class="listItem">
+            </fieldset>
 
-                    <div class="hostelId">${reservation.hostelId}</div>
-                    <div class="capacity">${reservation.capacity}</div>
-                    <div class="numOfBed">${reservation.numOfBed}</div>
-                    <div class="airCondition">${reservation.airCondition}</div>
-                    <div class="computer">${reservation.computer}</div>
-                    <div class="description">${reservation.description}</div>
-                    <div class="image">${reservation.image}</div>
-
-                    <div class="price">${reservation.price}</div>
-                    <div class="amount">${reservation.amount}</div>
-
-                    <div class="checkIn">${reservation.checkIn}</div>
-                    <div class="checkInTime">${reservation.checkInTime}</div>
-                    <div class="people">${reservation.people}</div>
-
-                    <div class="payment">${reservation.payment}</div>
-                    <div class="paymentTime">${reservation.paymentTime}</div>
-                    <div class="checkOut">${reservation.checkOut}</div>
-                    <div class="checkOutTime">${reservation.checkOutTime}</div>
-
-
-                    <div class="reserveTime">${reservation.reserveTime}</div>
-                    <div class="reservationId">${reservation.reservationId}</div>
-
-                </div>
-            </c:forEach>
-        </div>
-
-        <div class="myPager">
-            <ul id="myPagination" class="pagination" ></ul >
-        </div>
+        </form>
 
     </div>
+
 </div>
 
 </body>

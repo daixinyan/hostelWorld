@@ -16,7 +16,7 @@ public class AttributeUpdate{
      * @param <T>
      * @return
      */
-    public static <T> boolean  udpate(T base, T nullable, Class<T> tClass) {
+    public static <T> boolean update(T base, T nullable, Class<T> tClass) {
 
         Field[] fields = tClass.getDeclaredFields();
 
@@ -24,7 +24,9 @@ public class AttributeUpdate{
             for (Field field:fields) {
                 field.setAccessible(true);
                 if (field.get(nullable)!=null) {
-                    field.set(base, field.get(nullable));
+                    if(!field.get(nullable).equals("")) {
+                        field.set(base, field.get(nullable));
+                    }
                 }
             }
             return true;

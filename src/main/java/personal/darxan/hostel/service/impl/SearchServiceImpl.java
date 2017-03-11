@@ -3,6 +3,7 @@ package personal.darxan.hostel.service.impl;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import personal.darxan.hostel.dao.HostelRoomDao;
 import personal.darxan.hostel.logic.cache.impl.PageBorder;
 import personal.darxan.hostel.logic.cache.impl.SearchCache;

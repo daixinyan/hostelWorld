@@ -16,6 +16,7 @@ public final class Convert {
 
         member.setMemberId(memberVO.getMemberId());
 
+        member.setCreateTime(memberVO.getCreateTime());
         member.setName(memberVO.getName());
         member.setPassword(memberVO.getPassword());
         member.setBalance(memberVO.getBalance());
@@ -26,6 +27,7 @@ public final class Convert {
         member.setPhone(memberVO.getPhone());
         member.setState(memberVO.getState());
         member.setUpdateTime(new Date());
+        member.setAvatar(memberVO.getAvatar());
 
         return member;
     }
@@ -35,6 +37,7 @@ public final class Convert {
 
         member.setMemberId(memberEntity.getMemberId());
 
+        member.setCreateTime(memberEntity.getCreateTime());
         member.setName(memberEntity.getName());
         member.setPassword(memberEntity.getPassword());
         member.setBalance(memberEntity.getBalance());
@@ -45,6 +48,7 @@ public final class Convert {
         member.setPhone(memberEntity.getPhone());
         member.setState(memberEntity.getState());
         member.setUpdateTime(new Date());
+        member.setAvatar(memberEntity.getAvatar());
 
         return member;
     }
@@ -175,6 +179,7 @@ public final class Convert {
     public static final ReservationShowHostel convertForHostel(Reservation reservation) {
         ReservationShowHostel reservationShowHostel = new ReservationShowHostel();
 
+        reservationShowHostel.setCheckInDate(reservation.getCheckInDate());
         reservationShowHostel.setReservationId(reservation.getReservationId());
         reservationShowHostel.setReserved(reservation.isReserved());
         reservationShowHostel.setReserveTime(reservation.getReserveTime());
@@ -213,6 +218,7 @@ public final class Convert {
 
         ReservationShowMember reservationShowMember = new ReservationShowMember();
 
+        reservationShowMember.setCheckInDate(reservation.getCheckInDate());
         reservationShowMember.setReservationId(reservation.getReservationId());
         reservationShowMember.setReserved(reservation.isReserved());
         reservationShowMember.setReserveTime(reservation.getReserveTime());
@@ -231,9 +237,14 @@ public final class Convert {
 
         reservationShowMember.setPeople(reservation.getPeople());
 
+        Hostel hostel = reservation.getHostel();
+        reservationShowMember.setHostel(hostel.getHostel());
+        reservationShowMember.setHostelId(hostel.getHostelId());
+        reservationShowMember.setContact(hostel.getContact());
+        reservationShowMember.setPhone(hostel.getPhone());
+
         HostelRoom room = reservation.getHostelRoom();
         reservationShowMember.setRoomId(room.getRoomId());
-        reservationShowMember.setHostelId(room.getHostel().getHostelId());
         reservationShowMember.setStartDate(room.getStartDate());
         reservationShowMember.setEndDate(room.getEndDate());
         reservationShowMember.setPrice(room.getPrice());

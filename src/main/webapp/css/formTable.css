@@ -1,0 +1,11 @@
+.table-input  input {
+    border: none;
+    width: 3em;
+    max-width: 7em;
+    height: 3em;
+    overflow-x:visible;
+    overflow-y:visible;
+    margin: 0;
+    padding: 0;
+}
+

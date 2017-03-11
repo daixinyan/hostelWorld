@@ -9,11 +9,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by darxan on 2017/2/15.
  */
-@WebFilter(value = "/user")
+@WebFilter(value = "/user/*")
 public class UserFilter extends AuthFilter {
 
     @Override
     protected boolean login(HttpSession session) {
+        if (session==null){
+            return false;
+        }
         Object hostelVO = session.getAttribute(StringConstant.SESSION_LOGIN);
         return hostelVO!=null && hostelVO instanceof MemberVO;
     }

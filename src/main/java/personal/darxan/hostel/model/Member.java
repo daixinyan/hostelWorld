@@ -35,6 +35,11 @@ public class Member extends Loginable {
      */
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+    /**
+     * 会员最近一次创建时间
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createTime;
 
     /**
      * 余额
@@ -59,7 +64,7 @@ public class Member extends Loginable {
     /**
      * 银行卡
      */
-    @Column(length = 255)
+    @Column(length = 255, name = "bankCard")
     private String bankCard;
 
     @Column(length = 15)
@@ -85,6 +90,13 @@ public class Member extends Loginable {
     private Set<Payment> paymentSet;
 
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public Long getMemberId() {
         return memberId;
@@ -196,5 +208,25 @@ public class Member extends Loginable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "memberId=" + memberId +
+                ", state=" + state +
+                ", updateTime=" + updateTime +
+                ", balance=" + balance +
+                ", level=" + level +
+                ", bonusPoint=" + bonusPoint +
+                ", avatar='" + avatar + '\'' +
+                ", bankCard='" + bankCard + '\'' +
+                ", phone='" + phone + '\'' +
+                ", contact='" + contact + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", reservationSet=" + reservationSet +
+                ", paymentSet=" + paymentSet +
+                '}';
     }
 }

@@ -35,7 +35,8 @@ public class HostelRoomVO {
     private String hostel;
 
 
-    private java.util.Date createTime;
+    private Date createTime;
+
 
     public short getState() {
         return state;
