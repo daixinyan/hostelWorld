@@ -2,9 +2,11 @@ package personal.darxan.hostel.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import personal.darxan.hostel.dao.HostelDao;
 import personal.darxan.hostel.dao.HostelRoomDao;
 import personal.darxan.hostel.dao.MemberDao;
 import personal.darxan.hostel.dao.ReservationDao;
+import personal.darxan.hostel.model.Hostel;
 import personal.darxan.hostel.model.HostelRoom;
 import personal.darxan.hostel.model.Member;
 import personal.darxan.hostel.model.Reservation;
@@ -31,6 +33,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private HostelRoomDao hostelRoomDao;
+
+    @Autowired
+    private HostelDao hostelDao;
 
     @Autowired
     private MemberDao memberDao;
@@ -141,8 +146,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-    public ServiceResult getReservation(final HttpServletRequest httpServletRequest,
-                                        final ReservationRestrict reservationRestrict) {
+    private ServiceResult getByAdmin(final HttpServletRequest httpServletRequest,
+                                     final ReservationRestrict reservationRestrict,
+                                     final  MyFunction<PaginationResult,Object> function) {
         ServiceResult serviceResult = new ServiceResult(true);
         try {
 
@@ -151,7 +157,7 @@ public class OrderServiceImpl implements OrderService {
             if (!(login instanceof AdministerVO) ) {
                 throw  new Exception(StringConstant.AUTH_WRONG);
             }
-            PaginationResult paginationResult = reservationDao.getReservation(reservationRestrict);
+            PaginationResult paginationResult = function.execute(null);
             List<Reservation> reservationList = paginationResult.getItems();
             List<ReservationShowMember> show =
                     new ArrayList<ReservationShowMember>(reservationList.size());
@@ -169,6 +175,16 @@ public class OrderServiceImpl implements OrderService {
         return serviceResult;
     }
 
+    public ServiceResult getReservationByAdmin(final HttpServletRequest httpServletRequest,
+                                               final ReservationRestrict reservationRestrict) {
+        return getByAdmin(httpServletRequest, reservationRestrict,
+                new MyFunction<PaginationResult, Object>() {
+                    public PaginationResult execute(Object o) {
+                            return reservationDao.getReservation(reservationRestrict);
+                    }
+                });
+    }
+
     private ServiceResult getByUser(final HttpServletRequest httpServletRequest,
                                     final ReservationRestrict reservationRestrict,
                                     final   MyFunction<PaginationResult,Object> function
@@ -179,8 +195,8 @@ public class OrderServiceImpl implements OrderService {
             Object login = httpServletRequest.getSession(false)
                     .getAttribute(StringConstant.SESSION_LOGIN);
             Long memberId = null;
-            if (login instanceof Member) {
-                memberId = ((Member)login).getMemberId();
+            if (login instanceof MemberVO) {
+                memberId = ((MemberVO)login).getMemberId();
             } else if (login instanceof AdministerVO) {
                 memberId = reservationRestrict.getReservationOwner();
             }
@@ -242,6 +258,16 @@ public class OrderServiceImpl implements OrderService {
         );
     }
 
+    public ServiceResult getPaymentByAdmin(HttpServletRequest httpServletRequest,
+                                           final ReservationRestrict reservationRestrict) {
+
+        return getByAdmin(httpServletRequest, reservationRestrict,
+                new MyFunction<PaginationResult, Object>() {
+                    public PaginationResult execute(Object o) {
+                        return reservationDao.getPayment(reservationRestrict);
+                    }
+                });
+    }
 
     private ServiceResult getByHostel(final HttpServletRequest httpServletRequest,
                                       final ReservationRestrict reservationRestrict,
@@ -253,7 +279,7 @@ public class OrderServiceImpl implements OrderService {
             Object login = httpServletRequest.getSession(false)
                     .getAttribute(StringConstant.SESSION_LOGIN);
             Long hostelID = null;
-            if (login instanceof Member) {
+            if (login instanceof HostelVO) {
                 hostelID = ((HostelVO)login).getHostelId();
             } else if (login instanceof AdministerVO) {
                 hostelID = reservationRestrict.getReservationOwner();
@@ -357,4 +383,30 @@ public class OrderServiceImpl implements OrderService {
         return serviceResult;
     }
 
+    public ServiceResult adminDeductForHostel(HttpServletRequest httpServletRequest,
+                                              Long reservationId) {
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+
+            HttpSession session = httpServletRequest.getSession(false);
+            if (session!=null) {
+                Object login = session.getAttribute(StringConstant.SESSION_LOGIN);
+                if (login instanceof AdministerVO) {
+                    Reservation reservation = reservationDao.get(reservationId);
+                    reservation.setDeduct(true);
+                    reservation.setDeductTime(new Date());
+                    Hostel hostel = reservation.getHostel();
+                    hostel.setBalance(hostel.getBalance()+reservation.getAmount()*reservation.getPrice());
+
+                    reservationDao.update(reservation);
+                }
+            }
+
+            throw new Exception(StringConstant.AUTH_WRONG);
+        }catch (Exception e) {
+            serviceResult.setSuccess(false);
+            serviceResult.setMessage(e.getMessage());
+        }
+        return serviceResult;
+    }
 }

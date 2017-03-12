@@ -10,19 +10,65 @@
 <head>
     <title>Title</title>
     <script src="../../js/echarts.js"></script>
+    <jsp:include page="../common/header.jsp"/>
 </head>
 <body>
-
+<jsp:include page="../common/nav.jsp"/>
 <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-<div id="main" style="width: 600px;height:400px;"></div>
+<div id="reservationChart" style="width: 600px;height:400px;"></div>
+<div id="registerUserChart" style="width: 600px;height:400px;"></div>
+<div id="registerHostelChart" style="width: 600px;height:400px;"></div>
 
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
+    var reservationChart = echarts.init(document.getElementById('reservationChart'));
+    var registerUserChart = echarts.init(document.getElementById('registerUserChart'));
+    var registerHostelChart = echarts.init(document.getElementById('registerHostelChart'));
+
 
     // 指定图表的配置项和数据
 
-    function setChart(reservation) {
+    function setRegisterUserChart(reservation) {
+        var option =option = {
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : hostelsRegister.timeArray,
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'注册数目',
+                    type:'bar',
+                    barWidth: '60%',
+                    data:hostelsRegister.registerCount
+                }
+            ]
+        };
+        reservationChart.setOption(option);
+    }
+    function setReservation(reservation) {
         var option = {
             tooltip: {
                 trigger: 'axis'
@@ -74,8 +120,88 @@
                 }
             ]
         };
-        myChart.setOption(option);
+        reservationChart.setOption(option);
     }
+    function setRegisterHostelChart(hostelsRegister) {
+        var option =option = {
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : hostelsRegister.timeArray,
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'注册数目',
+                    type:'bar',
+                    barWidth: '60%',
+                    data:hostelsRegister.registerCount
+                }
+            ]
+        };
+        reservationChart.setOption(option);
+    }
+    $.ajax(
+        {
+            url:'/admin/stat/user',
+            type:'GET', //POST
+            async:true,    //或false,是否异步
+            data:{
+                dateUpper:'yang',
+                dateLower:25
+            },
+            timeout:5000,    //超时时间
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success:function(data,textStatus,jqXHR){
+                console.log(data)
+                console.log(textStatus)
+                console.log(jqXHR)
+                setRegisterUserChart(data)
+            },
+        }
+    );
+
+    $.ajax(
+        {
+            url:'/admin/stat/hostel',
+            type:'GET', //POST
+            async:true,    //或false,是否异步
+            data:{
+                dateUpper:'yang',
+                dateLower:25
+            },
+            timeout:5000,    //超时时间
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success:function(data,textStatus,jqXHR){
+                console.log(data)
+                console.log(textStatus)
+                console.log(jqXHR)
+                setRegisterHostelChart(data)
+            },
+        }
+    );
+
     $.ajax(
         {
             url:'/admin/stat/reservation',
@@ -95,7 +221,7 @@
                 console.log(data)
                 console.log(textStatus)
                 console.log(jqXHR)
-                setChart(data)
+                setReservation(data)
             },
             error:function(xhr,textStatus){
                 console.log('错误')

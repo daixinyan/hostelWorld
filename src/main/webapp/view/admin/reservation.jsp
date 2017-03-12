@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>hostel's custom check-in</title>
+    <title>admin for user's reservation</title>
     <jsp:include page="../common/header.jsp"/>
     <script>
         $(document).ready(function () {
@@ -130,24 +130,25 @@
                             </div>
                         </a>
 
+
                         <c:choose>
                             <c:when test="${room.canceled}">
                                 <br/>
                             </c:when>
-                            <c:when test="${room.payment}">
+                            <c:when test="${room.deduct}">
                                 <a class="">
                                     <div class="">
                                         <span class="">
-                                            已付款
+                                            已经支付
                                         </span>
                                     </div>
                                 </a>
                             </c:when>
                             <c:otherwise>
-                                <a href="/user/pay/${room.reservationId}">
+                                <a href="/admin/deduct/${room.reservationId}">
                                     <div class="">
                                         <span class="underline_link">
-                                            去付款
+                                            支付
                                         </span>
                                     </div>
                                 </a>
@@ -176,7 +177,7 @@
 
     <div class="col-md-3">
         <br/>
-        <form action="../../user/list/reservation" method="post">
+        <form action="../../admin/user/reservation?reservationOwner=${reservationRestrict.reservationOwner}" method="post">
             <fieldset>
                 <legend>房间搜索</legend>
 

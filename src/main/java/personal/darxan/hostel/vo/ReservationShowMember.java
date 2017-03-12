@@ -23,6 +23,8 @@ public class ReservationShowMember {
 
     private boolean checkOut;
 
+    private boolean deduct;
+
     /**
      * 创建时间
      */
@@ -38,6 +40,8 @@ public class ReservationShowMember {
     private Date checkOutTime;
 
     private Date paymentTime;
+
+    private Date deductTime;
 
     private String people;
 
@@ -80,6 +84,22 @@ public class ReservationShowMember {
 
     private String image;
 
+
+    public boolean isDeduct() {
+        return deduct;
+    }
+
+    public void setDeduct(boolean deduct) {
+        this.deduct = deduct;
+    }
+
+    public Date getDeductTime() {
+        return deductTime;
+    }
+
+    public void setDeductTime(Date deductTime) {
+        this.deductTime = deductTime;
+    }
 
     public Date getCheckInDate() {
         return checkInDate;

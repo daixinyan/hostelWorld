@@ -20,11 +20,8 @@ public class UserStateFilter extends StateFilter {
 
     protected boolean stateOk(HttpSession session) {
         Object userVO = session.getAttribute(StringConstant.SESSION_LOGIN);
-        if( userVO!=null && userVO instanceof MemberVO) {
-            MemberVO memberVO = (MemberVO)userVO;
-            return memberVO.getState()>=1;
-        }
-        return false;
+        MemberVO memberVO = (MemberVO)userVO;
+        return memberVO.getState()>=1;
     }
 
     protected String getLoginPage() {

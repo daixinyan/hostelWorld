@@ -7,35 +7,36 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by darxan on 2017/2/17.
  */
-public interface OrderService {
+ public interface OrderService {
 
-    public ServiceResult checkIn(CheckIn checkIn, HttpServletRequest httpServletRequest);
+     ServiceResult checkIn(CheckIn checkIn, HttpServletRequest httpServletRequest);
 
-    public ServiceResult checkOut(CheckOut checkOut, HttpServletRequest httpServletRequest);
+     ServiceResult checkOut(CheckOut checkOut, HttpServletRequest httpServletRequest);
 
-    public ServiceResult cancel(Long reservationId, HttpServletRequest httpServletRequest);
-    public ServiceResult reserve(ReservationVO reservationVO, HttpServletRequest httpServletRequest);
+     ServiceResult cancel(Long reservationId, HttpServletRequest httpServletRequest);
+     ServiceResult reserve(ReservationVO reservationVO, HttpServletRequest httpServletRequest);
 
-    public ServiceResult getReservation(HttpServletRequest httpServletRequest,
+     ServiceResult getReservationByAdmin(HttpServletRequest httpServletRequest,
+                                               ReservationRestrict reservationRestrict);
+
+     ServiceResult getReservationByUser(HttpServletRequest httpServletRequest,
                                               ReservationRestrict reservationRestrict);
-
-    public ServiceResult getReservationByUser(HttpServletRequest httpServletRequest,
-                                              ReservationRestrict reservationRestrict);
-    public ServiceResult getCheckInByUser(HttpServletRequest httpServletRequest,
+     ServiceResult getCheckInByUser(HttpServletRequest httpServletRequest,
                                           ReservationRestrict reservationRestrict);
-    public ServiceResult getPaymentByUser(HttpServletRequest httpServletRequest,
+     ServiceResult getPaymentByUser(HttpServletRequest httpServletRequest,
                                           ReservationRestrict reservationRestrict);
 
-    public ServiceResult getReservationByHostel(HttpServletRequest httpServletRequest,
+     ServiceResult getPaymentByAdmin(HttpServletRequest httpServletRequest,
+                                           ReservationRestrict reservationRestrict);
+    
+     ServiceResult getReservationByHostel(HttpServletRequest httpServletRequest,
                                                 ReservationRestrict reservationRestrict);
-    public ServiceResult getCheckInByHostel(HttpServletRequest httpServletRequest,
+     ServiceResult getCheckInByHostel(HttpServletRequest httpServletRequest,
                                             ReservationRestrict reservationRestrict);
-    public ServiceResult getPaymentByHostel(HttpServletRequest httpServletRequest,
+     ServiceResult getPaymentByHostel(HttpServletRequest httpServletRequest,
                                             ReservationRestrict reservationRestrict);
 
+     ServiceResult userPay(HttpServletRequest httpServletRequest, Long reservationId);
 
-
-    public ServiceResult userPay(HttpServletRequest httpServletRequest, Long reservationId);
-
-
+     ServiceResult adminDeductForHostel(HttpServletRequest httpServletRequest, Long reservationId);
 }

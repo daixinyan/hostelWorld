@@ -36,6 +36,8 @@
 <body>
 
 <jsp:include page="../common/nav.jsp"/>
+
+
 <div class="container-fluid">
     <div class="row-fluid">
 
@@ -68,32 +70,40 @@
                                     <span class="">${room.address}</span>
                                 </div>
                             </a>
+
+
+                                <%--<a class="">--%>
+                                <%--<div class="">--%>
+                                <%--<span class="">--%>
+                                <%--<c:choose>--%>
+                                <%--<c:when test="${room.airCondition==true}">--%>
+                                <%--有空调--%>
+                                <%--</c:when>--%>
+                                <%--<c:otherwise>--%>
+                                <%--无空调--%>
+                                <%--</c:otherwise>--%>
+                                <%--</c:choose>--%>
+                                <%--<c:choose>--%>
+                                <%--<c:when test="${room.computer==true}">--%>
+                                <%--有电脑--%>
+                                <%--</c:when>--%>
+                                <%--<c:otherwise>--%>
+                                <%--无电脑--%>
+                                <%--</c:otherwise>--%>
+                                <%--</c:choose>--%>
+                                <%--${room.numOfBed}人床--%>
+                                <%--</span>--%>
+                                <%--</div>--%>
+                                <%--</a>--%>
+                                <%--<a class="">--%>
+                                <%--<div class="">--%>
+                                <%--<span class="">${room.description}</span>--%>
+                                <%--</div>--%>
+                                <%--</a>--%>
+
                             <a class="">
                                 <div class="">
-                                <span class="">
-                                    <c:choose>
-                                        <c:when test="${room.airCondition==true}">
-                                            有空调
-                                        </c:when>
-                                        <c:otherwise>
-                                            无空调
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${room.computer==true}">
-                                            有电脑
-                                        </c:when>
-                                        <c:otherwise>
-                                            无电脑
-                                        </c:otherwise>
-                                    </c:choose>
-                                    ${room.numOfBed}人床
-                                </span>
-                                </div>
-                            </a>
-                            <a class="">
-                                <div class="">
-                                    <span class="">${room.description}</span>
+                                    <span class="">${room.people}已经入住</span>
                                 </div>
                             </a>
                         </div>
@@ -114,14 +124,11 @@
                             <div class="">
                                 <span class="">
                                     <c:choose>
-                                        <c:when test="${room.canceled}">
-                                            已退订
-                                        </c:when>
-                                        <c:when test="${room.checkIn && !room.canceled}">
+                                        <c:when test="${room.checkIn}">
                                             已入住
                                         </c:when>
                                         <c:otherwise>
-                                            <br/>
+                                            未入住
                                         </c:otherwise>
                                     </c:choose>
                                 </span>
@@ -129,9 +136,6 @@
                         </a>
 
                         <c:choose>
-                            <c:when test="${room.canceled}">
-                                <br/>
-                            </c:when>
                             <c:when test="${room.deduct}">
                                 <a class="">
                                     <div class="">
@@ -153,7 +157,6 @@
                         </c:choose>
 
                         <br/>
-
                         <a class="">
                             <div class="">
                                 <span class="">${room.reserveTime}</span>
@@ -174,9 +177,10 @@
 
     <div class="col-md-3">
         <br/>
-        <form action="../../admin/list/reservation" method="post">
+        <form action="../../user/list/payment" method="post">
             <fieldset>
                 <legend>房间搜索</legend>
+
 
                 <input type="hidden" class="page" id="pageNum" name="page"  value="${reservationRestrict.page}"/>
 

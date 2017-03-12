@@ -110,6 +110,12 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
         );
     }
 
+    public PaginationResult getPayment(ReservationRestrict reservationRestrict) {
+        return __getReservation(reservationRestrict,
+                new MyPair<String, Object>("payment", 1)
+        );
+    }
+
     public PaginationResult getPaymentByHostel(Object hostelId, ReservationRestrict reservationRestrict) {
         return __getReservation(reservationRestrict,
                 new MyPair<String,Object>("hostel.hostelId", hostelId),

@@ -59,6 +59,7 @@ public final class Convert {
 
         hostel.setHostelId(hostelVO.getHostelId());
 
+        hostel.setBalance(hostelVO.getBalance());
         hostel.setName(hostelVO.getName());
         hostel.setState(hostelVO.getState());
         hostel.setPhone(hostelVO.getPhone());
@@ -82,6 +83,7 @@ public final class Convert {
 
         hostel.setHostelId(hostelEntity.getHostelId());
 
+        hostel.setBalance(hostelEntity.getBalance());
         hostel.setName(hostelEntity.getName());
         hostel.setState(hostelEntity.getState());
         hostel.setPhone(hostelEntity.getPhone());
@@ -179,6 +181,9 @@ public final class Convert {
     public static final ReservationShowHostel convertForHostel(Reservation reservation) {
         ReservationShowHostel reservationShowHostel = new ReservationShowHostel();
 
+        reservationShowHostel.setDeduct(reservation.isDeduct());
+        reservationShowHostel.setDeductTime(reservation.getDeductTime());
+
         reservationShowHostel.setCheckInDate(reservation.getCheckInDate());
         reservationShowHostel.setReservationId(reservation.getReservationId());
         reservationShowHostel.setReserved(reservation.isReserved());
@@ -217,6 +222,9 @@ public final class Convert {
     public static final ReservationShowMember convertForMember(Reservation reservation) {
 
         ReservationShowMember reservationShowMember = new ReservationShowMember();
+
+        reservationShowMember.setDeduct(reservation.isDeduct());
+        reservationShowMember.setDeductTime(reservation.getDeductTime());
 
         reservationShowMember.setCheckInDate(reservation.getCheckInDate());
         reservationShowMember.setReservationId(reservation.getReservationId());

@@ -25,6 +25,7 @@ public class ReservationVO {
 
     private boolean checkOut;
 
+    private boolean deduct;
 
     private Long memberId;
 
@@ -36,8 +37,26 @@ public class ReservationVO {
      */
     private Date createTime;
 
+    private Date deductTime;
+
     private int amount;
 
+
+    public boolean isDeduct() {
+        return deduct;
+    }
+
+    public void setDeduct(boolean deduct) {
+        this.deduct = deduct;
+    }
+
+    public Date getDeductTime() {
+        return deductTime;
+    }
+
+    public void setDeductTime(Date deductTime) {
+        this.deductTime = deductTime;
+    }
 
     public Date getCheckInDate() {
         return checkInDate;

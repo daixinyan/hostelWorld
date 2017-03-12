@@ -16,6 +16,7 @@ public class HostelVO {
 
     protected String password;
 
+    private double balance;
     /**
      * 客栈状态：
      *  申请中；
@@ -49,6 +50,14 @@ public class HostelVO {
     private Date createTime;
 
     private String image;
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 
     public String getImage() {
         return image;

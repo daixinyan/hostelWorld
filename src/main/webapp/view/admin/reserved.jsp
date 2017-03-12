@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>hostel's reservations</title>
+    <title>admin for host's reserved</title>
     <jsp:include page="../common/header.jsp"/>
     <script>
 
@@ -104,21 +104,40 @@
                                     </c:when>
                                     <c:otherwise>
                                         未入住
-                                        <a href="">
-                                            <span class="underline_link" onclick="prom('${reservation.reservationId}')">填写入住单</span>
-                                        </a>
-
                                     </c:otherwise>
                                 </c:choose>
                                 <br/>
                                 <c:choose>
-                                    <c:when test="${room.payment}">
+                                    <c:when test="${reservation.payment}">
                                         已付款
                                     </c:when>
                                     <c:otherwise>
                                         未付款
                                     </c:otherwise>
                                 </c:choose>
+                                 <c:choose>
+                                     <c:when test="${reservation.canceled}">
+                                         <br/>
+                                     </c:when>
+                                     <c:when test="${reservation.deduct}">
+                                    <a class="">
+                                        <div class="">
+                                            <span class="">
+                                                已经支付
+                                            </span>
+                                        </div>
+                                    </a>
+                                     </c:when>
+                                     <c:otherwise>
+                                    <a href="/admin/deduct/${reservation.reservationId}">
+                                        <div class="">
+                                            <span class="underline_link">
+                                                支付
+                                            </span>
+                                        </div>
+                                    </a>
+                                     </c:otherwise>
+                                 </c:choose>
 
                             </span>
                                 </div>
@@ -164,7 +183,7 @@
 
     <div class="col-md-3">
         <br/>
-        <form action="../../hostel/list/reservation" method="post">
+        <form action="../../admin/hostel/reserved?reservationOwner=${reservationRestrict.reservationOwner}" method="post">
             <fieldset>
                 <legend>房间搜索</legend>
 

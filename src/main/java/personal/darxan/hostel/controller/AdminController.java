@@ -1,15 +1,19 @@
 package personal.darxan.hostel.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import personal.darxan.hostel.model.Member;
+import personal.darxan.hostel.model.Reservation;
 import personal.darxan.hostel.service.interf.AdminService;
 import personal.darxan.hostel.service.interf.HostelService;
 import personal.darxan.hostel.service.interf.OrderService;
 import personal.darxan.hostel.service.interf.UserService;
+import personal.darxan.hostel.tool.AttributeUpdate;
 import personal.darxan.hostel.tool.DateFormatter;
 import personal.darxan.hostel.vo.*;
 
@@ -50,6 +54,7 @@ public class AdminController {
     @RequestMapping(value = "/list/hostels")
     public ModelAndView  hostels(HttpServletRequest httpServletRequest,
                                  @ModelAttribute UsersRestrict usersRestrict) {
+        AttributeUpdate.clearObject(usersRestrict, UsersRestrict.class);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/hostels");
         ServiceResult serviceResult
@@ -64,6 +69,7 @@ public class AdminController {
     @RequestMapping(value = "/list/users")
     public ModelAndView  users(HttpServletRequest httpServletRequest,
                                @ModelAttribute UsersRestrict usersRestrict) {
+        AttributeUpdate.clearObject(usersRestrict, UsersRestrict.class);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/users");
         ServiceResult serviceResult
@@ -75,9 +81,38 @@ public class AdminController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/list/payment")
+    public ModelAndView  payment(HttpServletRequest httpServletRequest,
+                               @ModelAttribute ReservationRestrict reservationRestrict) {
+
+        AttributeUpdate.clearObject(reservationRestrict, ReservationRestrict.class);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("admin/payment");
+        ServiceResult serviceResult
+                = orderService.getPaymentByAdmin(httpServletRequest, reservationRestrict);
+        modelAndView.addObject("paginationResult", (PaginationResult)serviceResult.getValue());
+        modelAndView.addObject("restrict", reservationRestrict);
+        modelAndView.addObject("result", serviceResult);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/deduct/{reservation}")
+    public ModelAndView  deduct(HttpServletRequest httpServletRequest,
+                                 @PathVariable(value = "reservation") Long reservation) {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect: /admin/list/payment");
+        ServiceResult serviceResult
+                = orderService.adminDeductForHostel(httpServletRequest, reservation);
+        modelAndView.addObject("result", serviceResult);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/update/hostel")
     public ModelAndView  updateHostels(HttpServletRequest httpServletRequest,
                                  @ModelAttribute HostelVO hostelVO) {
+        AttributeUpdate.clearObject(hostelVO, HostelVO.class);
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect: /admin/list/hostels");
         ServiceResult serviceResult
@@ -89,6 +124,9 @@ public class AdminController {
     @RequestMapping(value = "/update/user")
     public ModelAndView  updateUser(HttpServletRequest httpServletRequest,
                                     @ModelAttribute MemberVO memberVO) {
+
+        AttributeUpdate.clearObject(memberVO, MemberVO.class);
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect: /admin/list/users");
         ServiceResult serviceResult
@@ -127,8 +165,10 @@ public class AdminController {
     public ModelAndView getReservation(HttpServletRequest httpServletRequest,
                                         @ModelAttribute ReservationRestrict reservationRestrict) {
 
+        AttributeUpdate.clearObject(reservationRestrict, ReservationRestrict.class);
+
         ModelAndView modelAndView = new ModelAndView("admin/admin");
-        ServiceResult serviceResult = orderService.getReservation(
+        ServiceResult serviceResult = orderService.getReservationByAdmin(
                 httpServletRequest, reservationRestrict);
         modelAndView.addObject("result",serviceResult);
         modelAndView.addObject("paginationResult", (PaginationResult)serviceResult.getValue());
@@ -139,6 +179,8 @@ public class AdminController {
     @RequestMapping(value = "/user/reservation")
     public ModelAndView userReservation(HttpServletRequest httpServletRequest,
                                           @ModelAttribute ReservationRestrict reservationRestrict) {
+
+        AttributeUpdate.clearObject(reservationRestrict, ReservationRestrict.class);
 
         ModelAndView modelAndView = new ModelAndView("admin/reservation");
         ServiceResult serviceResult = orderService.getReservationByUser(
@@ -153,9 +195,10 @@ public class AdminController {
     @RequestMapping(value = "/hostel/reserved")
     public ModelAndView hostelReservation(HttpServletRequest httpServletRequest,
                                         @ModelAttribute ReservationRestrict reservationRestrict) {
+        AttributeUpdate.clearObject(reservationRestrict, ReservationRestrict.class);
 
         ModelAndView modelAndView = new ModelAndView("admin/reserved");
-        ServiceResult serviceResult = orderService.getPaymentByHostel(
+        ServiceResult serviceResult = orderService.getReservationByAdmin(
                 httpServletRequest, reservationRestrict);
         modelAndView.addObject("result",serviceResult);
         modelAndView.addObject("paginationResult", (PaginationResult)serviceResult.getValue());
@@ -164,11 +207,17 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/stat/reservation")
+    @RequestMapping(value = "/stat/page")
     public ModelAndView statReservation(HttpServletRequest httpServletRequest) {
 
         ModelAndView modelAndView = new ModelAndView("admin/stat");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/stat/reservation")
+    @ResponseBody
+    public Object statReservation() {
+        return new StatReservation();
     }
 
 

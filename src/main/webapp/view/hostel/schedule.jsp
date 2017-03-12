@@ -56,6 +56,8 @@
         <thead>
         <tr>
             <th>描述</th>
+            <th>起效日期</th>
+            <th>失效日期</th>
             <th>床数</th>
             <th>容量</th>
             <th>空调</th>
@@ -74,6 +76,8 @@
                         <span><img src="${room.image}" style="width: 3em;height: 3em"></span>
                         <span>${room.description}</span>
                     </td>
+                    <td><span><input type="date" name="startDate" value="${room.startDate}"></span></td>
+                    <td><span><input type="date" name="endDate" value="${room.endDate}"></span></td>
                     <td><span><input name="numOfBed" value="${room.numOfBed}"></span></td>
                     <td><span><input name="capacity" value="${room.capacity}"></span></td>
 

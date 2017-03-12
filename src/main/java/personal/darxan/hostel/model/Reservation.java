@@ -34,6 +34,10 @@ public class Reservation extends BaseTable {
 
     private boolean checkOut;
 
+    /**
+     * 付款后是否已经支付给酒店
+     */
+    private boolean deduct;
 
 
 
@@ -71,7 +75,26 @@ public class Reservation extends BaseTable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date paymentTime;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deductTime;
+
     private String people;
+
+    public boolean isDeduct() {
+        return deduct;
+    }
+
+    public void setDeduct(boolean deduct) {
+        this.deduct = deduct;
+    }
+
+    public Date getDeductTime() {
+        return deductTime;
+    }
+
+    public void setDeductTime(Date deductTime) {
+        this.deductTime = deductTime;
+    }
 
     public Date getCheckInDate() {
         return checkInDate;

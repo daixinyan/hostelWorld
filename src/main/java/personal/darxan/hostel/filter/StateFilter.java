@@ -24,10 +24,11 @@ public abstract class StateFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest)request;
         try {
-            if (stateOk(httpServletRequest.getSession())) {
-                doFilter(request, response, chain);
+            if (stateOk(httpServletRequest.getSession(false))) {
+                chain.doFilter(request, response);
+            }else {
+                ((HttpServletResponse)response).sendRedirect(statePage());
             }
-            ((HttpServletResponse)response).sendRedirect(statePage());
         }catch (NullPointerException e) {
             ((HttpServletResponse)response).sendRedirect(getLoginPage());
         }catch (ClassCastException e) {

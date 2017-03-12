@@ -20,4 +20,59 @@ public class StatReservation {
     private double[] payment = {2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2};
 
 
+    public String[] getTimeArray() {
+        return timeArray;
+    }
+
+    public void setTimeArray(String[] timeArray) {
+        this.timeArray = timeArray;
+    }
+
+    public double getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(double maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public double getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(double minValue) {
+        this.minValue = minValue;
+    }
+
+    public double getInterval() {
+        return interval;
+    }
+
+    public void setInterval(double interval) {
+        this.interval = interval;
+    }
+
+    public double[] getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(double[] reservations) {
+        this.reservations = reservations;
+    }
+
+    public double[] getCheckIns() {
+        return checkIns;
+    }
+
+    public void setCheckIns(double[] checkIns) {
+        this.checkIns = checkIns;
+    }
+
+    public double[] getPayment() {
+        return payment;
+    }
+
+    public void setPayment(double[] payment) {
+        this.payment = payment;
+    }
 }

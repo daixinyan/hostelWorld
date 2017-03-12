@@ -31,6 +31,8 @@ public class Hostel extends Loginable {
      */
     private short state;
 
+    private double balance;
+
     @Column(length = 255)
     private String add_1;
 
@@ -73,6 +75,14 @@ public class Hostel extends Loginable {
 
     @Column(length = 255)
     private String image;
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 
     @OneToMany(mappedBy = "hostel", fetch = FetchType.LAZY,
             cascade={CascadeType.MERGE,CascadeType.REMOVE})

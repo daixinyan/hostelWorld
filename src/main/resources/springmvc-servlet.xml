@@ -15,6 +15,7 @@
     <mvc:annotation-driven/>
 
 
+
     <context:component-scan base-package="personal.darxan.hostel.controller"/>
 
 
@@ -27,15 +28,24 @@
 
 
 
-    <!-- HandlerMapping 负责找到controller -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
-    <!-- HandlerAdapter 负责找到controller中的方法-->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
+
+    <!--&lt;!&ndash; HandlerMapping 负责找到controller &ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; HandlerAdapter 负责找到controller中的方法&ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
 
     <!-- HandlerMapping 负责找到controller -->
     <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
     <!-- HandlerAdapter 负责找到controller中的方法-->
     <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->
+
 
 
 </beans>

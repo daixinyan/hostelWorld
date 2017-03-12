@@ -112,11 +112,19 @@
                                 </c:choose>
                                 <br/>
                                 <c:choose>
-                                    <c:when test="${room.payment}">
+                                    <c:when test="${reservation.payment}">
                                         已付款
                                     </c:when>
                                     <c:otherwise>
                                         未付款
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${reservation.deduct}">
+                                        已结账
+                                    </c:when>
+                                    <c:otherwise>
+                                        未结账
                                     </c:otherwise>
                                 </c:choose>
 

@@ -52,9 +52,7 @@
                     <li><a href="/hostel/list/schedule">客栈计划</a> </li>
                     <li><a href="/hostel/list/checkIn">入住信息</a> </li>
                     <li><a href="/hostel/list/reservation">预定信息</a> </li>
-                    <li><a href="/hostel/list/payment">用户付款</a> </li>
-                    <li><a href="/hostel/list/payment">平台结账</a> </li>
-
+                    <li><a href="/hostel/list/payment">账单信息</a> </li>
                 </ul>
             </nav>
         </c:if>
@@ -66,8 +64,8 @@
                     <li><a href="/admin/list/reservation">订单信息</a> </li>
                     <li><a href="/admin/list/hostels">客栈信息</a> </li>
                     <li><a href="/admin/list/users">会员信息</a> </li>
-
-
+                    <li><a href="/admin/list/payment">支付信息</a> </li>
+                    <li><a href="/admin/stat/page">统计信息</a> </li>
                 </ul>
             </nav>
         </c:if>
