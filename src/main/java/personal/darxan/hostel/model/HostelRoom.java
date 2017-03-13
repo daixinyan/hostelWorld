@@ -27,23 +27,23 @@ public class HostelRoom extends BaseTable{
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
-    private float price;
+    private Float price;
 
-    private short count;
+    private Short count;
 
     /**
      * 房间数
      */
-    private short capacity;
+    private Short capacity;
 
     /**
      * 床数
      */
-    private short numOfBed;
+    private Short numOfBed;
 
-    private boolean airCondition;
+    private Boolean airCondition;
 
-    private boolean computer;
+    private Boolean computer;
 
     private String description;
 
@@ -89,51 +89,51 @@ public class HostelRoom extends BaseTable{
         this.endDate = endDate;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
-    public short getCount() {
+    public Short getCount() {
         return count;
     }
 
-    public void setCount(short count) {
+    public void setCount(Short count) {
         this.count = count;
     }
 
-    public short getCapacity() {
+    public Short getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(short capacity) {
+    public void setCapacity(Short capacity) {
         this.capacity = capacity;
     }
 
-    public short getNumOfBed() {
+    public Short getNumOfBed() {
         return numOfBed;
     }
 
-    public void setNumOfBed(short numOfBed) {
+    public void setNumOfBed(Short numOfBed) {
         this.numOfBed = numOfBed;
     }
 
-    public boolean isAirCondition() {
+    public Boolean isAirCondition() {
         return airCondition;
     }
 
-    public void setAirCondition(boolean airCondition) {
+    public void setAirCondition(Boolean airCondition) {
         this.airCondition = airCondition;
     }
 
-    public boolean isComputer() {
+    public Boolean isComputer() {
         return computer;
     }
 
-    public void setComputer(boolean computer) {
+    public void setComputer(Boolean computer) {
         this.computer = computer;
     }
 

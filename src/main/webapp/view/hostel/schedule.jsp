@@ -19,27 +19,7 @@
 
     <link type="text/css" rel="stylesheet" href="../../css/table.css">
 
-    <script>
-        $(document).ready(function () {
-            var currentPage = 1;
-            var visiblePages = 10;
-            var totalPage = 1;
-            totalPage = ${paginationResult.totalPages};
-            currentPage = ${reservationRestrict.page};
 
-            $('#myPagination').jqPaginator({
-                totalPages: totalPage,
-                visiblePages: visiblePages,
-                currentPage: currentPage,
-                onPageChange: function (num, type) {
-                    if (num!=currentPage) {
-                        $("#pageNum").attr("value", num);
-                        $("#searchButton").click();
-                    }
-                }
-            });
-        });
-    </script>
     <jsp:include page="../common/header.jsp"/>
 </head>
 
@@ -47,12 +27,11 @@
 
 <jsp:include page="../common/nav.jsp"/>
 
-
 <div class="myContent">
     <br/>
     <br/>
     <div class="col-md-1"></div>
-    <table class="bordered col-md-8">
+    <table class="bordered col-md-7">
         <thead>
         <tr>
             <th>描述</th>
@@ -72,32 +51,37 @@
                 <tr class="table-input">
 
                     <input type="hidden" name="roomId" value="${room.roomId}"></span>
-                    <td title="${hostel.name}">
+                    <td width="5em" title="${hostel.name}">
                         <span><img src="${room.image}" style="width: 3em;height: 3em"></span>
                         <span>${room.description}</span>
                     </td>
-                    <td><span><input type="date" name="startDate" value="${room.startDate}"></span></td>
-                    <td><span><input type="date" name="endDate" value="${room.endDate}"></span></td>
-                    <td><span><input name="numOfBed" value="${room.numOfBed}"></span></td>
-                    <td><span><input name="capacity" value="${room.capacity}"></span></td>
+                    <td width="10em" ><span><input class="date-input" type="date" name="startDate" value="${room.startDate}"></span></td>
+                    <td width="10em" ><span><input class="date-input" type="date" name="endDate" value="${room.endDate}"></span></td>
+                    <td width="5em" ><span><input  class="narrow-input" name="numOfBed" value="${room.numOfBed}"></span></td>
+                    <td width="5em" ><span><input  class="narrow-input"  name="capacity" value="${room.capacity}"></span></td>
 
-                    <td>
-                        <span><input type="checkbox" name="airCondition"
+                    <td width="5em">
+                        <span>
+                            <input  type="checkbox" name="airCondition"
                                      <c:if test="${room.airCondition}"> checked</c:if>
-                              ></span>
+                            >
+                        </span>
                     </td>
 
-                    <td><span><input type="checkbox" name="computer"
-                                    <c:if test="${room.computer}"> checked</c:if>
-                        ></span>
+                    <td width="5em">
+                        <span>
+                            <input type="checkbox" name="computer"
+                            <c:if test="${room.computer}"> checked</c:if>
+                            >
+                        </span>
                     </td>
 
 
-                    <td>
-                        <span class="base_price"><dfn>¥</dfn>
-                            <input name="price" value="${room.price}"></span>
+                    <td width="5em">
+                        <span class="base_price">
+                            <input class="narrow-input" name="price" value="${room.price}"></span>
                     </td>
-                    <td>
+                    <td width="5em">
                         <a href=""><input type="submit"></a>
                     </td>
                 </tr>
@@ -106,9 +90,6 @@
 
         </tbody>
 
-        <div class="myPager">
-            <ul id="myPagination" class="pagination" ></ul >
-        </div>
 
     </table>
     

@@ -164,9 +164,17 @@ public class UserController {
     @RequestMapping(value = "/state/active")
     public ModelAndView active(HttpServletRequest httpServletRequest) {
 
-        ModelAndView modelAndView = new ModelAndView("/user/user");
+        ModelAndView modelAndView = new ModelAndView("redirect: /user/user/info");
         ServiceResult serviceResult = userService.state(httpServletRequest, (short) 1);
         modelAndView.addObject("result",serviceResult);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/state/delete")
+    public ModelAndView delete(HttpServletRequest httpServletRequest) {
+
+        ModelAndView modelAndView = new ModelAndView("redirect: /");
+        ServiceResult serviceResult = userService.state(httpServletRequest, (short) -1);
         return modelAndView;
     }
 

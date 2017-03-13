@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by darxan on 2017/2/15.
  */
-@Transactional
 public interface AuthService {
 
     /**

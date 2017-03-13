@@ -1,5 +1,7 @@
 package personal.darxan.hostel.vo;
 
+import personal.darxan.hostel.tool.DateFormatter;
+
 import java.util.Date;
 
 /**
@@ -29,9 +31,9 @@ public class ReservationShowHostel {
      */
     private Date reserveTime;
 
-    private int amount;
+    private Integer amount;
 
-    private double price;
+    private Double price;
 
     private Date updateTime;
 
@@ -57,12 +59,12 @@ public class ReservationShowHostel {
      * 正常
      * 停止
      */
-    private short state;
+    private Short state;
 
     /**
      * 会员等级
      */
-    private short level = 0;
+    private Short level = 0;
 
     /**
      * 会员积分
@@ -263,19 +265,19 @@ public class ReservationShowHostel {
         this.memberId = memberId;
     }
 
-    public short getState() {
+    public Short getState() {
         return state;
     }
 
-    public void setState(short state) {
+    public void setState(Short state) {
         this.state = state;
     }
 
-    public short getLevel() {
+    public Short getLevel() {
         return level;
     }
 
-    public void setLevel(short level) {
+    public void setLevel(Short level) {
         this.level = level;
     }
 
@@ -325,5 +327,17 @@ public class ReservationShowHostel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getReservationTimeString() {
+        return DateFormatter.dateFormat.format(reserveTime);
+    }
+
+    public String getPaymentTimeString() {
+        return DateFormatter.dateFormat.format(paymentTime);
+    }
+
+    public String getCheckInTimeString() {
+        return DateFormatter.dateFormat.format(checkInTime);
     }
 }

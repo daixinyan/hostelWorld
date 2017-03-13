@@ -220,12 +220,17 @@ public class AdminController {
         return new StatReservation();
     }
 
+    @RequestMapping(value = "/stat/user")
+    @ResponseBody
+    public Object statUser() {
+        return new StatObejct();
+    }
 
 
-
-
-
-
-
+    @RequestMapping(value = "/stat/hostel")
+    @ResponseBody
+    public Object statHostel() {
+        return new StatObejct();
+    }
 
 }

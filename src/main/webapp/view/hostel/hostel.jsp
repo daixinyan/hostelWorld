@@ -71,13 +71,10 @@
                         <c:choose>
                             <c:when test="${user.state==1}">
                                 <span class="tab-larger">已激活</span>
-                                <a href="http://www.baidu.com" target="_blank">
-                                    <span class="underline_link">注销资格</span>
-                                </a>
                             </c:when>
                             <c:otherwise>
                                 <span class="tab-larger">未激活</span>
-                                <a href="http://www.baidu.com" target="_blank">
+                                <a href="/user/state/active" target="_blank">
                                     <span class="underline_link tab-h2">激活</span>
                                 </a>
                             </c:otherwise>

@@ -76,7 +76,7 @@
             <tbody id="list">
             <c:forEach items="${paginationResult.items}" var="user">
                 <form action="../../admin/update/user">
-                    <tr class="table-input">
+                    <tr class="narrow-table">
                         <input type="hidden" name="memberId" value="${user.memberId}">
 
                         <td title="${user.name}">

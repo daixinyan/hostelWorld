@@ -22,7 +22,7 @@ public class MemberVO extends BaseVO {
      * 正常
      * 停止
      */
-    private short state;
+    private Short state;
 
     /**
      * 会员最近一次状态更新时间
@@ -37,12 +37,12 @@ public class MemberVO extends BaseVO {
     /**
      * 余额
      */
-    private double balance = 0;
+    private Double balance = .0;
 
     /**
      * 会员等级
      */
-    private short level = 0;
+    private Short level = 0;
 
     /**
      * 会员积分
@@ -88,11 +88,11 @@ public class MemberVO extends BaseVO {
         this.memberId = memberId;
     }
 
-    public short getState() {
+    public Short getState() {
         return state;
     }
 
-    public void setState(short state) {
+    public void setState(Short state) {
         this.state = state;
     }
 
@@ -104,19 +104,19 @@ public class MemberVO extends BaseVO {
         this.updateTime = updateTime;
     }
 
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
-    public short getLevel() {
+    public Short getLevel() {
         return level;
     }
 
-    public void setLevel(short level) {
+    public void setLevel(Short level) {
         this.level = level;
     }
 

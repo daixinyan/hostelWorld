@@ -1,5 +1,7 @@
 package personal.darxan.hostel.vo;
 
+import personal.darxan.hostel.tool.DateFormatter;
+
 import java.util.Date;
 
 /**
@@ -11,26 +13,26 @@ public class ReservationShowMember {
 
     private Date checkInDate;
 
-    private boolean reserved;
+    private Boolean reserved;
 
-    private boolean canceled;
+    private Boolean canceled;
 
-    private boolean refused;
+    private Boolean refused;
 
-    private boolean payment;
+    private Boolean payment;
 
-    private boolean checkIn;
+    private Boolean checkIn;
 
-    private boolean checkOut;
+    private Boolean checkOut;
 
-    private boolean deduct;
+    private Boolean deduct;
 
     /**
      * 创建时间
      */
     private Date reserveTime;
 
-    private int amount;
+    private Integer amount;
 
 
     private Date updateTime;
@@ -62,23 +64,23 @@ public class ReservationShowMember {
 
     private Date endDate;
 
-    private float price;
+    private Float price;
 
-    private short count;
+    private Short count;
 
     /**
      * 房间数
      */
-    private short capacity;
+    private Short capacity;
 
     /**
      * 床数
      */
-    private short numOfBed;
+    private Short numOfBed;
 
-    private boolean airCondition;
+    private Boolean airCondition;
 
-    private boolean computer;
+    private Boolean computer;
 
     private String description;
 
@@ -326,27 +328,27 @@ public class ReservationShowMember {
         this.price = price;
     }
 
-    public short getCount() {
+    public Short getCount() {
         return count;
     }
 
-    public void setCount(short count) {
+    public void setCount(Short count) {
         this.count = count;
     }
 
-    public short getCapacity() {
+    public Short getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(short capacity) {
+    public void setCapacity(Short capacity) {
         this.capacity = capacity;
     }
 
-    public short getNumOfBed() {
+    public Short getNumOfBed() {
         return numOfBed;
     }
 
-    public void setNumOfBed(short numOfBed) {
+    public void setNumOfBed(Short numOfBed) {
         this.numOfBed = numOfBed;
     }
 
@@ -381,4 +383,17 @@ public class ReservationShowMember {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getReservationTimeString() {
+        return DateFormatter.dateFormat.format(reserveTime);
+    }
+
+    public String getPaymentTimeString() {
+        return DateFormatter.dateFormat.format(paymentTime);
+    }
+
+    public String getCheckInTimeString() {
+        return DateFormatter.dateFormat.format(checkInTime);
+    }
+
 }

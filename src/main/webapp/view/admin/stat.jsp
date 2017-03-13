@@ -14,10 +14,14 @@
 </head>
 <body>
 <jsp:include page="../common/nav.jsp"/>
-<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-<div id="reservationChart" style="width: 600px;height:400px;"></div>
-<div id="registerUserChart" style="width: 600px;height:400px;"></div>
-<div id="registerHostelChart" style="width: 600px;height:400px;"></div>
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    <div id="reservationChart" style="width: 750px;height:450px;"></div>
+    <div id="registerUserChart" style="width: 750px;height:450px;"></div>
+    <div id="registerHostelChart" style="width: 750px;height:450px;"></div>
+</div>
+<div class="col-md-2"></div>
+
 
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
@@ -28,7 +32,7 @@
 
     // 指定图表的配置项和数据
 
-    function setRegisterUserChart(reservation) {
+    function setRegisterUserChart(userRegister) {
         var option =option = {
             color: ['#3398DB'],
             tooltip : {
@@ -36,6 +40,9 @@
                 axisPointer : {            // 坐标轴指示器，坐标轴触发有效
                     type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                 }
+            },
+            legend: {
+                data:['注册数目']
             },
             grid: {
                 left: '3%',
@@ -46,7 +53,7 @@
             xAxis : [
                 {
                     type : 'category',
-                    data : hostelsRegister.timeArray,
+                    data : userRegister.timeArray,
                     axisTick: {
                         alignWithLabel: true
                     }
@@ -62,11 +69,11 @@
                     name:'注册数目',
                     type:'bar',
                     barWidth: '60%',
-                    data:hostelsRegister.registerCount
+                    data: userRegister.values
                 }
             ]
         };
-        reservationChart.setOption(option);
+        registerUserChart.setOption(option);
     }
     function setReservation(reservation) {
         var option = {
@@ -82,7 +89,7 @@
                 }
             },
             legend: {
-                data:['预定数','入住数','付款数']
+                data:['预订数','入住数','付款数']
             },
             xAxis: [
                 {
@@ -131,6 +138,9 @@
                     type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                 }
             },
+            legend: {
+                data:['注册数目']
+            },
             grid: {
                 left: '3%',
                 right: '4%',
@@ -156,11 +166,11 @@
                     name:'注册数目',
                     type:'bar',
                     barWidth: '60%',
-                    data:hostelsRegister.registerCount
+                    data: hostelsRegister.values
                 }
             ]
         };
-        reservationChart.setOption(option);
+        registerHostelChart.setOption(option);
     }
     $.ajax(
         {

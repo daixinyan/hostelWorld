@@ -68,16 +68,16 @@
                             <br/>
                             <a class="">
                                 <div class="">
-                            <span class="">
-                                <c:choose>
-                                    <c:when test="${room.checkIn}">
-                                        已入住
-                                    </c:when>
-                                    <c:otherwise>
-                                        未入住
-                                    </c:otherwise>
-                                </c:choose>
-                            </span>
+                                <span class="">
+                                    <c:choose>
+                                        <c:when test="${reservation.checkIn}">
+                                            已入住
+                                        </c:when>
+                                        <c:otherwise>
+                                            未入住
+                                        </c:otherwise>
+                                    </c:choose>
+                                </span>
                                 </div>
                             </a>
 
@@ -103,7 +103,7 @@
 
                         <a class="">
                             <div class="">
-                                <span class="">${reservation.paymentTime}</span>
+                                <span class="">${reservation.paymentTimeString}</span>
                             </div>
                         </a>
 

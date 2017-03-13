@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private MemberDao memberDao;
 
-    public ServiceResult state(HttpServletRequest httpServletRequest, short state)  {
+    public ServiceResult state(HttpServletRequest httpServletRequest, Short state)  {
         ServiceResult serviceResult = new ServiceResult(true);
         try {
             MemberVO memberVO = (MemberVO)httpServletRequest.getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
@@ -32,10 +32,14 @@ public class UserServiceImpl implements UserService {
             member.setState(state);
             memberVO.setState(state);
 
-            member.setBalance(1000.0);
-            memberVO.setBalance(1000.0);
-            member.setBonusPoint(1000000L);
-            memberVO.setBonusPoint(1000000L);
+            if (state.shortValue()==1) {
+                member.setBalance(1000.0);
+                memberVO.setBalance(1000.0);
+                member.setBonusPoint(1000000L);
+                memberVO.setBonusPoint(1000000L);
+                member.setLevel((short)1);
+                memberVO.setLevel((short)1);
+            }
 
             memberDao.update(member);
         }catch (Exception e) {
@@ -47,7 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public ServiceResult level(HttpServletRequest httpServletRequest, short level) {
+    public ServiceResult level(HttpServletRequest httpServletRequest, Short level) {
         ServiceResult serviceResult = new ServiceResult(true);
         try {
             MemberVO memberVO = (MemberVO)httpServletRequest.getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
@@ -67,7 +71,7 @@ public class UserServiceImpl implements UserService {
         return serviceResult;
     }
 
-    public ServiceResult exchange(HttpServletRequest httpServletRequest, long bonusPoint) {
+    public ServiceResult exchange(HttpServletRequest httpServletRequest, Long bonusPoint) {
         ServiceResult serviceResult = new ServiceResult(true);
         try {
             MemberVO memberVO = (MemberVO)httpServletRequest
@@ -108,6 +112,7 @@ public class UserServiceImpl implements UserService {
 
 
             AttributeUpdate.update(memberPersistent, memberEntity, Member.class);
+
             memberPersistent.setUpdateTime(new Date());
             memberDao.update(memberPersistent);
 

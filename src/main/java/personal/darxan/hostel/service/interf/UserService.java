@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface UserService {
 
-    public ServiceResult state(HttpServletRequest httpServletRequest, short state) ;
+    public ServiceResult state(HttpServletRequest httpServletRequest, Short state) ;
 
-    public ServiceResult level(HttpServletRequest httpServletRequest, short level) ;
+    public ServiceResult level(HttpServletRequest httpServletRequest, Short level) ;
 
-    public ServiceResult exchange(HttpServletRequest httpServletRequest, long bonusPoint) ;
+    public ServiceResult exchange(HttpServletRequest httpServletRequest, Long bonusPoint) ;
 
     public ServiceResult updateInformation(HttpServletRequest httpServletRequest, MemberVO member);
 }

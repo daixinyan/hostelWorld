@@ -10,18 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 import personal.darxan.hostel.dao.AdministerDao;
 import personal.darxan.hostel.dao.HostelDao;
 import personal.darxan.hostel.dao.MemberDao;
-import personal.darxan.hostel.jmx.aop.HelloWorld;
 import personal.darxan.hostel.model.Administer;
 import personal.darxan.hostel.model.Hostel;
 import personal.darxan.hostel.model.Member;
 import personal.darxan.hostel.model.base.Loginable;
 import personal.darxan.hostel.service.interf.AuthService;
 import personal.darxan.hostel.tool.Convert;
-import personal.darxan.hostel.tool.MyLogger;
 import personal.darxan.hostel.tool.StringConstant;
 import personal.darxan.hostel.vo.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -29,7 +26,7 @@ import java.util.Date;
 /**
  * Created by darxan on 2017/2/15.
  */
-@Component
+@Service
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
@@ -112,7 +109,8 @@ public class AuthServiceImpl implements AuthService {
         try {
             Member member = Convert.convert(memberVO);
             member.setCreateTime(new Date());
-            member.setUpdateTime(new Date());
+            member.setState((short)0);
+            member.setLevel((short)0);
             memberDao.save(member);
         }catch (HibernateException e) {
             serviceResult.setSuccess(false);
@@ -129,6 +127,8 @@ public class AuthServiceImpl implements AuthService {
         try {
             Hostel hostel = Convert.convert(hostelVO);
             hostel.setCreateTime(new Date());
+            hostel.setState((short)0);
+
             hostelDao.save(hostel);
         }catch (HibernateException e) {
             serviceResult.setSuccess(false);

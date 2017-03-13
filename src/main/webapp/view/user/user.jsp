@@ -65,9 +65,7 @@
                         <c:choose>
                             <c:when test="${user.state==1}">
                                 <span class="tab-larger">已激活</span>
-                                <a href="/user/level/${user.level+1}" target="_blank">
-                                    <span class="underline_link tab-h2">升级享优惠</span>
-                                </a>
+
                                 <a href="/user/state/destroy" target="_blank">
                                     <span class="underline_link">注销资格</span>
                                 </a>

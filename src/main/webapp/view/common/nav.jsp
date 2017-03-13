@@ -19,9 +19,9 @@
         <nav id="menu">
             <ul>
                 <li><a href="/public/list/hostel">hostels Search</a></li>
-                <li><a href="/public/register/hostel">注册</a> </li>
-                <li><a href="/public/register/user">注册</a> </li>
-                <li><a href="/public/login/default">登陆</a> </li>
+                <li><a href="/public/register/hostel">hostel注册</a> </li>
+                <li><a href="/public/register/user">用户注册</a> </li>
+
                 <li><a href="/public/login/hostel">hostel登陆</a> </li>
                 <li><a href="/public/login/user">会员登陆</a> </li>
                 <li><a href="/public/login/admin">管理员登陆</a> </li>

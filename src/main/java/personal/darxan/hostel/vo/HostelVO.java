@@ -23,7 +23,7 @@ public class HostelVO {
      *  审核通过；
      *  审核不通过；
      */
-    private short state;
+    private Short state;
 
     private String add_1;
 
@@ -91,11 +91,11 @@ public class HostelVO {
         this.password = password;
     }
 
-    public short getState() {
+    public Short getState() {
         return state;
     }
 
-    public void setState(short state) {
+    public void setState(Short state) {
         this.state = state;
     }
 

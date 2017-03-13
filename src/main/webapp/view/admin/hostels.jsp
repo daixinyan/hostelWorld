@@ -73,7 +73,7 @@
             <c:forEach items="${paginationResult.items}" var="hostel">
                 <form action="../../admin/update/hostel" id="${hostel.hostelId}">
                     <input type="hidden" name="hostelId" value="${hostel.hostelId}">
-                    <tr class="table-input">
+                    <tr class="narrow-table">
 
                         <td title="${hostel.hostel}">
                             <a href="../../admin/hostel/reserved?reservationOwner=${hostel.hostelId}">

@@ -29,9 +29,10 @@ public class Hostel extends Loginable {
      *  审核通过；
      *  审核不通过；
      */
-    private short state;
+    @Column(columnDefinition="tinyint default 0")
+    private Short state;
 
-    private double balance;
+    private Double balance;
 
     @Column(length = 255)
     private String add_1;
@@ -48,7 +49,7 @@ public class Hostel extends Loginable {
     @Column(length = 255)
     private String address;
 
-    @Column(length = 15)
+    @Column(length = 17)
     private String phone;
 
     @Column(length = 255)
@@ -76,11 +77,11 @@ public class Hostel extends Loginable {
     @Column(length = 255)
     private String image;
 
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -111,11 +112,11 @@ public class Hostel extends Loginable {
         this.hostelId = hostelId;
     }
 
-    public short getState() {
+    public Short getState() {
         return state;
     }
 
-    public void setState(short state) {
+    public void setState(Short state) {
         this.state = state;
     }
 

@@ -154,7 +154,7 @@
 
                         <a class="">
                             <div class="">
-                                <span class="">${reservation.reserveTime}</span>
+                                <span class="">${reservation.reservationTimeString}</span>
                             </div>
                         </a>
 

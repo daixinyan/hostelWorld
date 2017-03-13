@@ -130,7 +130,7 @@
                         <br/>
                         <a class="">
                             <div class="">
-                                <span class="">${reservation.checkInTime}</span>
+                                <span class="">${reservation.checkInTimeString}</span>
                             </div>
                         </a>
 

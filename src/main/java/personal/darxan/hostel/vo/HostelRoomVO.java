@@ -11,7 +11,7 @@ public class HostelRoomVO {
 
     private Long hostelId;
 
-    private short state;
+    private Short state;
 
     private String add_1;
 
@@ -38,11 +38,11 @@ public class HostelRoomVO {
     private Date createTime;
 
 
-    public short getState() {
+    public Short getState() {
         return state;
     }
 
-    public void setState(short state) {
+    public void setState(Short state) {
         this.state = state;
     }
 
@@ -130,19 +130,19 @@ public class HostelRoomVO {
 
     private Date endDate;
 
-    private float price;
+    private Float price;
 
-    private short count;
+    private Short count;
 
     /**
      * 房间数
      */
-    private short capacity;
+    private Short capacity;
 
     /**
      * 床数
      */
-    private short numOfBed;
+    private Short numOfBed;
 
     private boolean airCondition;
 
@@ -184,27 +184,27 @@ public class HostelRoomVO {
         this.price = price;
     }
 
-    public short getCount() {
+    public Short getCount() {
         return count;
     }
 
-    public void setCount(short count) {
+    public void setCount(Short count) {
         this.count = count;
     }
 
-    public short getCapacity() {
+    public Short getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(short capacity) {
+    public void setCapacity(Short capacity) {
         this.capacity = capacity;
     }
 
-    public short getNumOfBed() {
+    public Short getNumOfBed() {
         return numOfBed;
     }
 
-    public void setNumOfBed(short numOfBed) {
+    public void setNumOfBed(Short numOfBed) {
         this.numOfBed = numOfBed;
     }
 

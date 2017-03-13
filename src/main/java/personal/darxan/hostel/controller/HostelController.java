@@ -119,6 +119,23 @@ public class HostelController {
         modelAndView.addObject("message", serviceResult.getMessage());
         return modelAndView;
     }
+    @RequestMapping(value = "/state/active")
+    public ModelAndView active(HttpServletRequest httpServletRequest) {
+
+        ModelAndView modelAndView = new ModelAndView("redirect: /hostel/hostel/info");
+        ServiceResult serviceResult = hostelService.state(httpServletRequest, (short) 1);
+        modelAndView.addObject("result",serviceResult);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/state/delete")
+    public ModelAndView delete(HttpServletRequest httpServletRequest) {
+
+        ModelAndView modelAndView = new ModelAndView("redirect: /");
+        ServiceResult serviceResult = hostelService.state(httpServletRequest, (short) -1);
+        return modelAndView;
+    }
+
 
     @RequestMapping(value = "/action/checkIn")
     @ResponseBody

@@ -231,4 +231,29 @@ public class HostelServiceImpl implements HostelService {
         }
         return serviceResult;
     }
+
+
+
+    public ServiceResult state(HttpServletRequest httpServletRequest, Short state) {
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            HostelVO hostelVO = (HostelVO)httpServletRequest.getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
+            Hostel hostel = hostelDao.load(hostelVO.getHostelId());
+            hostel.setState(state);
+            hostelVO.setState(state);
+
+            if (state.shortValue()==1) {
+                hostel.setBalance(1000.0);
+                hostelVO.setBalance(1000.0);
+
+            }
+
+            hostelDao.update(hostel);
+        }catch (Exception e) {
+            serviceResult.setSuccess(false);
+            serviceResult.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return serviceResult;
+    }
 }

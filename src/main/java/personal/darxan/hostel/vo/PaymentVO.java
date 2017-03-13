@@ -20,7 +20,7 @@ public class PaymentVO {
 
     private Date createTime;
 
-    private short payType;
+    private Short payType;
 
     private double amount;
 }

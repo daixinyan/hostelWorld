@@ -28,7 +28,8 @@ public class Member extends Loginable {
      * 正常
      * 停止
      */
-    private short state;
+    @Column(columnDefinition="tinyint default 0")
+    private Short state;
 
     /**
      * 会员最近一次状态更新时间
@@ -45,13 +46,13 @@ public class Member extends Loginable {
      * 余额
      */
     @Column(columnDefinition="decimal(10,2) default 0")
-    private double balance = 0;
+    private Double balance ;
 
     /**
      * 会员等级
      */
     @Column(columnDefinition="tinyint default 0")
-    private short level = 0;
+    private Short level ;
 
     /**
      * 会员积分
@@ -67,7 +68,7 @@ public class Member extends Loginable {
     @Column(length = 255, name = "bankCard")
     private String bankCard;
 
-    @Column(length = 15)
+    @Column(length = 17)
     private String phone;
 
     @Column(length = 255)
@@ -106,11 +107,11 @@ public class Member extends Loginable {
         this.memberId = memberId;
     }
 
-    public short getState() {
+    public Short getState() {
         return state;
     }
 
-    public void setState(short state) {
+    public void setState(Short state) {
         this.state = state;
     }
 
@@ -122,19 +123,19 @@ public class Member extends Loginable {
         this.updateTime = updateTime;
     }
 
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
-    public short getLevel() {
+    public Short getLevel() {
         return level;
     }
 
-    public void setLevel(short level) {
+    public void setLevel(Short level) {
         this.level = level;
     }
 
