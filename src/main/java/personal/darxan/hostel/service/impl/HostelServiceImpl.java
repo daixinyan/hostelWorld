@@ -88,11 +88,12 @@ public class HostelServiceImpl implements HostelService {
             HostelVO hostelVO = (HostelVO) httpServletRequest
                     .getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
             HostelRoom hostelRoomEntity = Convert.convert(hostelRoom);
-            HostelRoom hostelRoomPersistent = hostelRoomDao.load(hostelRoom.getRoomId());
+            HostelRoom hostelRoomPersistent = hostelRoomDao.get(hostelRoom.getRoomId());
             if (!hostelRoomPersistent.getHostel().getHostelId().equals(hostelVO.getHostelId())) {
                 throw new Exception(StringConstant.AUTH_WRONG);
             }
             AttributeUpdate.update(hostelRoomPersistent, hostelRoomEntity, HostelRoom.class);
+
             hostelRoomDao.update(hostelRoomPersistent);
         }catch (Exception e) {
             e.printStackTrace();
@@ -112,6 +113,9 @@ public class HostelServiceImpl implements HostelService {
                     .getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
             HostelRoom hostelRoomEntity = Convert.convert(hostelRoom);
             hostelRoomEntity.setHostel(Convert.convert(hostelVO));
+            if (hostelRoomEntity.getImage()==null || hostelRoomEntity.getImage().length()==0) {
+                hostelRoomEntity.setImage(hostelVO.getImage());
+            }
             hostelRoomDao.save(hostelRoomEntity);
         }catch (Exception e) {
             e.printStackTrace();

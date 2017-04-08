@@ -17,4 +17,9 @@ public interface UserService {
     public ServiceResult exchange(HttpServletRequest httpServletRequest, Long bonusPoint) ;
 
     public ServiceResult updateInformation(HttpServletRequest httpServletRequest, MemberVO member);
+
+    public ServiceResult getUser(Long userId);
+
+    public ServiceResult recharge(HttpServletRequest httpServletRequest, double much);
+
 }

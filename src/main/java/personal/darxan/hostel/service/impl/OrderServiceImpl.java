@@ -129,13 +129,14 @@ public class OrderServiceImpl implements OrderService {
             Reservation reservation = new Reservation();
 
             HostelRoom hostelRoom = hostelRoomDao.load(reservationVO.getRoomId());
-            reservation.setRefused(true);
+
             reservation.setUpdateTime(new Date());
             reservation.setMember(memberDao.load(memberVO.getMemberId()));
             reservation.setPrice(hostelRoom.getPrice());
             reservation.setAmount(reservationVO.getAmount());
             reservation.setHostel(hostelRoom.getHostel());
             reservation.setReserveTime(new Date());
+            reservation.setReserved(true);
             reservation.setHostelRoom(hostelRoom);
             reservationDao.save(reservation);
         }catch (Exception e) {

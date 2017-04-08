@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>hostel's reservations</title>
+    <title>hostel's payment</title>
     <jsp:include page="../common/header.jsp"/>
     <script>
         $(document).ready(function () {
@@ -35,6 +35,10 @@
 </head>
 <body>
 
+<div class="header">
+    <a href="#menu"><span></span></a>
+    hostel's payment
+</div>
 <jsp:include page="../common/nav.jsp"/>
 
 <div class="container-fluid">

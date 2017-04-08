@@ -75,6 +75,7 @@ public final class Convert {
         hostel.setImage(hostelVO.getImage());
         hostel.setPassword(hostelVO.getPassword());
 
+
         return hostel;
     }
 

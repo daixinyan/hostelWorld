@@ -208,28 +208,30 @@ public class AdminController {
 
 
     @RequestMapping(value = "/stat/page")
-    public ModelAndView statReservation(HttpServletRequest httpServletRequest) {
+    public ModelAndView statReservation(HttpServletRequest httpServletRequest,
+                                        @ModelAttribute UsersRestrict usersRestrict) {
 
         ModelAndView modelAndView = new ModelAndView("admin/stat");
+        modelAndView.addObject("usersRestrict", usersRestrict);
         return modelAndView;
     }
 
     @RequestMapping(value = "/stat/reservation")
     @ResponseBody
-    public Object statReservation() {
+    public Object statReservation(@ModelAttribute UsersRestrict usersRestrict) {
         return new StatReservation();
     }
 
     @RequestMapping(value = "/stat/user")
     @ResponseBody
-    public Object statUser() {
+    public Object statUser(@ModelAttribute UsersRestrict usersRestrict) {
         return new StatObejct();
     }
 
 
     @RequestMapping(value = "/stat/hostel")
     @ResponseBody
-    public Object statHostel() {
+    public Object statHostel(@ModelAttribute UsersRestrict usersRestrict) {
         return new StatObejct();
     }
 

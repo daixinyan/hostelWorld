@@ -48,6 +48,11 @@
     </script>
 </head>
 <body>
+
+<div class="header">
+    <a href="#menu"><span></span></a>
+    manager hostel
+</div>
 <jsp:include page="../common/nav.jsp"/>
 
 <div class="myContent">

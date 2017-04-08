@@ -12,14 +12,17 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>${room.description}</title>
     <jsp:include page="../common/header.jsp"/>
     <script type="text/javascript" src="../../js/numberchooser.js"></script>
     <link type="text/css" rel="stylesheet" href="../../css/numberchooser.css">
 </head>
 
 <body>
-
+<div class="header">
+    <a href="#menu"><span></span></a>
+    ${room.hostel}
+</div>
 <jsp:include page="../common/nav.jsp"/>
 
 <div class="myContent">
@@ -122,7 +125,7 @@
                     <input type="checkbox">
                     <span class="help-block"></span>
 
-                    <input type="hidden" name="roomId" value="1"> </input>
+                    <input type="hidden" name="roomId" value="${room.roomId}"> </input>
                     <span class="help-block"></span>
 
 

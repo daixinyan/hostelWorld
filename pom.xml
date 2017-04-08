@@ -107,12 +107,6 @@
       </dependency>
 
 
-      <!--<dependency>-->
-          <!--<groupId>jstl</groupId>-->
-          <!--<artifactId>jstl</artifactId>-->
-          <!--<version>1.2</version>-->
-      <!--</dependency>-->
-
       <dependency>
           <groupId>javax.servlet</groupId>
           <artifactId>jstl</artifactId>
@@ -136,14 +130,7 @@
           <artifactId>jackson-databind</artifactId>
           <version>2.7.3</version>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
-      <!--<dependency>-->
-          <!--<groupId>com.fasterxml.jackson.dataformat</groupId>-->
-          <!--<artifactId>jackson-dataformat-yaml</artifactId>-->
-          <!--<version>2.7.3</version>-->
-      <!--</dependency>-->
-      <!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
-      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+
       <dependency>
           <groupId>com.fasterxml.jackson.dataformat</groupId>
           <artifactId>jackson-dataformat-xml</artifactId>

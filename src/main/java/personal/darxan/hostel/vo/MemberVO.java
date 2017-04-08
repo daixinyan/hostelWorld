@@ -62,7 +62,7 @@ public class MemberVO extends BaseVO {
 
     protected String password;
 
-    private String avatar;
+    private String avatar = "../../image/common.jpg";
 
     public Date getCreateTime() {
         return createTime;

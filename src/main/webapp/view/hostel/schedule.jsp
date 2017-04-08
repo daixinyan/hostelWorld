@@ -15,7 +15,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>客栈计划</title>
 
     <link type="text/css" rel="stylesheet" href="../../css/table.css">
 
@@ -25,6 +25,10 @@
 
 <body>
 
+<div class="header">
+    <a href="#menu"><span></span></a>
+    客栈计划
+</div>
 <jsp:include page="../common/nav.jsp"/>
 
 <div class="myContent">
@@ -47,7 +51,7 @@
         </thead>
         <tbody id="list">
         <c:forEach items="${rooms}" var="room">
-            <form action="/hostel/update/schedule">
+            <form action="/hostel/update/schedule" method="get">
                 <tr class="table-input">
 
                     <input type="hidden" name="roomId" value="${room.roomId}"></span>
@@ -98,7 +102,7 @@
             <legend>房间类型增加</legend>
 
             <img class="img-responsive" src="${hostel.image}">
-            <input type="file" class="image" name="image"/>
+            <input type="file" class="image-default" name="image-default"/>
             <span class="help-block"></span>
 
             <label>电脑</label>
@@ -127,13 +131,16 @@
             <span class="help-block"></span>
 
 
+
             <c:set var="currentTime" value="<%=DateFormatter.dateFormat.format(new Date()) %>" />
+            <input type="hidden" class="startDate" name="createTime" value="${currentTime}"/>
+
             <label>计划开始日期</label>
-            <input type="date" class="startDate" name="dateLower" value="${currentTime}"/>
+            <input type="date" class="startDate" name="startDate" value="${currentTime}"/>
             <span class="help-block"></span>
 
             <label>计划截至日期</label>
-            <input type="date" class="endDate" name="dateUpper" value="${currentTime}"/>
+            <input type="date" class="endDate" name="endDate" value="${currentTime}"/>
             <span class="help-block"></span>
 
 

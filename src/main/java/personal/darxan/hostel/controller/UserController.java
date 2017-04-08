@@ -12,6 +12,7 @@ import personal.darxan.hostel.service.interf.UserService;
 import personal.darxan.hostel.tool.AttributeUpdate;
 import personal.darxan.hostel.tool.DateFormatter;
 import personal.darxan.hostel.tool.MyLogger;
+import personal.darxan.hostel.tool.StringConstant;
 import personal.darxan.hostel.vo.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +58,23 @@ public class UserController {
 
     public ServiceResult deposit() {
         ServiceResult modelAndView = new ServiceResult();
+        return modelAndView;
+    }
+
+    @RequestMapping("/page/recharge")
+    public ModelAndView rechargePage(HttpServletRequest httpServletRequest) {
+        ModelAndView modelAndView = new ModelAndView("/user/recharge");
+        modelAndView.addObject("user", (MemberVO)httpServletRequest.getSession().getAttribute(StringConstant.SESSION_LOGIN));
+        return modelAndView;
+    }
+
+
+    @RequestMapping("/recharge/action")
+    public ModelAndView rechargeAction(HttpServletRequest httpServletRequest,
+                                       @RequestParam("much") double much) {
+        ModelAndView modelAndView = new ModelAndView("redirect: /user/user/info");
+        ServiceResult serviceResult = userService.recharge(httpServletRequest, much);
+
         return modelAndView;
     }
 

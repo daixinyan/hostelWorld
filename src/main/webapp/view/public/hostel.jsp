@@ -9,11 +9,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>${hostel.hostel}房间列表</title>
     <link type="text/css" rel="stylesheet" href="../../css/table.css">
     <jsp:include page="../common/header.jsp"/>
 </head>
 <body>
+    <div class="header">
+        <a href="#menu"><span></span></a>
+        ${hostel.hostel}房间列表
+    </div>
     <jsp:include page="../common/nav.jsp"/>
 
 <div class="myContent">

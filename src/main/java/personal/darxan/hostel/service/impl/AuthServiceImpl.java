@@ -62,12 +62,18 @@ public class AuthServiceImpl implements AuthService {
 
         Loginable entity = null;
         ServiceResult result = new ServiceResult(false);
+        boolean deleted = false;
 
         try {
             if (loginVO.getLoginType()!=null&&loginVO.getLoginType().equals(StringConstant.HOSTEL)) {
 
                 entity = hostelDao.getByName(loginVO.getName());
-                result.setValue(Convert.convert((Hostel)entity));
+                Hostel hostel =(Hostel)entity;
+                if (hostel.getState()==-1){
+                    deleted = true;
+                }else {
+                    result.setValue(Convert.convert(hostel));
+                }
             } else if (loginVO.getLoginType()!=null&&loginVO.getLoginType().equals(StringConstant.ADMIN)) {
 
                 entity = adminDao.getByName(loginVO.getName());
@@ -78,7 +84,7 @@ public class AuthServiceImpl implements AuthService {
                 result.setValue(Convert.convert((Member)entity));
             }
 
-            if (entity==null) {
+            if (entity==null || deleted==true) {
                 result.setMessage(StringConstant.NAME_NOT_EXIST);
             } else if (!entity.getPassword().equals(loginVO.getPassword())) {
                 result.setMessage(StringConstant.WRONG_PASSWORD);

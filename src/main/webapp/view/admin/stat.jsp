@@ -8,16 +8,42 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>statistic</title>
     <script src="../../js/echarts.js"></script>
     <jsp:include page="../common/header.jsp"/>
 </head>
 <body>
+
+
+<div class="header">
+    <a href="#menu"><span></span></a>
+    statistic
+</div>
 <jsp:include page="../common/nav.jsp"/>
 <div class="col-md-2"></div>
 <div class="col-md-8">
+    <label>订单统计</label>
+    <label>开始</label>
+    <input type="date" value="${usersRestrict.dateLowerString}">
+    <label>结束</label>
+    <input type="date" value="${usersRestrict.dateUpperString}">
+    <span class="help-block"></span>
     <div id="reservationChart" style="width: 750px;height:450px;"></div>
+
+    <label>用户注册统计</label>
+    <label>开始</label>
+    <input type="date" value="${usersRestrict.dateLowerString}">
+    <label>结束</label>
+    <input type="date" value="${usersRestrict.dateUpperString}">
+    <span class="help-block"></span>
     <div id="registerUserChart" style="width: 750px;height:450px;"></div>
+
+    <label>酒店注册统计</label>
+    <label>开始</label>
+    <input type="date" value="${usersRestrict.dateLowerString}">
+    <label>结束</label>
+    <input type="date" value="${usersRestrict.dateUpperString}">
+    <span class="help-block"></span>
     <div id="registerHostelChart" style="width: 750px;height:450px;"></div>
 </div>
 <div class="col-md-2"></div>
@@ -177,10 +203,10 @@
             url:'/admin/stat/user',
             type:'GET', //POST
             async:true,    //或false,是否异步
-            data:{
-                dateUpper:'yang',
-                dateLower:25
-            },
+//            data:{
+//                dateUpper:'yang',
+//                dateLower:25
+//            },
             timeout:5000,    //超时时间
             dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
             success:function(data,textStatus,jqXHR){
@@ -197,10 +223,10 @@
             url:'/admin/stat/hostel',
             type:'GET', //POST
             async:true,    //或false,是否异步
-            data:{
-                dateUpper:'yang',
-                dateLower:25
-            },
+//            data:{
+//                dateUpper:'yang',
+//                dateLower:25
+//            },
             timeout:5000,    //超时时间
             dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
             success:function(data,textStatus,jqXHR){
@@ -217,10 +243,10 @@
             url:'/admin/stat/reservation',
             type:'GET', //POST
             async:true,    //或false,是否异步
-            data:{
-                dateUpper:'yang',
-                dateLower:25
-            },
+//            data:{
+//                dateUpper:'yang',
+//                dateLower:25
+//            },
             timeout:5000,    //超时时间
             dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
             beforeSend:function(xhr){

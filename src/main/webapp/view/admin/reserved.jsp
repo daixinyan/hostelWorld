@@ -65,6 +65,10 @@
 </head>
 <body>
 
+<div class="header">
+    <a href="#menu"><span></span></a>
+    admin for host's reserved
+</div>
 <jsp:include page="../common/nav.jsp"/>
 
 <div class="container-fluid">
@@ -165,7 +169,7 @@
 
                         <a class="">
                             <div class="">
-                                <span class="">${reservation.reserveTime}</span>
+                                <span class="">${reservation.reserveTimeString}</span>
                             </div>
                         </a>
 

@@ -150,7 +150,7 @@ public class HostelRoomVO {
 
     private String description;
 
-    private String image;
+    private String image = "../../image/default.jpg";
 
     public Long getHostelId() {
         return hostelId;

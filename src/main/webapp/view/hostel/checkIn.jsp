@@ -34,7 +34,10 @@
     </script>
 </head>
 <body>
-
+<div class="header">
+    <a href="#menu"><span></span></a>
+    hostel's custom check-in
+</div>
 <jsp:include page="../common/nav.jsp"/>
 
 

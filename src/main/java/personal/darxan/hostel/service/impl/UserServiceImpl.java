@@ -50,6 +50,21 @@ public class UserServiceImpl implements UserService {
         return serviceResult;
     }
 
+    public ServiceResult getUser(Long userId) {
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            Member member = memberDao.get(userId);
+            if (member==null) {
+                throw new Exception(StringConstant.NAME_NOT_EXIST);
+            }
+            serviceResult.setValue(Convert.convert(member));
+        }catch (Exception e) {
+            serviceResult.setSuccess(false);
+            serviceResult.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return serviceResult;
+    }
 
     public ServiceResult level(HttpServletRequest httpServletRequest, Short level) {
         ServiceResult serviceResult = new ServiceResult(true);
@@ -62,6 +77,26 @@ public class UserServiceImpl implements UserService {
             memberVO.setBalance(member.getBalance()+1000.0);
             member.setBonusPoint(member.getBonusPoint()+1000000L);
             memberVO.setBonusPoint(member.getBonusPoint()+1000000L);
+            memberDao.update(member);
+        }catch (Exception e) {
+            serviceResult.setSuccess(false);
+            serviceResult.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return serviceResult;
+    }
+
+    public ServiceResult recharge(HttpServletRequest httpServletRequest, double much) {
+        ServiceResult serviceResult = new ServiceResult(true);
+        try {
+            MemberVO memberVO = (MemberVO)httpServletRequest
+                    .getSession(false).getAttribute(StringConstant.SESSION_LOGIN);
+            Member member = memberDao.get(memberVO.getMemberId());
+
+            double current = member.getBalance()+much;
+            member.setBalance(current);
+            memberVO.setBalance(current);
+
             memberDao.update(member);
         }catch (Exception e) {
             serviceResult.setSuccess(false);

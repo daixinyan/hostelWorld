@@ -26,6 +26,10 @@ public class BaseDao<T extends BaseTable, ID extends Serializable> {
         entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
+    protected Criteria getCriteria() {
+        return getSession().createCriteria(entityClass);
+    }
+
     protected Class getEntityClass() {
         return entityClass;
     }

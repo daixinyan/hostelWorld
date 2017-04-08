@@ -13,14 +13,17 @@
 
 <head>
 
-    <title>Title</title>
+    <title>${hostel.hostel}信息</title>
 
     <jsp:include page="../common/header.jsp"/>
 </head>
 
 <body>
 
-
+<div class="header">
+    <a href="#menu"><span></span></a>
+    ${hostel.hostel}
+</div>
 
 <jsp:include page="../common/nav.jsp"/>
 
@@ -69,12 +72,12 @@
                         <br/>
                         <span class="tab-larger">当前状态</span>
                         <c:choose>
-                            <c:when test="${user.state==1}">
+                            <c:when test="${hostel.state==1}">
                                 <span class="tab-larger">已激活</span>
                             </c:when>
                             <c:otherwise>
                                 <span class="tab-larger">未激活</span>
-                                <a href="/user/state/active" target="_blank">
+                                <a href="/hostel/state/active" target="_blank">
                                     <span class="underline_link tab-h2">激活</span>
                                 </a>
                             </c:otherwise>
@@ -113,7 +116,11 @@
                     <span class="help-block"></span>
 
                     <input type="text" class="col-md-12 col-sm-12" name="hostel" value="${hostel.hostel}">
-                    <label class="tab-close">bankcard</label>
+                    <label class="tab-close">name</label>
+                    <span class="help-block"></span>
+
+                    <input type="text" class="col-md-12 col-sm-12" name="address" value="${hostel.address}">
+                    <label class="tab-close">address</label>
                     <span class="help-block"></span>
 
                     <div class="clearfix"></div>

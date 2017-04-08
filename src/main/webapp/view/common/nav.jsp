@@ -8,10 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="header">
-    <a href="#menu"><span></span></a>
-    Demo
-</div>
 
 <c:choose>
     <c:when test="${empty sessionScope.LOGIN_TYPE}">
@@ -37,6 +33,7 @@
                     <li><a href="/public/list/hostel">hostels Search</a></li>
 
                     <li><a href="/user/user/info">用户信息</a> </li>
+                    <li><a href="/user/page/recharge">用户充值</a> </li>
                     <li><a href="/user/list/checkIn">入住信息</a> </li>
                     <li><a href="/user/list/reservation">预定信息</a> </li>
                     <li><a href="/user/list/payment">用户付款</a> </li>

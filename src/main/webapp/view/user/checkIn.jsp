@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>hostel's custom check-in</title>
+    <title>user's check-in</title>
     <jsp:include page="../common/header.jsp"/>
     <script>
         $(document).ready(function () {
@@ -35,6 +35,10 @@
 </head>
 <body>
 
+<div class="header">
+    <a href="#menu"><span></span></a>
+    my checkin
+</div>
 <jsp:include page="../common/nav.jsp"/>
 
 <div class="container-fluid">
@@ -71,42 +75,13 @@
                             </a>
 
 
-                            <%--<a class="">--%>
-                                <%--<div class="">--%>
-                                <%--<span class="">--%>
-                                    <%--<c:choose>--%>
-                                        <%--<c:when test="${room.airCondition==true}">--%>
-                                            <%--有空调--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:otherwise>--%>
-                                            <%--无空调--%>
-                                        <%--</c:otherwise>--%>
-                                    <%--</c:choose>--%>
-                                    <%--<c:choose>--%>
-                                        <%--<c:when test="${room.computer==true}">--%>
-                                            <%--有电脑--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:otherwise>--%>
-                                            <%--无电脑--%>
-                                        <%--</c:otherwise>--%>
-                                    <%--</c:choose>--%>
-                                    <%--${room.numOfBed}人床--%>
-                                <%--</span>--%>
-                                <%--</div>--%>
-                            <%--</a>--%>
-                            <%--<a class="">--%>
-                                <%--<div class="">--%>
-                                    <%--<span class="">${room.description}</span>--%>
-                                <%--</div>--%>
-                            <%--</a>--%>
-
                             <a class="">
                                 <div class="">
                                     <span class="">${room.people}已经入住</span>
                                 </div>
                             </a>
                         </div>
-                        <diV class="col-md-3">
+                        <div class="col-md-3">
                             <a class="">
                                 <div class="">
                                         <span class="price tab-h2">
@@ -115,9 +90,8 @@
                                         </span>
                                 </div>
                             </a>
-                        </diV>
+                        </div>
 
-                        <br/>
                         <br/>
                         <a class="">
                             <div class="">
@@ -158,7 +132,7 @@
                         <br/>
                         <a class="">
                             <div class="">
-                                <span class="">${room.reserveTime}</span>
+                                <span class="">${room.reserveTimeString}</span>
                             </div>
                         </a>
 

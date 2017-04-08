@@ -22,8 +22,32 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class Main
 {
     public static void main(String[] args) {
+
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                execute(1);
+            }
+
+            private void execute(int i) {
+                if(i<8)
+                try{
+                    try{
+                        execute(i+1);
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    throw new Exception("did you every checked that?: check at: "+new Random().nextInt(100));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
+//        t.interrupt();
+
         ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
+        ConcurrentHashMap concurrentHashMap ;
         /**
          * 读写锁允许读线程和写线程按照请求锁的顺序重新获取读取锁或者写入锁。
          * 当然了只有写线程释放了锁，读线程才能获取重入锁。

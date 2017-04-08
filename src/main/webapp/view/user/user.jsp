@@ -19,7 +19,10 @@
 </head>
 
 <body>
-
+<div class="header">
+    <a href="#menu"><span></span></a>
+    user info
+</div>
 <jsp:include page="../common/nav.jsp"/>
 
 <div class="myContent">
@@ -40,7 +43,7 @@
                     <br/>
                     <br/>
                     <img src="${user.avatar}">
-                    <input type="file" class="avatar" name="avatar" value="${user.avatar}">
+                    <input type="file" class="avatar_delete" name="avatar" value="${user.avatar}">
                     <span class="help-block"></span>
                 </fieldset>
                 <div class="col-md-2"></div>
@@ -120,6 +123,17 @@
                             <span class="underline_link tab-larger">兑换积分</span>
                         </a>
                         <br/>
+                        <br/>
+                    </div>
+
+                    <div>
+                        <span class="tab-larger">当前余额</span>
+                        <span class="tab-larger">
+                            ${user.balance}
+                        </span>
+                        <a href="/user/exchange/1000" target="_blank">
+                            <span class="underline_link tab-larger">点击充值</span>
+                        </a>
                         <br/>
                     </div>
 

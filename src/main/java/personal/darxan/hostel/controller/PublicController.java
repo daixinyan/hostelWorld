@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import personal.darxan.hostel.model.Member;
 import personal.darxan.hostel.service.interf.AuthService;
 import personal.darxan.hostel.service.interf.HostelService;
 import personal.darxan.hostel.service.interf.SearchService;
+import personal.darxan.hostel.service.interf.UserService;
 import personal.darxan.hostel.tool.*;
 import personal.darxan.hostel.vo.*;
 
@@ -35,6 +37,9 @@ public class PublicController {
 
     @Autowired
     private HostelService hostelService;
+
+    @Autowired
+    private UserService userService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -92,11 +97,11 @@ public class PublicController {
     public ModelAndView user(HttpServletRequest httpServletRequest, @PathVariable("userId") Long userId) {
 
         ModelAndView modelAndView = new ModelAndView();
-        ServiceResult serviceResult = null;
+        ServiceResult serviceResult = userService.getUser(userId);
         MyLogger.log(serviceResult);
 
         modelAndView.setViewName("public/user");
-        modelAndView.addObject("user", (HostelRoomVO)serviceResult.getValue());
+        modelAndView.addObject("user", (MemberVO)serviceResult.getValue());
         return modelAndView;
     }
 

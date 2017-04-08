@@ -36,7 +36,13 @@ public class ReservationDao extends BaseDao<Reservation, Long> {
             query.setDate(1, reservationRestrict.getDateUpper());
         }
         PaginationResult paginationResult = new PaginationResult();
-        paginationResult.setTotalPages(Integer.parseInt(query.uniqueResult().toString()));
+        int page = Integer.parseInt(query.uniqueResult().toString());
+        if (page%reservationRestrict.getPageSize()==0) {
+            page = page/reservationRestrict.getPageSize();
+        }else {
+            page = page/reservationRestrict.getPageSize()+1;
+        }
+        paginationResult.setTotalPages(page);
 
 
 

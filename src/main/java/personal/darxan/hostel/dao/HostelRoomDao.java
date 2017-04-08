@@ -30,7 +30,8 @@ public class HostelRoomDao extends BaseDao<HostelRoom, Long> {
         sqlAppend.addEq("add3", searchRestrict.getAdd3());
         sqlAppend.addEq("add4", searchRestrict.getAdd4());
         sqlAppend.addLike("description", searchRestrict.getKeyword());
-        sqlAppend.addLike("address", searchRestrict.getAddress());
+//        sqlAppend.addLike("address", searchRestrict.getAddress());
+//        sqlAppend.addLike("address", searchRestrict.getKeyword());
         sqlAppend.addOrder(searchRestrict.getOrder(), searchRestrict.isAsc());
 
         if (searchRestrict.getDateLower()!=null&&searchRestrict.getDateUpper()!=null) {
@@ -45,7 +46,14 @@ public class HostelRoomDao extends BaseDao<HostelRoom, Long> {
 
 
         PaginationResult paginationResult = new PaginationResult();
-        paginationResult.setTotalPages(Integer.parseInt(query.uniqueResult().toString()));
+
+        int page = Integer.parseInt(query.uniqueResult().toString());
+        if (page%searchRestrict.getPageSize()==0) {
+            page = page/searchRestrict.getPageSize();
+        }else {
+            page = page/searchRestrict.getPageSize()+1;
+        }
+        paginationResult.setTotalPages(page);
 
 
         query = sqlAppend.fetchList();

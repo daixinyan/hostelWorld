@@ -12,6 +12,9 @@
         <param-value>classpath*:/applicationContext.xml</param-value>
     </context-param>
 
+    <error-page>
+        <location>/public/list/hostel</location>
+    </error-page>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

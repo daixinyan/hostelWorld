@@ -7,11 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set value="住宿搜索" var="title"></c:set>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>hostels</title>
+    <title>hostels客栈搜索</title>
 
     <jsp:include page="../common/header.jsp"/>
     <script>
@@ -39,7 +41,10 @@
 
 <body>
 
-
+<div class="header">
+    <a href="#menu"><span></span></a>
+    hostels客栈搜索
+</div>
 <jsp:include page="../common/nav.jsp"/>
 <div class="container-fluid">
 <div class="row-fluid">
@@ -134,7 +139,7 @@
 
                 <input type="hidden" class="page" id="pageNum" name="page"  value="${searchRestrict.page}"/>
 
-                <label>搜索关键字</label>
+                <label>搜索</label>
                 <input type="text" class="keyword" name="keyword" value="${searchRestrict.keyword}"/>
                 <span class="help-block"></span>
 
@@ -169,9 +174,9 @@
                 <input type="number" class="numOfBed" name="numOfBed" value="${searchRestrict.numOfBed}">
                 <span class="help-block"></span>
 
-                <label>地址</label>
-                <input type="text" class="address" name="address" value="${searchRestrict.address}"/>
-                <span class="help-block"></span>
+                <%--<label>地址</label>--%>
+                <%--<input type="text" class="address" name="address" value="${searchRestrict.address}"/>--%>
+                <%--<span class="help-block"></span>--%>
 
                 <label>空调</label>
                 <input type="checkbox" class="airCondition" name="airCondition"  value="${searchRestrict.airCondition}"/>

@@ -1,5 +1,7 @@
 package personal.darxan.hostel.vo;
 
+import personal.darxan.hostel.tool.DateFormatter;
+
 import java.util.Date;
 
 /**
@@ -57,4 +59,14 @@ public class UsersRestrict {
     public void setDateUpper(Date dateUpper) {
         this.dateUpper = dateUpper;
     }
+
+    public String getDateLowerString() {
+        return DateFormatter.dateFormat.format(dateLower);
+    }
+
+
+    public String getDateUpperString() {
+        return DateFormatter.dateFormat.format(dateUpper);
+    }
+
 }

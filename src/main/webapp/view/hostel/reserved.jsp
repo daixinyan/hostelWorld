@@ -65,6 +65,10 @@
 </head>
 <body>
 
+<div class="header">
+    <a href="#menu"><span></span></a>
+    hostel's reservations
+</div>
 <jsp:include page="../common/nav.jsp"/>
 
 <div class="container-fluid">

@@ -333,6 +333,10 @@ public class ReservationShowHostel {
         return DateFormatter.dateFormat.format(reserveTime);
     }
 
+    public String getReserveTimeString() {
+        return DateFormatter.dateFormat.format(reserveTime);
+    }
+
     public String getPaymentTimeString() {
         return DateFormatter.dateFormat.format(paymentTime);
     }

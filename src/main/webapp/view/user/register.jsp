@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" id="bankcard" name="bankcard" placeholder="银行卡号">
+                    <input type="text" class="form-control" id="bankcard" name="bankCard" placeholder="银行卡号">
                     <i class="fa fa-user"></i>
                 </div>
 

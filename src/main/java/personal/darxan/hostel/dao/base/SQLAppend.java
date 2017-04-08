@@ -114,7 +114,7 @@ public class SQLAppend {
     }
 
     public SQLAppend addLike(String column, Object value) {
-        if (column==null||value==null){
+        if (column==null||value==null||value.toString().length()==0){
             return this;
         }
         addSQLCondition(column,"'%"+value+"%'"," like ");

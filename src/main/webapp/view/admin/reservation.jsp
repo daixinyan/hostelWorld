@@ -34,7 +34,10 @@
     </script>
 </head>
 <body>
-
+<div class="header">
+    <a href="#menu"><span></span></a>
+    admin for user's reservation
+</div>
 <jsp:include page="../common/nav.jsp"/>
 <div class="container-fluid">
     <div class="row-fluid">
@@ -159,7 +162,7 @@
 
                         <a class="">
                             <div class="">
-                                <span class="">${room.reserveTime}</span>
+                                <span class="">${room.reserveTimeString}</span>
                             </div>
                         </a>
 
